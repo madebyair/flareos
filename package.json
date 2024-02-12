@@ -1,7 +1,7 @@
 {
   "name": "airos",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "tauri dev",
@@ -14,6 +14,7 @@
   "dependencies": {
     "@tauri-apps/api": "^2.0.0-beta.0",
     "@tauri-apps/plugin-shell": "^2.0.0-beta.0",
+    "@zedux/react": "^1.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

@@ -5,3 +5,12 @@
 :root {
     font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
 }
+
+* {
+    cursor: default;
+}
+
+.setup-bg {
+    background: url("/src/assets/images/background.webp") no-repeat center;
+    background-size: cover;
+}
