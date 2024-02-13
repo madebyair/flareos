@@ -2,6 +2,7 @@ import "./assets/css/App.css";
 import Setup from "./components/setup/Setup.tsx";
 import { useAtomState } from "@zedux/react";
 import { colorSchemeState } from "./state/themeState.ts";
+import "./i18n"
 
 function App() {
     const [colorScheme] = useAtomState(colorSchemeState)
