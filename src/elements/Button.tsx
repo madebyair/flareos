@@ -1,7 +1,7 @@
 const Button = ({label = 'Submit', submit}: {label?: string, submit: () => void}) => {
     return (
         <button onClick={submit} type="button"
-                className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 focus:ring-gray-700 border-gray-700 transition-all duration-150">{label}</button>
+                className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-900 focus:ring-gray-700 border-gray-700 transition-all duration-150">{label}</button>
     )
 }
 
