@@ -21,14 +21,20 @@ const WelcomeSetup = () => {
     }
 
     return (
-        <div className="">
+        <div className="relative h-full">
             <h1 className="text-5xl dark:text-white">{t("Welcome!")}</h1>
             <h2 className="text-zinc-700 dark:text-zinc-300 mt-4 w-72">
                 {t("Welcome to Airos! Before we begin, let's connect to the network and log in to your air account.")}
             </h2>
-            <Toggle onChange={trigger} enabled={enabled} setEnabled={setEnabled} />
-            <span className="text-zinc-700 dark:text-zinc-300">Dark mode</span>
-            <Button label={t("Continue")} submit={() => console.log("Button works")} />
+            <div className="absolute bottom-0 w-full">
+                <div className="flex">
+                    <Toggle onChange={trigger} enabled={enabled} setEnabled={setEnabled} />
+                    <span className="text-zinc-700 dark:text-zinc-300 ml-3 mt-[4px]">{t("Dark mode")}</span>
+                </div>
+                <div className="absolute top-0 right-0">
+                    <Button label={t("Continue")} submit={() => console.log("Button works")} />
+                </div>
+            </div>
         </div>
     );
 };
