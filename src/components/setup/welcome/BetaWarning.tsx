@@ -2,11 +2,16 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import Button from "../../../elements/Button.tsx";
 import { useTranslation } from "react-i18next";
+import { useAtomState } from "@zedux/react";
+import { setupComponent } from "../setupState.tsx";
+import WifiLoader from "../loaders/WifiLoader.tsx";
 
 export default function BetaWarning() {
     const { t } = useTranslation()
+    const [, setComponent] = useAtomState(setupComponent)
 
 
+    // @ts-ignore
     return (
         <>
             <Transition appear show as={Fragment}>
@@ -49,7 +54,7 @@ export default function BetaWarning() {
                                     </div>
 
                                     <div className="mt-4">
-                                        <Button label={t("Continue")} submit={() => console.log("id")}></Button>
+                                        <Button label={t("Continue")} submit={() => setComponent(<WifiLoader />)}></Button>
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>
