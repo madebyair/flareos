@@ -1,15 +1,29 @@
 import { BarLoader } from "react-spinners";
 import { useTranslation } from "react-i18next";
 import { useAtomState } from "@zedux/react";
-import { setupNoPadding } from "../setupState.tsx";
+import { setupComponent, setupNoPadding } from "../setupState.tsx";
 import { useEffect } from "react";
+import AccountSetupLogin from "../account/AccountSetupLogin.tsx";
 
 const WifiLoader = () => {
     const { t } = useTranslation()
     const [, setNoPadding] = useAtomState(setupNoPadding)
+    const [, setComponent] = useAtomState(setupComponent)
 
     useEffect(() => {
         setNoPadding(true)
+
+        fetch("https://api.made-by-air.com").then((r) => {
+            if (r.status === 200) {
+                console.log("air servers are up and internet connection is correct")
+
+                setTimeout(() => {
+                    setComponent(<AccountSetupLogin />)
+                }, 700)
+            } else {
+                console.log("no network detected")
+            }
+        })
     }, [])
 
     return (

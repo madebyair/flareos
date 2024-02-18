@@ -6,5 +6,16 @@
   "You are now using beta of airos": "You are now using beta of airos",
   "You are currently using the beta version of airos. This is associated with a large number of bugs and system instability. Currently, no stable version of the system has been released. When we release the stable release, you will need to download an update package approximately ~2GB in size. We do not currently recommend using this system on your main computer.": "You are currently using the beta version of airos. This is associated with a large number of bugs and system instability. Currently, no stable version of the system has been released. When we release the stable release, you will need to download an update package approximately ~2GB in size. We do not currently recommend using this system on your main computer.",
   "BAD THINGS MAY HAPPEN IF YOU DON'T READ THIS": "BAD THINGS MAY HAPPEN IF YOU DON'T READ THIS",
-  "Just one secound": "Just one secound"
+  "Just one secound": "Just one secound",
+  "Sign in": "Sign in",
+  "to air account.": "to air account.",
+  "Your email": "Your email",
+  "Email": "Email",
+  "Provide the e-mail address for your account, it really doesn't hurt.": "Provide the e-mail address for your account, it really doesn't hurt.",
+  "This doesn't look like an email address.": "This doesn't look like an email address.",
+  "It looks like you don't have an account yet. It's time to change that!": "It looks like you don't have an account yet. It's time to change that!",
+  "Your password": "Your password",
+  "Password": "Password",
+  "Hmm, maybe it would be a good idea to provide the password?": "Hmm, maybe it would be a good idea to provide the password?",
+  "We think that's not your password.": "We think that's not your password."
 }
