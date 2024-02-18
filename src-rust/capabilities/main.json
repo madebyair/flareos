@@ -13,6 +13,11 @@
     "resources:default",
     "menu:default",
     "tray:default",
-    "shell:allow-open"
+    "shell:allow-open",
+    "store:allow-delete",
+    "store:allow-get",
+    "store:allow-load",
+    "store:allow-save",
+    "store:allow-set"
   ]
 }

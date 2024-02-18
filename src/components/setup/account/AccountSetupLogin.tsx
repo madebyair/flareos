@@ -13,6 +13,7 @@ import useBlobUrl from "../../../functions/useBlobUrl.ts";
 import login from "../../../api/auth/login.ts";
 import { useAtomState } from "@zedux/react";
 import { userState } from "../../../state/currentUserState.ts";
+import { set } from "../../../store_manager.ts";
 
 const AccountSetupLogin = () => {
     const { t } = useTranslation()
@@ -85,6 +86,16 @@ const AccountSetupLogin = () => {
                 "sessionUuid": r?.data.uuid,
                 "sessionSecret": r?.data.secret
             })
+            set("users", [
+                {
+                    "firstName": first,
+                    "lastName": last,
+                    "email": email,
+                    "uuid": uuid,
+                    "sessionUuid": r?.data.uuid,
+                    "sessionSecret": r?.data.secret
+                }
+            ])
         }).catch(function () {
             setError(t("We think that's not your password."))
             setLoading(false)
