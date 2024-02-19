@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { invoke } from "@tauri-apps/api/core";
 
 const AuthCurrentUser = ({ user }: { user: User }) => {
     const { t } = useTranslation();
@@ -17,8 +18,19 @@ const AuthCurrentUser = ({ user }: { user: User }) => {
             setTimeout(() => {
                 setShake("")
             }, 300)
+
             return
         }
+
+        invoke("decrypt", { content: value, challenge: user.password }).then(result => {
+            if (!result) {
+                setShake("shake")
+                setError(t("We think that's not your password."))
+                setTimeout(() => {
+                    setShake("")
+                }, 300)
+            }
+        })
     }
 
     return (
