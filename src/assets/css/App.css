@@ -14,3 +14,8 @@
     background: url("/src/assets/images/background.webp") no-repeat center;
     background-size: cover;
 }
+
+.auth-bg {
+    background: url("/src/assets/images/background.webp") no-repeat center;
+    background-size: cover;
+}
