@@ -37,3 +37,14 @@
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
+
+.fadeout {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.7s, opacity 0.7s linear;
+}
+
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}

@@ -5,7 +5,7 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 
-const AuthCurrentUser = ({ user }: { user: User }) => {
+const AuthCurrentUser = ({ user, onDesktop }: { user: User, onDesktop: () => void }) => {
     const { t } = useTranslation();
     const [error, setError] = useState("")
     const [value, setValue] = useState("")
@@ -29,6 +29,8 @@ const AuthCurrentUser = ({ user }: { user: User }) => {
                 setTimeout(() => {
                     setShake("")
                 }, 300)
+            } else {
+                onDesktop()
             }
         })
     }
