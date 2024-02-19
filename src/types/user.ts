@@ -4,7 +4,8 @@ type User = {
     "email": string,
     "uuid": string,
     "sessionUuid": string,
-    "sessionSecret": string
+    "sessionSecret": string,
+    "password": string
 }
 
 export default User

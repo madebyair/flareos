@@ -14,6 +14,7 @@ import login from "../../../api/auth/login.ts";
 import { useAtomState } from "@zedux/react";
 import { userState } from "../../../state/currentUserState.ts";
 import { set } from "../../../store_manager.ts";
+import { invoke } from "@tauri-apps/api/core";
 
 const AccountSetupLogin = () => {
     const { t } = useTranslation()
@@ -78,24 +79,30 @@ const AccountSetupLogin = () => {
         setLoading(true)
 
         login(email, value).then((r) => {
-            setUser({
-                "firstName": first,
-                "lastName": last,
-                "email": email,
-                "uuid": uuid,
-                "sessionUuid": r?.data.uuid,
-                "sessionSecret": r?.data.secret
-            })
-            set("users", [
-                {
-                    "firstName": first,
-                    "lastName": last,
-                    "email": email,
-                    "uuid": uuid,
-                    "sessionUuid": r?.data.uuid,
-                    "sessionSecret": r?.data.secret
+            invoke("encrypt", { content: value}).then((password) => {
+                if (typeof password === 'string') {
+                    setUser({
+                        "firstName": first,
+                        "lastName": last,
+                        "email": email,
+                        "uuid": uuid,
+                        "sessionUuid": r?.data.uuid,
+                        "sessionSecret": r?.data.secret,
+                        "password": password
+                    })
+                    set("users", [
+                        {
+                            "firstName": first,
+                            "lastName": last,
+                            "email": email,
+                            "uuid": uuid,
+                            "sessionUuid": r?.data.uuid,
+                            "sessionSecret": r?.data.secret,
+                            "password": password
+                        }
+                    ])
                 }
-            ])
+            })
         }).catch(function () {
             setError(t("We think that's not your password."))
             setLoading(false)
