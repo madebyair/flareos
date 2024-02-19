@@ -1,5 +1,7 @@
 import User from "../../types/user.ts";
 import { useTranslation } from "react-i18next";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 const AuthCurrentUser = ({ user }: { user: User }) => {
     const { t } = useTranslation();
@@ -21,10 +23,14 @@ const AuthCurrentUser = ({ user }: { user: User }) => {
                         :
                             <div className="relative">
                                 <input type="password"
-                                       className="w-full h-[40px] outline-none m-auto border text-sm rounded-lg block p-2.5 bg-slate-300 dark:bg-[#252525] border-gray-600 placeholder-gray-400 dark:text-white focus:border-indigo-500 focus:border-2"
+                                       className="w-full pr-[35px] h-[40px] outline-none m-auto border text-sm rounded-lg block p-2.5 bg-slate-300 dark:bg-[#252525] border-gray-600 placeholder-gray-400 dark:text-white focus:border-indigo-500 focus:border-2"
                                        placeholder={t("Password")} autoFocus={true}/>
                                 <div className="absolute right-0 top-0 w-[40px] h-[40px] rounded-full flex">
-                                    <div className="m-auto h-6 w-6 bg-slate-400 rounded-full">I</div>
+                                    <div className="m-auto h-6 w-6 bg-slate-400 rounded-full flex relative">
+                                        <div className="m-auto top-2">
+                                            <FontAwesomeIcon icon={faPaperPlane} size="xs" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         }
