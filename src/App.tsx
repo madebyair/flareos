@@ -14,13 +14,14 @@ function App() {
 
     useEffect(() => {
         get("users").then(r => {
-            if (r) {
-                // @ts-ignore
+            if (r && Array.isArray(r)) {
                 if (r.length > 0) {
                     setCompoment(<Auth />)
                 } else {
                     setCompoment(<Setup />)
                 }
+            } else {
+                setCompoment(<Setup />)
             }
         })
     }, [])
