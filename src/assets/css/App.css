@@ -20,6 +20,13 @@
     background-size: cover;
 }
 
+.desktop-bg {
+    background: url("/src/assets/images/background.webp") no-repeat center;
+    background-size: cover;
+}
+
+
+
 .shake {
     animation: shake 300ms infinite;
 }
