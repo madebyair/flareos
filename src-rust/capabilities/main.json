@@ -3,7 +3,8 @@
   "identifier": "main-capability",
   "description": "Capability for the main window",
   "windows": [
-    "main"
+    "main",
+    "start"
   ],
   "permissions": [
     "path:default",
@@ -18,6 +19,9 @@
     "store:allow-get",
     "store:allow-load",
     "store:allow-save",
-    "store:allow-set"
+    "store:allow-set",
+    "webview:allow-create-webview-window",
+    "window:allow-hide",
+    "window:allow-show"
   ]
 }
