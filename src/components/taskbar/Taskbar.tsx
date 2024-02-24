@@ -2,10 +2,10 @@
 import airsmallBlack from "../../assets/images/airsmall-black.webp"
 // @ts-ignore
 import airsmallWhite from "../../assets/images/airsmall-white.webp"
-import { useEffect, useState } from "react";
-import { WebviewWindow } from '@tauri-apps/api/webview'
-import { emit } from "@tauri-apps/api/event";
-import { currentMonitor } from '@tauri-apps/api/window';
+import { useEffect, useState } from "react"
+import { WebviewWindow } from "@tauri-apps/api/webviewWindow"
+import { emit } from "@tauri-apps/api/event"
+import { currentMonitor } from "@tauri-apps/api/window"
 const Taskbar = () => {
     const [isStartDisplayed, setIsStartDisplayed] = useState(false)
 
@@ -16,8 +16,8 @@ const Taskbar = () => {
 
                 console.log(height)
 
-                const web = new WebviewWindow('start', {
-                    url: 'start.html',
+                const web = new WebviewWindow("start", {
+                    url: "start.html",
                     x: 50,
                     y: height,
                     width: 700,
@@ -36,7 +36,7 @@ const Taskbar = () => {
 
     useEffect(() => {
         emit("start-display-event", isStartDisplayed)
-    }, [isStartDisplayed]);
+    }, [isStartDisplayed])
 
 
     function onClick() {
