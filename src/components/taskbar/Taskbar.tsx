@@ -25,7 +25,8 @@ const Taskbar = () => {
                     decorations: false,
                     alwaysOnTop: true,
                     transparent: true,
-                    visible: false
+                    visible: false,
+                    resizable: false
                 })
 
                 web.once("tauri://error", (e) => { console.log(e)})

@@ -1,4 +1,4 @@
-import "../assets/css/App.css"
+import "../../assets/css/App.css"
 import { useEffect } from "react"
 import { listen } from "@tauri-apps/api/event"
 import { getCurrent } from "@tauri-apps/api/window"
