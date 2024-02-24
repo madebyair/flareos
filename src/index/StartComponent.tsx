@@ -14,7 +14,7 @@ const StartComponent = () => {
         })
     }, []);
     return (
-        <div className="start bg-slate-300">
+        <div className="start bg-slate-200 w-screen h-screen rounded-xl">
             START COMPONENT
         </div>
     )

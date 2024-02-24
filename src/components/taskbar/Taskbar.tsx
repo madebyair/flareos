@@ -5,21 +5,32 @@ import airsmallWhite from "../../assets/images/airsmall-white.webp"
 import { useEffect, useState } from "react";
 import { WebviewWindow } from '@tauri-apps/api/webview'
 import { emit } from "@tauri-apps/api/event";
-
+import { currentMonitor } from '@tauri-apps/api/window';
 const Taskbar = () => {
     const [isStartDisplayed, setIsStartDisplayed] = useState(false)
 
     useEffect(() => {
-        new WebviewWindow('start', {
-            url: 'start.html',
-            x: 100,
-            y: 1090,
-            width: 200,
-            height: 100,
-            decorations: false,
-            alwaysOnTop: true,
-            transparent: true,
-            visible: false
+        currentMonitor().then((result) => {
+            if (result?.size.height) {
+                const height = result.size.height - 655
+
+                console.log(height)
+
+                const web = new WebviewWindow('start', {
+                    url: 'start.html',
+                    x: 50,
+                    y: height,
+                    width: 700,
+                    height: 600,
+                    decorations: false,
+                    alwaysOnTop: true,
+                    transparent: true,
+                    visible: false
+                })
+
+                web.once("tauri://error", (e) => { console.log(e)})
+                web.once("tauri://success", (e) => { console.log(e)})
+            }
         })
     }, [])
 
