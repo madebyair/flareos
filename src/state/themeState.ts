@@ -1,3 +1,3 @@
-import { atom } from "@zedux/react";
+import { atom } from "@zedux/react"
 
-export const colorSchemeState = atom('colorScheme', "light");
+export const colorSchemeState = atom("colorScheme", "light")
