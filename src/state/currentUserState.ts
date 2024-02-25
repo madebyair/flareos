@@ -8,5 +8,6 @@ export const userState = atom("user", <User>{
     "uuid": "",
     "sessionUuid": "",
     "sessionSecret": "",
-    "password": ""
+    "password": "",
+    "apps": []
 })
