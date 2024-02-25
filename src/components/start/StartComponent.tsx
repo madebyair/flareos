@@ -1,6 +1,6 @@
 import "../../assets/css/App.css"
 import { useEffect } from "react"
-import { listen } from "@tauri-apps/api/event"
+import { emit, listen } from "@tauri-apps/api/event"
 import { getCurrent } from "@tauri-apps/api/window"
 import User from "../../types/user.ts"
 import { useAtomState } from "@zedux/react"
@@ -37,6 +37,8 @@ const StartComponent = () => {
                 "title": "Terminal"
             })
         }
+
+        emit("start-hide-request")
     }
 
     return (

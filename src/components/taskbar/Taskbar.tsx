@@ -4,7 +4,7 @@ import airsmallBlack from "../../assets/images/airsmall-black.webp"
 import airsmallWhite from "../../assets/images/airsmall-white.webp"
 import { useEffect, useState } from "react"
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow"
-import { emit } from "@tauri-apps/api/event"
+import { emit, listen } from "@tauri-apps/api/event"
 import { currentMonitor } from "@tauri-apps/api/window"
 import { useAtomState } from "@zedux/react"
 import { userState } from "../../state/currentUserState.ts"
@@ -39,6 +39,10 @@ const Taskbar = () => {
         emit("start-display-event", {
             "user": user,
             "current": isStartDisplayed
+        })
+
+        listen<undefined>("start-hide-request", () => {
+            setIsStartDisplayed(false)
         })
     }, [isStartDisplayed])
 
