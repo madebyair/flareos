@@ -3,6 +3,7 @@
 import { Terminal } from "xterm"
 import { FitAddon } from "xterm-addon-fit"
 import { invoke } from "@tauri-apps/api/core"
+import { getCurrent } from "@tauri-apps/api/window"
 
 const root = document.getElementById("root") as HTMLElement
 const body = document.getElementById("body") as HTMLElement
@@ -55,6 +56,8 @@ initShell()
 term.onData(writeToPty)
 addEventListener("resize", fitTerminal)
 fitTerminal()
+getCurrent().show()
+
 
 async function readFromPty() {
     const data = await invoke<string>("async_read_from_pty")

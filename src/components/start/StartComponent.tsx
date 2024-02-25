@@ -36,7 +36,8 @@ const StartComponent = () => {
                 url: "terminal.html",
                 title: "Terminal",
                 minWidth: 300,
-                minHeight: 200
+                minHeight: 200,
+                visible: false
             })
         }
 
