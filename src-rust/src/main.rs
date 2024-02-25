@@ -9,14 +9,11 @@ mod apps {
 use utils::encryption::encrypt;
 use utils::encryption::decrypt;
 use apps::terminal::{async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty, TerminalState};
-use tauri::{async_runtime::Mutex as AsyncMutex, State};
+use tauri::{async_runtime::Mutex as AsyncMutex};
 use std::io::BufReader;
 use std::sync::Arc;
 use portable_pty::PtySize;
 use portable_pty::native_pty_system;
-use std::io::Read;
-use std::io::Write;
-use portable_pty::PtyPair;
 
 fn main() {
     let pty_system = native_pty_system();
