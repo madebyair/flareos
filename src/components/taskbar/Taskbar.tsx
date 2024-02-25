@@ -6,15 +6,16 @@ import { useEffect, useState } from "react"
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow"
 import { emit } from "@tauri-apps/api/event"
 import { currentMonitor } from "@tauri-apps/api/window"
+import { useAtomState } from "@zedux/react"
+import { userState } from "../../state/currentUserState.ts"
 const Taskbar = () => {
     const [isStartDisplayed, setIsStartDisplayed] = useState(false)
+    const [user] = useAtomState(userState)
 
     useEffect(() => {
         currentMonitor().then((result) => {
             if (result?.size.height) {
                 const height = result.size.height - 655
-
-                console.log(height)
 
                 const web = new WebviewWindow("start", {
                     url: "start.html",
@@ -29,14 +30,16 @@ const Taskbar = () => {
                     resizable: false
                 })
 
-                web.once("tauri://error", (e) => { console.log(e)})
-                web.once("tauri://success", (e) => { console.log(e)})
+                web.once("tauri://error", (e) => { console.error(e) })
             }
         })
     }, [])
 
     useEffect(() => {
-        emit("start-display-event", isStartDisplayed)
+        emit("start-display-event", {
+            "user": user,
+            "current": isStartDisplayed
+        })
     }, [isStartDisplayed])
 
 
