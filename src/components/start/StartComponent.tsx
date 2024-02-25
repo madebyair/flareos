@@ -33,8 +33,10 @@ const StartComponent = () => {
         switch (command) {
         case "__airos_emebed_app_terminal__":
             new WebviewWindow("terminal", {
-                "url": "terminal.html",
-                "title": "Terminal"
+                url: "terminal.html",
+                title: "Terminal",
+                minWidth: 300,
+                minHeight: 200
             })
         }
 
