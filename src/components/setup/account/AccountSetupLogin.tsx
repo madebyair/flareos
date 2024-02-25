@@ -100,6 +100,7 @@ const AccountSetupLogin = () => {
                             "sessionUuid": r?.data.uuid,
                             "sessionSecret": r?.data.secret,
                             "password": password,
+                            "apps": embededApps
                         },
                     ])
                 }
