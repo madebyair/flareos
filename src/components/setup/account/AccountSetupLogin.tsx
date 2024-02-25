@@ -1,21 +1,21 @@
-import AccountSetupLayout from "./AccountSetupLayout.tsx";
-// @ts-ignore
+import AccountSetupLayout from "./AccountSetupLayout.tsx"
+// @ts-expect-error type script bug
 import airBlack from "../../../assets/images/air-black.webp"
-// @ts-ignore
+// @ts-expect-error type script bug
 import airWhite from "../../../assets/images/air-white.webp"
-import { useTranslation } from "react-i18next";
-import { useState } from "react";
-import Button from "../../../elements/Button.tsx";
-import { isValidEmail } from "../../../helpers.ts";
-import exists from "../../../api/auth/exists.ts";
-import { BarLoader } from "react-spinners";
-import useBlobUrl from "../../../functions/useBlobUrl.ts";
-import login from "../../../api/auth/login.ts";
-import { useAtomState } from "@zedux/react";
-import { userState } from "../../../state/currentUserState.ts";
-import { set } from "../../../store_manager.ts";
-import { invoke } from "@tauri-apps/api/core";
-
+import { useTranslation } from "react-i18next"
+import { useState } from "react"
+import Button from "../../../elements/Button.tsx"
+import { isValidEmail } from "../../../helpers.ts"
+import exists from "../../../api/auth/exists.ts"
+import { BarLoader } from "react-spinners"
+import useBlobUrl from "../../../functions/useBlobUrl.ts"
+import login from "../../../api/auth/login.ts"
+import { useAtomState } from "@zedux/react"
+import { userState } from "../../../state/currentUserState.ts"
+import { set } from "../../../store_manager.ts"
+import { invoke } from "@tauri-apps/api/core"
+import embededApps from "../../../apps/embededApps.ts"
 const AccountSetupLogin = () => {
     const { t } = useTranslation()
     const [value, setValue] = useState("")
@@ -79,8 +79,8 @@ const AccountSetupLogin = () => {
         setLoading(true)
 
         login(email, value).then((r) => {
-            invoke("encrypt", { content: value}).then((password) => {
-                if (typeof password === 'string') {
+            invoke("encrypt", { content: value }).then((password) => {
+                if (typeof password === "string") {
                     setUser({
                         "firstName": first,
                         "lastName": last,
@@ -88,7 +88,8 @@ const AccountSetupLogin = () => {
                         "uuid": uuid,
                         "sessionUuid": r?.data.uuid,
                         "sessionSecret": r?.data.secret,
-                        "password": password
+                        "password": password,
+                        "apps": embededApps
                     })
                     set("users", [
                         {
@@ -98,8 +99,8 @@ const AccountSetupLogin = () => {
                             "uuid": uuid,
                             "sessionUuid": r?.data.uuid,
                             "sessionSecret": r?.data.secret,
-                            "password": password
-                        }
+                            "password": password,
+                        },
                     ])
                 }
             })
@@ -120,7 +121,7 @@ const AccountSetupLogin = () => {
                             height={8}
                             cssOverride={{
                                 width: "100%",
-                                borderRadius: "10px"
+                                borderRadius: "10px",
                             }}
                             loading={loading}
                             aria-label="Loading Spinner"
@@ -131,36 +132,37 @@ const AccountSetupLogin = () => {
                     <div className="h-[20px]"></div>
                     <div className="w-full h-[70px] flex">
                         <div className="m-auto">
-                            <img src={airWhite} alt="" width="90px" className="hidden dark:block"/>
-                            <img src={airBlack} alt="" width="90px" className="block dark:hidden"/>
+                            <img src={airWhite} alt="" width="90px" className="hidden dark:block" />
+                            <img src={airBlack} alt="" width="90px" className="block dark:hidden" />
                         </div>
                     </div>
                     <h1 className="text-2xl dark:text-white poppins">{t("Sign in")}</h1>
                     <span className="text-md dark:text-white poppins">{t("to air account.")}</span>
-                    {!uuid &&
+                    {!uuid && (
                         <div className="h-[20px]"></div>
-                    }
-                    {uuid &&
+                    )}
+                    {uuid && (
                         <div className="flex w-full mt-2">
                             <div className="m-auto text-white flex">
-                                <img src={avatarBlob} alt="" className="rounded-full w-[40px] h-[40px] mt-auto mb-auto"/>
+                                <img src={avatarBlob} alt="" className="rounded-full w-[40px] h-[40px] mt-auto mb-auto" />
                                 <div className="mt-auto mb-auto ml-4">{name}</div>
                             </div>
                         </div>
-                    }
+                    )}
                     <div className="w-full flex mt-2">
                         <div className="block m-auto w-[70%]">
                             <label htmlFor="email"
-                                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">{uuid ? t("Your password") : t("Your email")}</label>
-                            { /* @ts-ignore */ }
-                            <input id="email" type={uuid ? "password" : "text"} value={value} onChange={e => setValue(e.target.value) || setError("")}
-                                   className="w-full h-[50px] outline-none m-auto border text-sm rounded-lg block p-2.5 bg-slate-300 dark:bg-[#252525] border-gray-600 placeholder-gray-400 dark:text-white focus:border-indigo-500 focus:border-2"
-                                   placeholder={uuid ? t("Password") : t("Email")} disabled={loading}
-                                   onKeyDown={(e) => {
-                                       if (e.key === "Enter") {
-                                           next()
-                                       }
-                                   }}
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">{uuid ? t("Your password") : t("Your email")}</label>
+                            <input id="email" type={uuid ? "password" : "text"} value={value} onChange={(e) => {
+                                setValue(e.target.value)
+                                setError("")
+                            }}
+                            className="w-full h-[50px] outline-none m-auto border text-sm rounded-lg block p-2.5 bg-slate-300 dark:bg-[#252525] border-gray-600 placeholder-gray-400 dark:text-white focus:border-indigo-500 focus:border-2"
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                    next()
+                                }
+                            }}
                             />
                             <div className="text-left">
                                 <span className="mt-2 text-xs text-red-600 dark:text-red-400">{error}</span>
@@ -176,4 +178,4 @@ const AccountSetupLogin = () => {
     )
 }
 
-export default AccountSetupLogin;
+export default AccountSetupLogin
