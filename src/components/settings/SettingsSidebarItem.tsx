@@ -1,7 +1,31 @@
-const SettingsSidebarItem = () => {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core"
+
+type SettingsSidebarItemType = {
+    name: string,
+    icon: IconDefinition,
+    description: string
+}
+
+const SettingsSidebarItem = ({name, icon, description} : SettingsSidebarItemType) => {
     return (
-        <div className="bg-slate-400 w-full h-28">
-            Item
+        <div className="bg-slate-400/30 hover:bg-slate-400/80 transition duration-300
+         w-full h-28 rounded-xl">
+            <div className="flex w-full h-14">
+                <div className="flex mt-auto mb-auto mx-6">
+                    <div className="flex">
+                        <div className="mb-auto mt-auto">
+                            <FontAwesomeIcon icon={icon} />
+                        </div>
+                        <h1 className="mt-auto mb-auto ml-2">{name}</h1>
+                    </div>
+                </div>
+            </div>
+            <div className="h-14 flex w-10/12">
+                <div className="mt-auto mb-auto mx-8 text-sm text-gray-700">
+                    {description}
+                </div>
+            </div>
         </div>
     )
 }
