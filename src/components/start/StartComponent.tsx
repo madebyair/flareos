@@ -29,7 +29,7 @@ const StartComponent = () => {
         })
     }, [])
 
-    function run(command : string) {
+    function run(command: string) {
         switch (command) {
         case "__airos_emebed_app_terminal__":
             new WebviewWindow("terminal", {
@@ -39,10 +39,20 @@ const StartComponent = () => {
                 minHeight: 200,
                 visible: false
             })
+            break
+        case "__airos_emebed_app_settings__":
+            new WebviewWindow("settings", {
+                url: "settings.html",
+                title: "Settings",
+                minWidth: 800,
+                minHeight: 600
+            })
+            break
         }
 
         emit("start-hide-request")
     }
+
 
     return (
         <div className="start bg-slate-200/95 dark:bg-zinc-950/95 w-screen h-screen rounded-xl">
