@@ -9,5 +9,6 @@ export const userState = atom("user", <User>{
     "sessionUuid": "",
     "sessionSecret": "",
     "password": "",
-    "apps": []
+    "apps": [],
+    "theme": "light"
 })

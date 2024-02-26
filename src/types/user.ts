@@ -8,7 +8,8 @@ type User = {
     "sessionUuid": string,
     "sessionSecret": string,
     "password": string,
-    "apps": Array<App>
+    "apps": Array<App>,
+    "theme": "light"|"dark"
 }
 
 export default User
