@@ -1,6 +1,6 @@
 import SettingsSidebarItem from "./SettingsSidebarItem.tsx"
 import "../../assets/css/App.css"
-import { faWifi } from "@fortawesome/free-solid-svg-icons"
+import { faDownload, faWifi } from "@fortawesome/free-solid-svg-icons"
 
 const SettingsLayout = () => {
     return (
@@ -8,6 +8,7 @@ const SettingsLayout = () => {
             <div className="w-1/2 p-4">
                 <div className="mt-2 mb-2">
                     <SettingsSidebarItem name="Connections" icon={faWifi} description="Wifi ・ Bluetooth"/>
+                    <SettingsSidebarItem name="Updates" icon={faDownload} description="Download and Install ・ Labs"/>
                 </div>
             </div>
         </div>

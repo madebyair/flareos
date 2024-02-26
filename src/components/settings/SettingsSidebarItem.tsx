@@ -10,7 +10,7 @@ type SettingsSidebarItemType = {
 const SettingsSidebarItem = ({name, icon, description} : SettingsSidebarItemType) => {
     return (
         <div className="bg-slate-400/30 hover:bg-slate-400/80 transition duration-300
-         w-full h-28 rounded-xl">
+         w-full h-28 rounded-xl mt-4 mb-4">
             <div className="flex w-full h-14">
                 <div className="flex mt-auto mb-auto mx-6">
                     <div className="flex">
