@@ -45,7 +45,8 @@ const StartComponent = () => {
                 url: "settings.html",
                 title: "Settings",
                 minWidth: 800,
-                minHeight: 600
+                minHeight: 600,
+                visible: false
             })
             break
         }
