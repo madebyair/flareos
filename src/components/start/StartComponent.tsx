@@ -56,21 +56,24 @@ const StartComponent = () => {
 
 
     return (
-        <div className="start bg-slate-200/95 dark:bg-zinc-950/95 w-screen h-screen rounded-xl">
-            <div>
-                <div className="mx-4 pt-2">
-                    {user.apps.map(function (app) {
-                        return (
-                            <div key={app.name} onClick={() => run(app.exec)} className="mx-8 mt-2 hover:bg-slate-300 dark:hover:bg-black transition duration-300 rounded-md w-20 h-24">
-                                <div className="flex w-20">
-                                    <img src={app.icon} alt="" width="60px" height="60px" className="m-auto"/>
+        <div className={user?.theme}>
+            <div className="start bg-slate-200/95 dark:bg-zinc-950/95 w-screen h-screen rounded-xl">
+                <div>
+                    <div className="mx-4 pt-2">
+                        {user.apps.map(function (app) {
+                            return (
+                                <div key={app.name} onClick={() => run(app.exec)}
+                                    className="mx-8 mt-2 hover:bg-slate-300 dark:hover:bg-zinc-800 transition duration-300 rounded-md w-20 h-24">
+                                    <div className="flex w-20">
+                                        <img src={app.icon} alt="" width="60px" height="60px" className="m-auto"/>
+                                    </div>
+                                    <div className="text-center w-20 dark:text-white">
+                                        {app.name}
+                                    </div>
                                 </div>
-                                <div className="text-center w-20">
-                                    {app.name}
-                                </div>
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         </div>
