@@ -12,4 +12,16 @@ type User = {
     "theme": "light"|"dark"
 }
 
+export const defaultUser : User = {
+    "firstName": "",
+    "lastName": "",
+    "email": "",
+    "uuid": "",
+    "sessionUuid": "",
+    "sessionSecret": "",
+    "password": "",
+    "apps": [],
+    "theme": "light"
+}
+
 export default User

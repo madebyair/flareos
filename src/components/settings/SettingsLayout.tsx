@@ -6,11 +6,11 @@ import { useAtomState } from "@zedux/react"
 import SettingsPersonalization from "./personalization/SettingsPersonalization.tsx"
 import { useEffect, useState } from "react"
 import { emit, listen } from "@tauri-apps/api/event"
-import User from "../../types/user.ts"
+import User, { defaultUser } from "../../types/user.ts"
 
 const SettingsLayout = () => {
     const [component] = useAtomState(settingsComponent)
-    const [user, setUser] = useState<User>()
+    const [user, setUser] = useState<User>(defaultUser)
 
     useEffect(() => {
         emit("user-request")
@@ -18,10 +18,18 @@ const SettingsLayout = () => {
         listen<User>("user-response", (r) => {
             setUser(r.payload)
         })
+
+        listen<"light" | "dark">("theme-change", (event) => {
+            setUser(prevUser => ({
+                ...prevUser,
+                theme: event.payload
+            }))
+        })
+
     }, [])
 
     return (
-        <div className={user?.theme}>
+        <div className={user.theme}>
             <div className={"w-screen h-screen bg-slate-300 dark:bg-zinc-950 flex select-none dark:text-white"}>
                 <div className="w-1/2 p-4">
                     <div className="mt-2 mb-2">
