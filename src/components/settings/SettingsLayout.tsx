@@ -21,16 +21,22 @@ const SettingsLayout = () => {
     }, [])
 
     return (
-        <div className={"w-screen h-screen bg-slate-300 flex select-none " + user?.theme}>
-            <div className="w-1/2 p-4">
-                <div className="mt-2 mb-2">
-                    <SettingsSidebarItem name="Connections" icon={faWifi} description="Wifi ・ Bluetooth" component={<></>}/>
-                    <SettingsSidebarItem name="Personalization" icon={faPalette} description="Dark mode ・ Wallpaper" component={<SettingsPersonalization />}/>
-                    <SettingsSidebarItem name="Updates" icon={faDownload} description="Download and Install ・ Labs" component={<></>}/>
+        <div className={user?.theme}>
+            <div className={"w-screen h-screen bg-slate-300 dark:bg-zinc-950 flex select-none dark:text-white"}>
+                <div className="w-1/2 p-4">
+                    <div className="mt-2 mb-2">
+                        <SettingsSidebarItem name="Connections" icon={faWifi} description="Wifi ・ Bluetooth"
+                            component={<></>}/>
+                        <SettingsSidebarItem name="Personalization" icon={faPalette}
+                            description="Dark mode ・ Wallpaper"
+                            component={<SettingsPersonalization/>}/>
+                        <SettingsSidebarItem name="Updates" icon={faDownload} description="Download and Install ・ Labs"
+                            component={<></>}/>
+                    </div>
                 </div>
-            </div>
-            <div className="w-1/2 mt-2 mb-2 mx-2">
-                {component}
+                <div className="w-1/2 mt-2 mb-2 mx-2">
+                    {component}
+                </div>
             </div>
         </div>
     )
