@@ -7,6 +7,7 @@ import SettingsPersonalization from "./personalization/SettingsPersonalization.t
 import { useEffect, useState } from "react"
 import { emit, listen } from "@tauri-apps/api/event"
 import User, { defaultUser } from "../../types/user.ts"
+import SettingsGeneral from "./general/SettingsGeneral.tsx"
 
 const SettingsLayout = () => {
     const [component] = useAtomState(settingsComponent)
@@ -40,7 +41,7 @@ const SettingsLayout = () => {
                             component={<SettingsPersonalization/>}/>
                         <SettingsSidebarItem name="General" icon={faGear}
                             description="Language ・ Date and time"
-                            component={<></>}/>
+                            component={<SettingsGeneral />}/>
                         <SettingsSidebarItem name="Updates" icon={faDownload} description="Download and Install ・ Labs"
                             component={<></>}/>
                     </div>
