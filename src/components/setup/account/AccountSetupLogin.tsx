@@ -92,7 +92,8 @@ const AccountSetupLogin = () => {
                         "sessionSecret": r?.data.secret,
                         "password": password,
                         "apps": embededApps,
-                        "theme": theme
+                        "theme": theme,
+                        "language": "en"
                     })
                     set("users", [
                         {
@@ -104,7 +105,8 @@ const AccountSetupLogin = () => {
                             "sessionSecret": r?.data.secret,
                             "password": password,
                             "apps": embededApps,
-                            "theme": theme
+                            "theme": theme,
+                            "language": "en"
                         },
                     ])
                 }

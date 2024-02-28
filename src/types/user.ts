@@ -1,4 +1,5 @@
 import { App } from "./app.ts"
+import { supportedLanguagesType } from "./supportedLanguages.ts"
 
 type User = {
     "firstName": string,
@@ -9,7 +10,8 @@ type User = {
     "sessionSecret": string,
     "password": string,
     "apps": Array<App>,
-    "theme": "light"|"dark"
+    "theme": "light"|"dark",
+    "language": supportedLanguagesType
 }
 
 export const defaultUser : User = {
@@ -21,7 +23,8 @@ export const defaultUser : User = {
     "sessionSecret": "",
     "password": "",
     "apps": [],
-    "theme": "light"
+    "theme": "light",
+    "language": "en"
 }
 
 export default User
