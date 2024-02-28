@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import { get, set } from "./store_manager.ts"
 import Loading from "./components/Loading.tsx"
 import Auth from "./components/auth/Auth.tsx"
-import { listen } from "@tauri-apps/api/event"
+import { emit, listen } from "@tauri-apps/api/event"
 import { userState } from "./state/currentUserState.ts"
 import User from "./types/user.ts"
 
@@ -45,6 +45,15 @@ function App() {
                 return {
                     ...prevUser,
                     theme: event.payload
+                }
+            })
+        })
+
+        listen("user-request", () => {
+            setUser(prevUser => {
+                emit("user-response", prevUser)
+                return {
+                    ...prevUser
                 }
             })
         })
