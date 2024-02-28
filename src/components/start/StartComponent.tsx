@@ -12,6 +12,8 @@ type EventResponse = {
     current: boolean
 }
 
+
+
 const StartComponent = () => {
     const [user, setUser] = useAtomState(userState)
 
@@ -19,13 +21,18 @@ const StartComponent = () => {
         listen<EventResponse>("start-display-event", (event) => {
             setUser(event.payload.user)
 
-            console.log(event.payload.user)
-
             if (!event.payload.current) {
                 getCurrent().hide()
             } else {
                 getCurrent().show()
             }
+        })
+
+        listen<"light" | "dark">("theme-change", (event) => {
+            setUser(prevUser => ({
+                ...prevUser,
+                theme: event.payload
+            }))
         })
     }, [])
 
