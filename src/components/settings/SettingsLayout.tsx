@@ -1,6 +1,6 @@
 import SettingsSidebarItem from "./SettingsSidebarItem.tsx"
 import "../../assets/css/App.css"
-import { faDownload, faPalette, faWifi } from "@fortawesome/free-solid-svg-icons"
+import { faDownload, faGear, faPalette, faWifi } from "@fortawesome/free-solid-svg-icons"
 import { settingsComponent } from "./settingsState.tsx"
 import { useAtomState } from "@zedux/react"
 import SettingsPersonalization from "./personalization/SettingsPersonalization.tsx"
@@ -38,6 +38,9 @@ const SettingsLayout = () => {
                         <SettingsSidebarItem name="Personalization" icon={faPalette}
                             description="Dark mode ・ Wallpaper"
                             component={<SettingsPersonalization/>}/>
+                        <SettingsSidebarItem name="General" icon={faGear}
+                            description="Language ・ Date and time"
+                            component={<></>}/>
                         <SettingsSidebarItem name="Updates" icon={faDownload} description="Download and Install ・ Labs"
                             component={<></>}/>
                     </div>
