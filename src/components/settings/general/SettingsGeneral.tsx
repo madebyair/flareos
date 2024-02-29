@@ -1,9 +1,16 @@
 import SettingsSelection from "../SettingsSelection.tsx"
+import { useState } from "react"
+import LanguageChangePopup from "../popup/LanguageChangePopup.tsx"
 
 const SettingsGeneral = () => {
+    const [languageModal, setLanguageModal] = useState(false)
+
     return (
         <div className="w-full h-full">
-            <SettingsSelection name="Language" subtext="English" onClick={() => { console.log("idk")}} />
+            {languageModal &&
+                <LanguageChangePopup />
+            }
+            <SettingsSelection name="Language" subtext="English" onClick={() => setLanguageModal(true)} />
             <SettingsSelection name="Date" onClick={() => { console.log("idk")}} />
         </div>
     )
