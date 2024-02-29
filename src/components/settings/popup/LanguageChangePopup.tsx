@@ -15,7 +15,7 @@ type LanguageType = {
 
 function Language({name, short, flag, setChanged} : LanguageType) {
     return (
-        <div className="h-1 w-full rounded-md flex hover:bg-zinc-900/70 transition duration-300" onClick={() => {
+        <div className="h-12 w-full rounded-md flex hover:bg-zinc-900/70 transition duration-300" onClick={() => {
             setChanged(true)
             console.log(short)
         }}>
