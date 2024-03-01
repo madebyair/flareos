@@ -10,6 +10,7 @@ mod apps {
 
 mod wm {
     pub mod get_windows;
+    pub mod activate;
 }
 
 use utils::encryption::encrypt;
@@ -21,6 +22,7 @@ use std::sync::Arc;
 use portable_pty::PtySize;
 use portable_pty::native_pty_system;
 use wm::get_windows::get_windows;
+use wm::activate::activate;
 
 fn main() {
     let pty_system = native_pty_system();
@@ -45,7 +47,11 @@ fn main() {
                     writer: Arc::new(AsyncMutex::new(writer)),
                     reader: Arc::new(AsyncMutex::new(BufReader::new(reader))),
                 })
-        .invoke_handler(tauri::generate_handler![encrypt, decrypt, async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty, get_windows])
+        .invoke_handler(tauri::generate_handler![
+            encrypt, decrypt,
+            async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty,
+            get_windows, activate
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
