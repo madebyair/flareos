@@ -30,14 +30,18 @@ const TaskbarApps = () => {
     }
 }
 
-const TaskbarApp = ({className} : Window) => {
-    if (className == "airos") {
+const TaskbarApp = ({name, className} : Window) => {
+    if (name == "airos") {
         return
+    }
+
+    function activate() {
+        invoke("activate", { "class": className })
     }
 
     return (
         <div className="flex w-10 h-10">
-            <div className="w-8 h-8 flex m-auto dark:text-white rounded bg-slate-300 dark:bg-zinc-900">
+            <div className="w-8 h-8 flex m-auto dark:text-white rounded bg-slate-300 dark:bg-zinc-900" onClick={() => activate()}>
                 <div className="m-auto">
                     {className.charAt(0).toUpperCase()}
                 </div>
