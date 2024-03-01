@@ -53,8 +53,8 @@ const Taskbar = () => {
     }
 
     return (
-        <div className="w-screen bg-zinc-300 dark:bg-zinc-950 h-10 z-30 flex">
-            <div className="mx-6 flex h-8 my-auto z-40">
+        <div className="w-screen bg-zinc-300 dark:bg-zinc-950 h-10 z-10 flex">
+            <div className="mx-6 flex h-8 my-auto z-10">
                 <div
                     className="flex mx-2 rounded-md hover:bg-zinc-400 dark:hover:bg-zinc-800 transition duration-300 h-8 w-8" onClick={() => onClick()}>
                     <img src={airsmallBlack} alt="" className="block dark:hidden"/>

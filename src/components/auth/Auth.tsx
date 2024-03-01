@@ -27,7 +27,7 @@ const Auth = () => {
                 <Desktop />
             }
             {!hide &&
-                <div className={"w-screen h-screen auth-bg select-none absolute top-0"}>
+                <div className={"w-screen h-screen auth-bg select-none absolute top-0 z-20"}>
                     <div className={`w-screen h-screen backdrop-blur-md flex ${
                         inDesktop && "fadeout"
                     }`}>
