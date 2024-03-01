@@ -10,6 +10,7 @@ import Auth from "./components/auth/Auth.tsx"
 import { emit, listen } from "@tauri-apps/api/event"
 import { userState } from "./state/currentUserState.ts"
 import User from "./types/user.ts"
+import { supportedLanguagesType } from "./types/supportedLanguages.ts"
 
 function App() {
     const [colorScheme] = useAtomState(colorSchemeState)
@@ -45,6 +46,26 @@ function App() {
                 return {
                     ...prevUser,
                     theme: event.payload
+                }
+            })
+        })
+
+        listen<supportedLanguagesType>("language-change", (event) => {
+            setUser(prevUser => {
+                get("users").then((r) => {
+                    const cur: unknown = r
+
+                    if (Array.isArray(cur)) {
+                        const indexToUpdate = cur.findIndex((key: User) => key.uuid === prevUser.uuid)
+                        if (indexToUpdate !== -1) {
+                            cur[indexToUpdate].language = event.payload
+                            set("users", cur)
+                        }
+                    }
+                })
+                return {
+                    ...prevUser,
+                    language: event.payload
                 }
             })
         })

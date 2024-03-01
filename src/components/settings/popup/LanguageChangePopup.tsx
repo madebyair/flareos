@@ -5,6 +5,8 @@ import { UsaFlag } from "../../../assets/CountryFlags.tsx"
 import Button from "../../../elements/Button.tsx"
 import { useAtomState } from "@zedux/react"
 import { settingsComponent } from "../settingsState.tsx"
+import { useTranslation } from "react-i18next"
+import { emit } from "@tauri-apps/api/event"
 
 type LanguageType = {
     name: string,
@@ -14,10 +16,13 @@ type LanguageType = {
 }
 
 function Language({name, short, flag, setChanged} : LanguageType) {
+    const [, i18n] = useTranslation()
+
     return (
         <div className="h-12 w-full rounded-md flex hover:bg-zinc-900/70 transition duration-300" onClick={() => {
             setChanged(true)
-            console.log(short)
+            i18n.changeLanguage(short)
+            emit("language-change", short)
         }}>
             <div className="h-12 w-12 flex ml-4">
                 {flag}
