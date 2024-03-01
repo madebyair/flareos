@@ -8,6 +8,7 @@ import { emit, listen } from "@tauri-apps/api/event"
 import { currentMonitor } from "@tauri-apps/api/window"
 import { useAtomState } from "@zedux/react"
 import { userState } from "../../state/currentUserState.ts"
+import TaskbarApps from "./TaskbarApps.tsx"
 const Taskbar = () => {
     const [isStartDisplayed, setIsStartDisplayed] = useState(false)
     const [user] = useAtomState(userState)
@@ -52,12 +53,17 @@ const Taskbar = () => {
     }
 
     return (
-        <div className="w-screen bg-zinc-300 dark:bg-zinc-950 h-10 z-50 flex">
-            <div className="mx-6 flex h-8 my-auto">
+        <div className="w-screen bg-zinc-300 dark:bg-zinc-950 h-10 z-30 flex">
+            <div className="mx-6 flex h-8 my-auto z-40">
                 <div
                     className="flex mx-2 rounded-md hover:bg-zinc-400 dark:hover:bg-zinc-800 transition duration-300 h-8 w-8" onClick={() => onClick()}>
                     <img src={airsmallBlack} alt="" className="block dark:hidden"/>
                     <img src={airsmallWhite} alt="" className="hidden dark:block"/>
+                </div>
+            </div>
+            <div className="absolute w-screen flex">
+                <div className="m-auto">
+                    <TaskbarApps />
                 </div>
             </div>
         </div>

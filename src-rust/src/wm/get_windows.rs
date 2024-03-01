@@ -4,7 +4,7 @@ use serde::{Serialize};
 #[derive(Serialize)]
 struct Window {
     name: String,
-    class: String
+    className: String
 }
 
 #[tauri::command]
@@ -16,7 +16,7 @@ pub fn get_windows() -> String {
     for window in windows {
         let cwindow = Window {
                 name: window.title().to_string(),
-                class: window.class().to_string()
+                className: window.class().to_string()
         };
         window_vec.push(cwindow)
     }

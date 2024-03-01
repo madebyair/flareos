@@ -1,3 +1,5 @@
+#![allow(warnings)]
+
 mod utils {
     pub mod encryption;
 }
