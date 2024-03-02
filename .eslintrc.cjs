@@ -48,7 +48,8 @@ module.exports = {
             "never"
         ],
         "react/react-in-jsx-scope": "off",
-        "react/jsx-uses-react": "off"
+        "react/jsx-uses-react": "off",
+        "@typescript-eslint/ban-ts-comment": "off"
     },
     "settings": {
         "react": {
