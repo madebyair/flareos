@@ -48,10 +48,8 @@ const TaskbarApp = ({name, className, active} : {name: string, className: string
         return
     }
 
-    console.log(className, active)
-
     function activate() {
-        invoke("activate", { "class": className })
+        invoke("activate", { "name": name })
     }
 
     return (
@@ -61,7 +59,7 @@ const TaskbarApp = ({name, className, active} : {name: string, className: string
                     {className.charAt(0).toUpperCase()}
                 </div>
             </div>
-            {active === className &&
+            {active === name &&
                 <div className="absolute bottom-0 w-full h-1.5 flex">
                     <div className="mx-auto h-1.5 w-1.5 bg-black dark:bg-white rounded-full"><></></div>
                 </div>

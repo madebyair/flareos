@@ -4,7 +4,7 @@ use std::process::Command;
 pub fn get_active_window() -> String {
     let command = Command::new("sh")
              .arg("-c")
-             .arg("xdotool getwindowfocus getwindowclassname")
+             .arg("xdotool getwindowfocus getwindowname")
              .output()
              .unwrap_or_else(|_| panic!("failed to execute xdotool"));
 

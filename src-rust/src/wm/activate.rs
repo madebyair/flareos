@@ -1,10 +1,10 @@
 use std::process::Command;
 
 #[tauri::command]
-pub fn activate(class: String) {
+pub fn activate(name: String) {
     Command::new("sh")
              .arg("-c")
-             .arg(format!("wmctrl -x -a {}", class))
+             .arg(format!("wmctrl -a {}", name))
              .output()
-             .unwrap_or_else(|_| panic!("failed to execute 'wmctrl -x -a {}'", class));
+             .unwrap_or_else(|_| panic!("failed to execute 'wmctrl -x -a {}'", name));
 }
