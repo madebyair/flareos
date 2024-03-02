@@ -10,12 +10,21 @@ const TaskbarApps = () => {
     const [windowsState, setWindows] = useState<Array<Window>>()
 
     useEffect(() => {
-        invoke<string>("get_windows").then((r) => {
-            const json : InvokeResponse = JSON.parse(r)
-            const windows : Array<Window> = json.windows
+        const interval = setInterval(() => {
+            invoke<string>("get_windows").then((r) => {
+                const json : InvokeResponse = JSON.parse(r)
+                console.log("got response")
 
-            setWindows(windows)
-        })
+                const windows : Array<Window> = json.windows
+
+                setWindows(windows)
+            })
+        }, 100)
+
+        return () => {
+            clearInterval(interval)
+        }
+
     }, [])
     if (windowsState !== undefined) {
         return (
