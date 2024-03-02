@@ -19,6 +19,7 @@ const Taskbar = () => {
                 const height = result.size.height - 655
 
                 const web = new WebviewWindow("start", {
+                    title: "__airos_start_menu__",
                     url: "start.html",
                     x: 50,
                     y: height,

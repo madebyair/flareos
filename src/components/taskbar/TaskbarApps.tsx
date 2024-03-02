@@ -44,7 +44,7 @@ const TaskbarApps = () => {
 }
 
 const TaskbarApp = ({name, className, active} : {name: string, className: string, active: string}) => {
-    if (name == "airos") {
+    if (name == "airos" || name == "__airos_start_menu__") {
         return
     }
 
