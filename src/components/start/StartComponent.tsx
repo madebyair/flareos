@@ -34,6 +34,10 @@ const StartComponent = () => {
                 theme: event.payload
             }))
         })
+
+        if (window.location.port !== "1420") {
+            window.addEventListener("contextmenu", e => e.preventDefault())
+        }
     }, [])
 
     function run(command: string) {
