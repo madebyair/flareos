@@ -11,6 +11,7 @@ mod apps {
 mod wm {
     pub mod get_windows;
     pub mod activate;
+    pub mod get_active_window;
 }
 
 use utils::encryption::encrypt;
@@ -23,6 +24,7 @@ use portable_pty::PtySize;
 use portable_pty::native_pty_system;
 use wm::get_windows::get_windows;
 use wm::activate::activate;
+use wm::get_active_window::get_active_window;
 
 fn main() {
     let pty_system = native_pty_system();
@@ -50,7 +52,7 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             encrypt, decrypt,
             async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty,
-            get_windows, activate
+            get_windows, activate, get_active_window
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
