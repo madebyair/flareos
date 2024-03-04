@@ -19,7 +19,10 @@
       }
     ],
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; connect-src ipc: http://ipc.localhost; media-src icons: http://icons.localhost",
+      "assetProtocol": {
+        "scope": ["/usr/airos/icons/*"]
+      }
     }
   },
   "bundle": {

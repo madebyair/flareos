@@ -5,13 +5,13 @@ const embededApps : Array<App> = [
         "name": "Terminal",
         "description": "Terminal. For real Developers :D",
         "exec": "__airos_emebed_app_terminal__",
-        "icon": "/src/assets/icons/terminal.webp"
+        "icon": "icons://terminal.webp"
     },
     {
         "name": "Settings",
         "description": "Here you can manage with all settings",
         "exec": "__airos_emebed_app_settings__",
-        "icon": "/src/assets/icons/settings.webp"
+        "icon": "icons://settings.webp"
     }
 ]
 
