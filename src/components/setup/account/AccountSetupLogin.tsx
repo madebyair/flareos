@@ -15,8 +15,8 @@ import { useAtomState } from "@zedux/react"
 import { userState } from "../../../state/currentUserState.ts"
 import { set } from "../../../store_manager.ts"
 import { invoke } from "@tauri-apps/api/core"
-import embededApps from "../../../apps/embededApps.ts"
 import { colorSchemeState } from "../../../state/themeState.ts"
+
 const AccountSetupLogin = () => {
     const { t } = useTranslation()
     const [value, setValue] = useState("")
@@ -91,7 +91,7 @@ const AccountSetupLogin = () => {
                         "sessionUuid": r?.data.uuid,
                         "sessionSecret": r?.data.secret,
                         "password": password,
-                        "apps": embededApps,
+                        "apps": [],
                         "theme": theme,
                         "language": "en"
                     })
@@ -104,7 +104,7 @@ const AccountSetupLogin = () => {
                             "sessionUuid": r?.data.uuid,
                             "sessionSecret": r?.data.secret,
                             "password": password,
-                            "apps": embededApps,
+                            "apps": [],
                             "theme": theme,
                             "language": "en"
                         },

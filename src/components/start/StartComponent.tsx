@@ -1,11 +1,13 @@
 import "../../assets/css/App.css"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { emit, listen } from "@tauri-apps/api/event"
 import { getCurrent } from "@tauri-apps/api/window"
 import User from "../../types/user.ts"
 import { useAtomState } from "@zedux/react"
 import { userState } from "../../state/currentUserState.ts"
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow"
+import { App } from "../../types/app.ts"
+import embededApps from "../../apps/embededApps.ts"
 
 type EventResponse = {
     user: User,
@@ -16,6 +18,12 @@ type EventResponse = {
 
 const StartComponent = () => {
     const [user, setUser] = useAtomState(userState)
+    const [apps, setApps] = useState<Array<App>>([{
+        name: "",
+        icon: "",
+        description: "",
+        exec: ""
+    }])
 
     useEffect(() => {
         listen<EventResponse>("start-display-event", (event) => {
@@ -39,6 +47,14 @@ const StartComponent = () => {
             window.addEventListener("contextmenu", e => e.preventDefault())
         }
     }, [])
+
+    useEffect(() => {
+        const x = user.apps
+        embededApps.forEach((app) => {
+            x.push(app)
+        })
+        setApps(x)
+    }, [user])
 
     function run(command: string) {
         switch (command) {
@@ -71,7 +87,7 @@ const StartComponent = () => {
             <div className="start bg-slate-200/95 dark:bg-zinc-950/95 w-screen h-screen rounded-xl">
                 <div>
                     <div className="mx-4 pt-2">
-                        {user.apps.map(function (app) {
+                        {apps.map(function (app) {
                             return (
                                 <div key={app.name} onClick={() => run(app.exec)}
                                     className="mx-8 mt-2 hover:bg-slate-300 dark:hover:bg-zinc-800 transition duration-300 rounded-md w-20 h-24">
