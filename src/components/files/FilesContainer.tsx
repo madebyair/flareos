@@ -1,5 +1,6 @@
 import { useAtomState } from "@zedux/react"
 import { filesComponent } from "./filesState.tsx"
+import "../../assets/css/App.css"
 
 const FilesContainer = () => {
     // @ts-ignore
@@ -11,7 +12,7 @@ const FilesContainer = () => {
                 Sidebar
             </div>
             <div className="w-2/3 h-screen">
-                {component}
+                {component.component}
             </div>
         </div>
     )

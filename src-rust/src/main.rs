@@ -18,6 +18,10 @@ mod icons {
     pub mod get_icon;
 }
 
+mod files {
+    pub mod read_dir;
+}
+
 use utils::encryption::encrypt;
 use utils::encryption::decrypt;
 use apps::terminal::{async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty, TerminalState};
@@ -38,6 +42,7 @@ use std::{
   path::PathBuf,
   process::{Command, Stdio},
 };
+use files::read_dir::read_dir;
 
 fn main() {
     let pty_system = native_pty_system();
@@ -67,7 +72,8 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             encrypt, decrypt,
             async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty,
-            get_windows, activate, get_active_window
+            get_windows, activate, get_active_window,
+            read_dir
          ])
         .register_asynchronous_uri_scheme_protocol("icons", move |_app, request, responder| {
               match get_icon(request, &boundary_id) {
