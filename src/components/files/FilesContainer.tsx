@@ -1,10 +1,11 @@
 import { useAtomState } from "@zedux/react"
-import { filesComponent } from "./filesState.tsx"
 import "../../assets/css/App.css"
+import { currentDirState } from "./filesState.tsx"
+import DirectoryExplorer from "./explorer/DirectoryExplorer.tsx"
 
 const FilesContainer = () => {
     // @ts-ignore
-    const [component] = useAtomState(filesComponent)
+    const [currentDir] = useAtomState(currentDirState)
 
     return (
         <div className="w-screen h-screen bg-slate-300 dark:bg-zinc-950 select-none dark:text-white flex">
@@ -12,7 +13,7 @@ const FilesContainer = () => {
                 Sidebar
             </div>
             <div className="w-2/3 h-screen">
-                {component.component}
+                <DirectoryExplorer directory={currentDir} />
             </div>
         </div>
     )

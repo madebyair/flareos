@@ -1,5 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFile, faFolder } from "@fortawesome/free-solid-svg-icons"
+import { useAtomState } from "@zedux/react"
+import { currentDirState } from "../filesState.tsx"
 
 type Entry = {
     path: string,
@@ -7,8 +9,14 @@ type Entry = {
 }
 
 const FileEntry = ({path, is_dir} : Entry) => {
+    const [, setDirectory] = useAtomState(currentDirState)
+
     return (
-        <div className="flex h-12 bg-slate-400/30 dark:bg-black mt-2 mb-2 rounded-md">
+        <div className="flex h-12 bg-slate-400/30 dark:bg-black mt-2 mb-2 rounded-md" onClick={() => {
+            if (is_dir) {
+                setDirectory(path)
+            }
+        }}>
             <div className="mt-auto mb-auto ml-2">
                 <FontAwesomeIcon icon={is_dir ? faFolder : faFile} />
             </div>
