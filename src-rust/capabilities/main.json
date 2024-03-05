@@ -6,7 +6,8 @@
     "main",
     "start",
     "terminal",
-    "settings"
+    "settings",
+    "files"
   ],
   "permissions": [
     "path:default",

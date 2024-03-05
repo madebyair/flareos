@@ -2,28 +2,21 @@ import "../../assets/css/App.css"
 import { useEffect, useState } from "react"
 import { emit, listen } from "@tauri-apps/api/event"
 import { getCurrent } from "@tauri-apps/api/window"
-import User from "../../types/user.ts"
+import User from "../../types/user"
 import { useAtomState } from "@zedux/react"
-import { userState } from "../../state/currentUserState.ts"
+import { userState } from "../../state/currentUserState"
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow"
-import { App } from "../../types/app.ts"
-import embededApps from "../../apps/embededApps.ts"
+import { App } from "../../types/app"
+import embededApps from "../../apps/embededApps"
 
 type EventResponse = {
-    user: User,
-    current: boolean
-}
-
-
+    user: User;
+    current: boolean;
+};
 
 const StartComponent = () => {
     const [user, setUser] = useAtomState(userState)
-    const [apps, setApps] = useState<Array<App>>([{
-        name: "",
-        icon: "",
-        description: "",
-        exec: ""
-    }])
+    const [apps, setApps] = useState<Array<App>>([])
 
     useEffect(() => {
         listen<EventResponse>("start-display-event", (event) => {
@@ -49,11 +42,8 @@ const StartComponent = () => {
     }, [])
 
     useEffect(() => {
-        const x = user.apps
-        embededApps.forEach((app) => {
-            x.push(app)
-        })
-        setApps(x)
+        const updatedApps = [...user.apps, ...embededApps]
+        setApps(updatedApps)
     }, [user])
 
     function run(command: string) {
@@ -76,30 +66,37 @@ const StartComponent = () => {
                 visible: false
             })
             break
+        case "__airos_emebed_app_files__":
+            new WebviewWindow("files", {
+                url: "files.html",
+                title: "Files",
+                minWidth: 800,
+                minHeight: 600,
+                visible: false
+            })
+            break
+        default:
+            break
         }
 
         emit("start-hide-request")
     }
-
 
     return (
         <div className={user?.theme}>
             <div className="start bg-slate-200/95 dark:bg-zinc-950/95 w-screen h-screen rounded-xl">
                 <div>
                     <div className="mx-4 pt-2">
-                        {apps.map(function (app) {
-                            return (
-                                <div key={app.name} onClick={() => run(app.exec)}
-                                    className="mx-8 mt-2 hover:bg-slate-300 dark:hover:bg-zinc-800 transition duration-300 rounded-md w-20 h-24">
-                                    <div className="flex w-20">
-                                        <img src={app.icon} alt="" width="60px" height="60px" className="m-auto"/>
-                                    </div>
-                                    <div className="text-center w-20 dark:text-white">
-                                        {app.name}
-                                    </div>
+                        {apps.map(app => (
+                            <div key={app.name} onClick={() => run(app.exec)} className="mx-8 mt-2 hover:bg-slate-300 dark:hover:bg-zinc-800 transition duration-300 rounded-md w-20 h-24">
+                                <div className="flex w-20">
+                                    <img src={app.icon} alt="" width="60px" height="60px" className="m-auto rounded-md"/>
                                 </div>
-                            )
-                        })}
+                                <div className="text-center w-20 dark:text-white">
+                                    {app.name}
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
