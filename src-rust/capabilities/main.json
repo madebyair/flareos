@@ -25,6 +25,9 @@
     "store:allow-set",
     "webview:allow-create-webview-window",
     "window:allow-hide",
-    "window:allow-show"
+    "window:allow-show",
+    "window:allow-minimize",
+    "window:allow-close",
+    "window:allow-start-dragging"
   ]
 }

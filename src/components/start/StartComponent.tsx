@@ -72,7 +72,8 @@ const StartComponent = () => {
                 title: "Files",
                 minWidth: 800,
                 minHeight: 600,
-                visible: false
+                visible: false,
+                decorations: false
             })
             break
         default:

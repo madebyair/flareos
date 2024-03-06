@@ -3,8 +3,9 @@ import "../../assets/css/App.css"
 import { currentDirState } from "./filesState.tsx"
 import DirectoryExplorer from "./explorer/DirectoryExplorer.tsx"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
+import { faArrowLeft, faX } from "@fortawesome/free-solid-svg-icons"
 import { history, get_back } from "./files_history.ts"
+import { getCurrent } from "@tauri-apps/api/window"
 
 const FilesContainer = () => {
     // @ts-ignore
@@ -18,7 +19,6 @@ const FilesContainer = () => {
                     <div onClick={() => {
                         const back = get_back()
                         if (back !== null) {
-                            console.log(back)
                             setCurrentDir(back)
                         }
                     }}>
@@ -26,8 +26,27 @@ const FilesContainer = () => {
                     </div>
                 }
             </div>
-            <div className="w-2/3 h-screen">
-                <DirectoryExplorer directory={currentDir}/>
+            <div className="w-2/3">
+                <div data-tauri-drag-region={true} className="h-9 w-full relative" onDoubleClick={() => {
+                    getCurrent().toggleMaximize()
+                }} onMouseDown={(event) => {
+                    if( event.button === 1 ) {
+                        getCurrent().minimize()
+                    }
+                }}>
+                    <div className="absolute right-0 h-9 w-9 flex" onClick={() => {
+                        getCurrent().close()
+                    }}>
+                        <div className="m-auto">
+                            <FontAwesomeIcon icon={faX} size={"sm"} />
+                        </div>
+                    </div>
+                </div>
+                <div className="w-full mr-2" style={{
+                    height: "calc(100% - 45px)"
+                }}>
+                    <DirectoryExplorer directory={currentDir}/>
+                </div>
             </div>
         </div>
     )

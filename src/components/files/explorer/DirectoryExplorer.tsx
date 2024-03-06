@@ -23,7 +23,7 @@ const DirectoryExplorer = ({directory} : DirectoryExplorerType) => {
     }, [directory])
 
     return (
-        <div className="w-full overflow-y-auto h-screen">
+        <div className="w-full overflow-y-auto h-full">
             {entries.map((entry) => {
                 return (
                     <FileEntry key={entry.path} path={entry.path} is_dir={entry.is_dir} />
