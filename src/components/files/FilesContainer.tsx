@@ -11,11 +11,14 @@ import User, { defaultUser } from "../../types/user.ts"
 import "../../i18n.ts"
 import { useTranslation } from "react-i18next"
 import FilesSidebar from "./FilesSidebar.tsx"
+import Tabs, { Tab } from "@uiw/react-tabs-draggable"
+import FilesTab from "./FilesTab.tsx"
 
 const FilesContainer = () => {
     // @ts-ignore
-    const [currentDir, setCurrentDir] = useAtomState(currentDirState)
+    const [currentDir, ] = useAtomState(currentDirState)
     const [user, setUser] = useState<User>(defaultUser)
+    const [activeKey, setActiveKey] = useState("tab-1")
     const [ , i18n ] = useTranslation()
 
     useEffect(() => {
@@ -53,6 +56,12 @@ const FilesContainer = () => {
                             getCurrent().minimize()
                         }
                     }}>
+                        <div className="absolute">
+                            <Tabs activeKey={activeKey} style={{ gap: 12 }} onTabClick={(id) => setActiveKey(id)}>
+                                <Tab id="tab-1"><FilesTab path={currentDir} active={activeKey === "tab-1"} /></Tab>
+                                <Tab id="tab-2"><FilesTab path={currentDir} active={activeKey === "tab-2"} /></Tab>
+                            </Tabs>
+                        </div>
                         <div className="absolute right-0 h-9 w-9 flex" onClick={() => {
                             getCurrent().close()
                         }}>
