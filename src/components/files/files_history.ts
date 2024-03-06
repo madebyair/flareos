@@ -18,3 +18,13 @@ export function get_back(): string | null {
         return null // No more history to go back
     }
 }
+
+
+export function go_forward(): string | null {
+    if (currentIndex < history.length - 1) {
+        currentIndex++
+        return history[currentIndex]
+    } else {
+        return null // No more history to go forward
+    }
+}

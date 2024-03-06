@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next"
-import { get_back } from "./files_history.ts"
+import { get_back, go_forward } from "./files_history.ts"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import { useAtomState } from "@zedux/react"
 import { currentDirState } from "./filesState.tsx"
 
@@ -23,8 +23,20 @@ const FilesSidebar = () => {
                         setCurrentDir(back)
                     }
                 }}>
-                    <div className="h-10 w-10 hover:bg-slate-400/70 dark:hover:bg-zinc-950 flex rounded-md transition duration-300">
+                    <div
+                        className="h-10 w-10 hover:bg-slate-400/70 dark:hover:bg-zinc-950 flex rounded-md transition duration-300">
                         <FontAwesomeIcon icon={faArrowLeft} size="lg" className="m-auto"/>
+                    </div>
+                </div>
+                <div onClick={() => {
+                    const back = go_forward()
+                    if (back !== null) {
+                        setCurrentDir(back)
+                    }
+                }}>
+                    <div
+                        className="h-10 w-10 hover:bg-slate-400/70 dark:hover:bg-zinc-950 flex rounded-md transition duration-300">
+                        <FontAwesomeIcon icon={faArrowRight} size="lg" className="m-auto"/>
                     </div>
                 </div>
             </div>
