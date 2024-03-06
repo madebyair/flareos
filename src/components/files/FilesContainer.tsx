@@ -3,7 +3,7 @@ import "../../assets/css/App.css"
 import { currentDirState } from "./filesState.tsx"
 import DirectoryExplorer from "./explorer/DirectoryExplorer.tsx"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faX } from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faX } from "@fortawesome/free-solid-svg-icons"
 import { getCurrent } from "@tauri-apps/api/window"
 import { useEffect, useState } from "react"
 import { emit, listen } from "@tauri-apps/api/event"
@@ -16,9 +16,12 @@ import FilesTab from "./FilesTab.tsx"
 
 const FilesContainer = () => {
     // @ts-ignore
-    const [currentDir, ] = useAtomState(currentDirState)
+    const [currentDir, setCurrentDir, ] = useAtomState(currentDirState)
     const [user, setUser] = useState<User>(defaultUser)
-    const [activeKey, setActiveKey] = useState("tab-1")
+    const [activeKey, setActiveKey] = useState("1")
+    const [tabs, setTabs] = useState<Array<string>>([
+        "1"
+    ])
     const [ , i18n ] = useTranslation()
 
     useEffect(() => {
@@ -56,10 +59,26 @@ const FilesContainer = () => {
                             getCurrent().minimize()
                         }
                     }}>
-                        <div className="absolute">
+                        <div className="absolute w-11/12 overflow-auto">
                             <Tabs activeKey={activeKey} style={{ gap: 12 }} onTabClick={(id) => setActiveKey(id)}>
-                                <Tab id="tab-1"><FilesTab path={currentDir} active={activeKey === "tab-1"} /></Tab>
-                                <Tab id="tab-2"><FilesTab path={currentDir} active={activeKey === "tab-2"} /></Tab>
+                                {tabs.map((object) => {
+                                    return (
+                                        <Tab id={object}><FilesTab path={currentDir} active={activeKey.toString() === object.toString()} /></Tab>
+                                    )
+                                })}
+                                <div className="h-10 max-w-10/12 flex" onClick={() => {
+                                    setCurrentDir("/home")
+
+                                    setTabs(prevState => {
+                                        const length = prevState.length + 1
+                                        setActiveKey(length.toString())
+                                        return [...prevState, String(length)]
+                                    })
+                                }}>
+                                    <div className="m-auto">
+                                        <FontAwesomeIcon icon={faPlus} />
+                                    </div>
+                                </div>
                             </Tabs>
                         </div>
                         <div className="absolute right-0 h-9 w-9 flex" onClick={() => {

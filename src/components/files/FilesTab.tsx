@@ -15,6 +15,7 @@ const FilesTab = ({active, path} : FilesTabType) => {
 
     useEffect(() => {
         if (active) {
+            console.log("active")
             setOwnPath(path)
         }
         if (ownPath == "") {
