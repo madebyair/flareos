@@ -49,8 +49,13 @@ use std::{
 };
 use files::read_dir::read_dir;
 use unix::create_user::create_user;
+use nix::unistd::Uid;
 
 fn main() {
+    if !Uid::effective().is_root() {
+        panic!("The Air Operating System Shell requires to be runned as root.");
+    }
+
     let pty_system = native_pty_system();
 
     let pty_pair = pty_system
