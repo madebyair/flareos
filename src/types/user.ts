@@ -11,7 +11,8 @@ type User = {
     "password": string,
     "apps": Array<App>,
     "theme": "light"|"dark",
-    "language": supportedLanguagesType
+    "language": supportedLanguagesType,
+    "unixUser": string
 }
 
 export const defaultUser : User = {
@@ -24,7 +25,8 @@ export const defaultUser : User = {
     "password": "",
     "apps": [],
     "theme": "light",
-    "language": "en"
+    "language": "en",
+    "unixUser": ""
 }
 
 export default User

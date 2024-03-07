@@ -6,7 +6,7 @@ import airWhite from "../../../assets/images/air-white.webp"
 import { useTranslation } from "react-i18next"
 import { useState } from "react"
 import Button from "../../../elements/Button.tsx"
-import { isValidEmail } from "../../../helpers.ts"
+import { isValidEmail, removeSpecialCharacters } from "../../../helpers.ts"
 import exists from "../../../api/auth/exists.ts"
 import { BarLoader } from "react-spinners"
 import useBlobUrl from "../../../functions/useBlobUrl.ts"
@@ -83,32 +83,40 @@ const AccountSetupLogin = () => {
         login(email, value).then((r) => {
             invoke("encrypt", { content: value }).then((password) => {
                 if (typeof password === "string") {
-                    setUser({
-                        "firstName": first,
-                        "lastName": last,
-                        "email": email,
-                        "uuid": uuid,
-                        "sessionUuid": r?.data.uuid,
-                        "sessionSecret": r?.data.secret,
-                        "password": password,
-                        "apps": [],
-                        "theme": theme,
-                        "language": "en"
+                    const unixUser : string = removeSpecialCharacters(first.toLowerCase() + last.toLowerCase())
+
+                    invoke("create_user", { name: unixUser, uuid: uuid, password: value }).then(() => {
+                        if (unixUser !== "") {
+                            setUser({
+                                "firstName": first,
+                                "lastName": last,
+                                "email": email,
+                                "uuid": uuid,
+                                "sessionUuid": r?.data.uuid,
+                                "sessionSecret": r?.data.secret,
+                                "password": password,
+                                "apps": [],
+                                "theme": theme,
+                                "language": "en",
+                                "unixUser": unixUser
+                            })
+                            set("users", [
+                                {
+                                    "firstName": first,
+                                    "lastName": last,
+                                    "email": email,
+                                    "uuid": uuid,
+                                    "sessionUuid": r?.data.uuid,
+                                    "sessionSecret": r?.data.secret,
+                                    "password": password,
+                                    "apps": [],
+                                    "theme": theme,
+                                    "language": "en",
+                                    "unixUser": unixUser
+                                },
+                            ])
+                        }
                     })
-                    set("users", [
-                        {
-                            "firstName": first,
-                            "lastName": last,
-                            "email": email,
-                            "uuid": uuid,
-                            "sessionUuid": r?.data.uuid,
-                            "sessionSecret": r?.data.secret,
-                            "password": password,
-                            "apps": [],
-                            "theme": theme,
-                            "language": "en"
-                        },
-                    ])
                 }
             })
         }).catch(function () {

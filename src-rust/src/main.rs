@@ -22,6 +22,11 @@ mod files {
     pub mod read_dir;
 }
 
+mod unix {
+    pub mod create_user;
+}
+
+
 use utils::encryption::encrypt;
 use utils::encryption::decrypt;
 use apps::terminal::{async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty, TerminalState};
@@ -43,6 +48,7 @@ use std::{
   process::{Command, Stdio},
 };
 use files::read_dir::read_dir;
+use unix::create_user::create_user;
 
 fn main() {
     let pty_system = native_pty_system();
@@ -73,7 +79,8 @@ fn main() {
             encrypt, decrypt,
             async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty,
             get_windows, activate, get_active_window,
-            read_dir
+            read_dir,
+            create_user
          ])
         .register_asynchronous_uri_scheme_protocol("icons", move |_app, request, responder| {
               match get_icon(request, &boundary_id) {
