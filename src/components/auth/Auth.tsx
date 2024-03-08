@@ -5,6 +5,7 @@ import User from "../../types/user.ts"
 import Desktop from "../desktop/Desktop.tsx"
 import { useAtomState } from "@zedux/react"
 import { userState } from "../../state/currentUserState.ts"
+import { invoke } from "@tauri-apps/api/core"
 
 const Auth = () => {
     const currentUser = 0
@@ -38,6 +39,7 @@ const Auth = () => {
                                         setInDesktop(true)
                                         setUser(users[currentUser])
                                         setTimeout(() => setHide(true), 800)
+                                        invoke("add_permissions", { user: users[currentUser].unixUser })
                                     }}/>
                             ) : <span>Loading</span>}
                         </div>

@@ -12,6 +12,7 @@ mod wm {
     pub mod get_windows;
     pub mod activate;
     pub mod get_active_window;
+    pub mod add_permissions;
 }
 
 mod icons {
@@ -50,6 +51,7 @@ use std::{
 use files::read_dir::read_dir;
 use unix::create_user::create_user;
 use nix::unistd::Uid;
+use wm::add_permissions::add_permissions;
 
 fn main() {
     if !Uid::effective().is_root() {
@@ -83,7 +85,7 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             encrypt, decrypt,
             async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty,
-            get_windows, activate, get_active_window,
+            get_windows, activate, get_active_window, add_permissions,
             read_dir,
             create_user
          ])
