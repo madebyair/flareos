@@ -9,9 +9,11 @@ import { currentMonitor } from "@tauri-apps/api/window"
 import { useAtomState } from "@zedux/react"
 import { userState } from "../../state/currentUserState.ts"
 import TaskbarApps from "./TaskbarApps.tsx"
+import { useTranslation } from "react-i18next"
 const Taskbar = () => {
     const [isStartDisplayed, setIsStartDisplayed] = useState(false)
     const [user] = useAtomState(userState)
+    const [, i18n] = useTranslation()
 
     useEffect(() => {
         currentMonitor().then((result) => {
@@ -53,6 +55,35 @@ const Taskbar = () => {
         setIsStartDisplayed(!isStartDisplayed)
     }
 
+    const [time, setTime] = useState(() => {
+        const now = new Date()
+
+        const timeFormat = new Intl.DateTimeFormat(undefined, {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: i18n.language === "en"
+        })
+
+        return timeFormat.format(now)
+    })
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTime(() => {
+                const now = new Date()
+                const timeFormat = new Intl.DateTimeFormat(undefined, {
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: i18n.language === "en"
+                })
+
+                return timeFormat.format(now)
+            })
+        }, 1000)
+
+        return () => clearInterval(interval)
+    }, [])
+
     return (
         <div className="w-screen bg-zinc-300 dark:bg-zinc-950 h-10 z-10 flex">
             <div className="mx-6 flex h-8 my-auto z-10">
@@ -65,6 +96,11 @@ const Taskbar = () => {
             <div className="absolute w-screen flex">
                 <div className="m-auto">
                     <TaskbarApps />
+                </div>
+            </div>
+            <div className="absolute mx-12 right-0 text-white h-10 flex">
+                <div className="h-8 w-24 my-auto flex rounded-md hover:bg-zinc-400 dark:hover:bg-zinc-800 transition duration-300">
+                    <span className="m-auto">{time}</span>
                 </div>
             </div>
         </div>
