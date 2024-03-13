@@ -12,15 +12,16 @@ import TaskbarApps from "./TaskbarApps.tsx"
 import { useTranslation } from "react-i18next"
 const Taskbar = () => {
     const [isStartDisplayed, setIsStartDisplayed] = useState(false)
+    const [isActionsDisplayed, setIsActionsDisplayed] = useState(false)
     const [user] = useAtomState(userState)
     const [, i18n] = useTranslation()
 
     useEffect(() => {
         currentMonitor().then((result) => {
-            if (result?.size.height) {
+            if (result?.size.height && result?.size.width) {
                 const height = result.size.height - 655
 
-                const web = new WebviewWindow("start", {
+                new WebviewWindow("start", {
                     title: "__airos_start_menu__",
                     url: "start.html",
                     x: 50,
@@ -34,7 +35,19 @@ const Taskbar = () => {
                     resizable: false
                 })
 
-                web.once("tauri://error", (e) => { console.error(e) })
+                new WebviewWindow("actions", {
+                    title: "__airos_actions_menu__",
+                    url: "actions.html",
+                    x: result?.size.width - 580,
+                    y: height + 200,
+                    width: 550,
+                    height: 400,
+                    decorations: false,
+                    alwaysOnTop: true,
+                    transparent: true,
+                    visible: false,
+                    resizable: false
+                })
             }
         })
     }, [])
@@ -50,9 +63,20 @@ const Taskbar = () => {
         })
     }, [isStartDisplayed])
 
+    useEffect(() => {
+        emit("actions-display-event", {
+            "user": user,
+            "current": isActionsDisplayed
+        })
+    }, [isActionsDisplayed])
 
-    function onClick() {
+
+    function onStartClick() {
         setIsStartDisplayed(!isStartDisplayed)
+    }
+
+    function onActionsClick() {
+        setIsActionsDisplayed(!isActionsDisplayed)
     }
 
     const [time, setTime] = useState(() => {
@@ -88,7 +112,7 @@ const Taskbar = () => {
         <div className="w-screen bg-zinc-300 dark:bg-zinc-950 h-10 z-10 flex">
             <div className="mx-6 flex h-8 my-auto z-10">
                 <div
-                    className="flex mx-2 rounded-md hover:bg-zinc-400 dark:hover:bg-zinc-800 transition duration-300 h-8 w-8" onClick={() => onClick()}>
+                    className="flex mx-2 rounded-md hover:bg-zinc-400 dark:hover:bg-zinc-800 transition duration-300 h-8 w-8" onClick={() => onStartClick()}>
                     <img src={airsmallBlack} alt="" className="block dark:hidden"/>
                     <img src={airsmallWhite} alt="" className="hidden dark:block"/>
                 </div>
@@ -99,7 +123,7 @@ const Taskbar = () => {
                 </div>
             </div>
             <div className="absolute mx-12 right-0 text-white h-10 flex">
-                <div className="h-8 w-24 my-auto flex rounded-md hover:bg-zinc-400 dark:hover:bg-zinc-800 transition duration-300">
+                <div className="h-8 w-24 my-auto flex rounded-md hover:bg-zinc-400 dark:hover:bg-zinc-800 transition duration-300" onClick={() => onActionsClick()}>
                     <span className="m-auto">{time}</span>
                 </div>
             </div>
