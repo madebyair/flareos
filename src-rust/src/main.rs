@@ -27,6 +27,10 @@ mod unix {
     pub mod create_user;
 }
 
+mod gamma {
+    pub mod get_current_gamma;
+    pub mod set_current_gamma;
+}
 
 use utils::encryption::encrypt;
 use utils::encryption::decrypt;
@@ -52,6 +56,8 @@ use files::read_dir::read_dir;
 use unix::create_user::create_user;
 use nix::unistd::Uid;
 use wm::add_permissions::add_permissions;
+use gamma::get_current_gamma::get_current_gamma;
+use gamma::set_current_gamma::set_current_gamma;
 
 fn main() {
     if !Uid::effective().is_root() {
@@ -87,7 +93,8 @@ fn main() {
             async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty,
             get_windows, activate, get_active_window, add_permissions,
             read_dir,
-            create_user
+            create_user,
+            get_current_gamma, set_current_gamma
          ])
         .register_asynchronous_uri_scheme_protocol("icons", move |_app, request, responder| {
               match get_icon(request, &boundary_id) {

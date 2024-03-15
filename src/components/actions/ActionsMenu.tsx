@@ -5,6 +5,8 @@ import { getCurrent } from "@tauri-apps/api/window"
 import "../../assets/css/App.css"
 import { faMoon, faPalette, faPlane, faShare, faWifi } from "@fortawesome/free-solid-svg-icons"
 import ActionsButton from "./ActionsButton.tsx"
+import { enableNightLight } from "../../manager/nightlight/setNightLight.ts"
+import isNightLight from "../../manager/nightlight/isNightLight.ts"
 
 type EventResponse = {
     user: User;
@@ -13,6 +15,7 @@ type EventResponse = {
 
 const ActionsMenu = () => {
     const [user, setUser] = useState<User>(defaultUser)
+    const [nightLight, setIsNightLight] = useState(false)
 
     useEffect(() => {
         listen<EventResponse>("actions-display-event", (event) => {
@@ -35,6 +38,15 @@ const ActionsMenu = () => {
         if (window.location.port !== "1420") {
             window.addEventListener("contextmenu", e => e.preventDefault())
         }
+
+        const interval = setInterval(() => {
+            isNightLight().then((r) => {
+                setIsNightLight(r)
+                console.log(r)
+            })
+        }, 100)
+
+        return () => clearInterval(interval)
     }, [])
     return (
         <div className={user?.theme}>
@@ -42,14 +54,16 @@ const ActionsMenu = () => {
                 <div className="w-screen h-3/4 flex">
                     <div className="w-11/12 h-5/6 m-auto">
                         <div className="w-full h-1/3 flex">
-                            <ActionsButton text="Wifi" subtext="Connected" icon={faWifi} enabled/>
-                            <ActionsButton text="Bluetooth" subtext="Ready" iconSvg={<BluetoothIcon/>} enabled/>
-                            <ActionsButton text="Plane mode" icon={faPlane} enabled={false}/>
+                            <ActionsButton text="Wifi" subtext="Connected" icon={faWifi} enabled onClick={() => {}}/>
+                            <ActionsButton text="Bluetooth" subtext="Ready" iconSvg={<BluetoothIcon/>} enabled onClick={() => {}}/>
+                            <ActionsButton text="Plane mode" icon={faPlane} enabled={false} onClick={() => {}}/>
                         </div>
                         <div className="w-full h-1/3 flex">
-                            <ActionsButton text="Blue light" icon={faPalette} enabled={false} />
-                            <ActionsButton text="Night light" icon={faMoon} enabled={false} />
-                            <ActionsButton text="Hotspot" icon={faShare} enabled={false}/>
+                            <ActionsButton text="Blue light" icon={faPalette} enabled={false} onClick={() => {}} />
+                            <ActionsButton text="Night light" icon={faMoon} enabled={nightLight} onClick={() => {
+                                enableNightLight()
+                            }} />
+                            <ActionsButton text="Hotspot" icon={faShare} enabled={false} onClick={() => {}} />
                         </div>
                     </div>
                 </div>

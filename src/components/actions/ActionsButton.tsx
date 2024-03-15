@@ -7,9 +7,10 @@ type ActionsButtonType = {
     icon?: IconDefinition;
     iconSvg?: JSX.Element;
     enabled: boolean;
+    onClick: () => void;
 };
 
-const ActionsButton = ({ text, subtext, icon, iconSvg, enabled }: ActionsButtonType) => {
+const ActionsButton = ({ text, subtext, icon, iconSvg, enabled, onClick }: ActionsButtonType) => {
     let className = "w-9/12 h-3/4 bg-sky-500/65 hover:bg-sky-500 m-auto rounded-md transition duration-300 flex"
 
     if (!enabled) {
@@ -18,7 +19,7 @@ const ActionsButton = ({ text, subtext, icon, iconSvg, enabled }: ActionsButtonT
 
     return (
         <div className="w-1/3 h-full flex">
-            <div className={className}>
+            <div className={className} onClick={() => onClick()}>
                 <div className="h-full w-1/3 flex">
                     <div className="m-auto">
                         {icon && <FontAwesomeIcon icon={icon} />}

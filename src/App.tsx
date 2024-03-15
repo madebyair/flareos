@@ -11,6 +11,7 @@ import { emit, listen } from "@tauri-apps/api/event"
 import { userState } from "./state/currentUserState.ts"
 import User from "./types/user.ts"
 import { supportedLanguagesType } from "./types/supportedLanguages.ts"
+import getCurrentGamma from "./manager/gamma/getCurrentGamma.ts"
 
 function App() {
     const [colorScheme] = useAtomState(colorSchemeState)
@@ -81,6 +82,10 @@ function App() {
                     ...prevUser
                 }
             })
+        })
+
+        getCurrentGamma().then((r) => {
+            console.log(r)
         })
     }, [])
 
