@@ -8,5 +8,5 @@ pub fn get_current_gamma() -> String {
              .output()
              .unwrap_or_else(|_| panic!("failed to execute xrandr"));
 
-    String::from_utf8(command.stdout).expect("got non UTF-8 data")
+    String::from_utf8(command.stdout).expect("got non UTF-8 data").replace("\n", "")
 }

@@ -5,7 +5,7 @@ import { getCurrent } from "@tauri-apps/api/window"
 import "../../assets/css/App.css"
 import { faMoon, faPalette, faPlane, faShare, faWifi } from "@fortawesome/free-solid-svg-icons"
 import ActionsButton from "./ActionsButton.tsx"
-import { enableNightLight } from "../../manager/nightlight/setNightLight.ts"
+import { disableNightLight, enableNightLight } from "../../manager/nightlight/setNightLight.ts"
 import isNightLight from "../../manager/nightlight/isNightLight.ts"
 
 type EventResponse = {
@@ -61,7 +61,13 @@ const ActionsMenu = () => {
                         <div className="w-full h-1/3 flex">
                             <ActionsButton text="Blue light" icon={faPalette} enabled={false} onClick={() => {}} />
                             <ActionsButton text="Night light" icon={faMoon} enabled={nightLight} onClick={() => {
+                                if (nightLight) {
+                                    disableNightLight()
+                                    setIsNightLight(false)
+                                    return
+                                }
                                 enableNightLight()
+                                setIsNightLight(true)
                             }} />
                             <ActionsButton text="Hotspot" icon={faShare} enabled={false} onClick={() => {}} />
                         </div>
