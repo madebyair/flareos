@@ -18,6 +18,12 @@ const embededApps : Array<App> = [
         "description": "Here you can manage with all settings",
         "exec": "__airos_emebed_app_settings__",
         "icon": "icons://settings.webp"
+    },
+    {
+        "name": "Store",
+        "description": "airstore is app which allows you to download any app.",
+        "exec": "__airos_emebed_app_store__",
+        "icon": "icons://store.webp"
     }
 ]
 

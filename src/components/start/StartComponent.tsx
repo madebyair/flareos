@@ -76,6 +76,16 @@ const StartComponent = () => {
                 decorations: false
             })
             break
+
+        case "__airos_emebed_app_store__":
+            new WebviewWindow("store", {
+                url: "store.html",
+                title: "Store",
+                minWidth: 800,
+                minHeight: 600,
+                visible: false
+            })
+            break
         default:
             break
         }

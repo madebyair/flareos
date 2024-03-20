@@ -8,7 +8,8 @@
     "terminal",
     "settings",
     "files",
-    "actions"
+    "actions",
+    "store"
   ],
   "permissions": [
     "path:default",
