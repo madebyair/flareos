@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next"
 import "../../assets/css/App.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHome, faSearch } from "@fortawesome/free-solid-svg-icons"
+import StoreApps from "./StoreApps.tsx"
 
 const StoreComponent = () => {
     const [user, setUser] = useState<User>(defaultUser)
@@ -60,10 +61,15 @@ const StoreComponent = () => {
                     </div>
                 </div>
                 <div className="w-full flex">
-                    <div className="w-1/3">
+                    <div className="w-1/4">
                         <div className="mt-8 w-10/12 text-xl font-bold ml-4">
                             <FontAwesomeIcon icon={faHome}/>
                             <span className="ml-4">Home</span>
+                        </div>
+                    </div>
+                    <div className="w-3/4 h-scren overflow-auto">
+                        <div style={{overflowX: "auto"}}>
+                            <StoreApps channel="home" />
                         </div>
                     </div>
                 </div>
