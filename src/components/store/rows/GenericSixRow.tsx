@@ -11,7 +11,7 @@ const GenericSixRow = ({apps, name}: {name: string | undefined, apps: storeApp[]
                     return (
                         <div
                             key={app.uuid}
-                            className="bg-zinc-900 w-1/3 min-w-[270px] rounded-md flex h-[100px] mt-6 mb-6"
+                            className="bg-slate-300 dark:bg-zinc-900 hover:dark:bg-zinc-950/5 hover:bg-slate-400 transition duration-300 min-w-[270px] rounded-md flex h-[100px] mt-6 mb-6"
                             style={{
                                 flex: "0 1 calc(33.33% - 4%)",
                                 maxWidth: "calc(33.33% - 4%)",
