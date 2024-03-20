@@ -38,7 +38,9 @@ const StoreComponent = () => {
                 <div className="w-full h-24">
                     <div className="h-24 w-full flex">
                         <div className="w-[200px] h-24 flex">
-                            <img src="/src/assets/images/airstorewhite.png" alt=""/>
+                            <div className="m-auto">
+                                <img src="/src/assets/images/airstorewhite.png" alt=""/>
+                            </div>
                         </div>
                         <div className="m-auto">
                             <div className="relative">
