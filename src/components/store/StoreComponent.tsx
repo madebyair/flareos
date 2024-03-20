@@ -5,12 +5,14 @@ import { useTranslation } from "react-i18next"
 import "../../assets/css/App.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHome, faSearch } from "@fortawesome/free-solid-svg-icons"
-import StoreApps from "./StoreApps.tsx"
+import { useAtomState } from "@zedux/react"
+import { storeComponent } from "./storeState.tsx"
 
 const StoreComponent = () => {
     const [user, setUser] = useState<User>(defaultUser)
     const [input, setInput] = useState("")
     const [, i18n] = useTranslation()
+    const [component] = useAtomState(storeComponent)
 
     useEffect(() => {
         emit("user-request")
@@ -69,7 +71,7 @@ const StoreComponent = () => {
                     </div>
                     <div className="w-3/4 h-scren overflow-auto">
                         <div style={{overflowX: "auto"}}>
-                            <StoreApps channel="home" />
+                            {component}
                         </div>
                     </div>
                 </div>
