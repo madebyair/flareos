@@ -5,6 +5,8 @@ import Skeleton from "react-loading-skeleton"
 import "./../../assets/css/Skeleton.css"
 import Button from "../../elements/Button.tsx"
 import { useTranslation } from "react-i18next"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faBox, faCode, faDownload } from "@fortawesome/free-solid-svg-icons"
 
 type StoreResponse = {
     status: "success" | "failed",
@@ -61,6 +63,52 @@ const StoreView = ({app} : {app: string}) => {
                                     className="rounded-md mx-4"/>
                             )
                         })}
+                    </div>
+                </div>
+            }
+            {loading &&
+                <Skeleton
+                    containerClassName="h-36 w-full"
+                    height="144px"
+                />
+            }
+            {!loading &&
+                <div className="h-36 w-full bg-slate-300 dark:bg-zinc-900 flex rounded-md mt-8">
+                    <div className="w-1/3 h-full flex">
+                        <div className="m-auto flex h-10">
+                            <div className="flex h-full">
+                                <FontAwesomeIcon icon={faBox} size="xl" className="m-auto"/>
+                            </div>
+                            <div className="mt-auto mb-auto ml-3 text-sm">
+                                {t("Latest release")}
+                                <br/>
+                                {appDetalis?.latest_version}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-1/3 h-full flex">
+                        <div className="m-auto flex h-10">
+                            <div className="flex h-full">
+                                <FontAwesomeIcon icon={faCode} size="xl" className="m-auto"/>
+                            </div>
+                            <div className="mt-auto mb-auto ml-3 text-sm">
+                                {t("Developer")}
+                                <br/>
+                                {appDetalis?.author}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-1/3 h-full flex">
+                        <div className="m-auto flex h-10">
+                            <div className="flex h-full">
+                                <FontAwesomeIcon icon={faDownload} size="xl" className="m-auto"/>
+                            </div>
+                            <div className="mt-auto mb-auto ml-3 text-sm">
+                                {t("Downloads")}
+                                <br/>
+                                {appDetalis?.downloads.toString()}
+                            </div>
+                        </div>
                     </div>
                 </div>
             }

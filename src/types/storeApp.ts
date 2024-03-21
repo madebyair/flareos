@@ -12,5 +12,7 @@ export type storeApp = {
     categories: Array<string>,
     free_license: boolean,
     is_amd: boolean,
-    is_arm: boolean
+    is_arm: boolean,
+    author: string,
+    downloads: number
 }
