@@ -24,7 +24,7 @@ const StoreView = ({app} : {app: string}) => {
         })
     }, [app])
     return (
-        <div className="mr-4">
+        <div className="mr-4 overflow-auto" style={{height: "calc(100vh - 96px)"}}>
             {loading &&
                 <Skeleton
                     containerClassName="h-36 w-full"
@@ -32,9 +32,9 @@ const StoreView = ({app} : {app: string}) => {
                 />
             }
             {!loading &&
-                <div className="h-36 w-full bg-slate-300 dark:bg-zinc-900 flex relative">
+                <div className="h-36 w-full bg-slate-300 dark:bg-zinc-900 flex relative rounded-md">
                     <div className="h-36 w-36 flex">
-                        <img src={appDetalis?.icon} className="m-auto" width="80px" alt=""/>
+                        <img src={appDetalis?.icon} className="m-auto" draggable={false} width="80px" alt=""/>
                     </div>
                     <div className="mt-auto mb-auto ml-4 font-bold text-2xl">
                         {appDetalis?.name}
@@ -43,6 +43,24 @@ const StoreView = ({app} : {app: string}) => {
                         <div className="mt-auto mb-auto">
                             <Button submit={() => console.log("install")} label={t("Install")} />
                         </div>
+                    </div>
+                </div>
+            }
+            {loading &&
+                <Skeleton
+                    containerClassName="mt-8"
+                    height="384px"
+                />
+            }
+            {!loading &&
+                <div className="h-96 mt-8 bg-slate-300 dark:bg-zinc-900 rounded-md flex">
+                    <div className="m-auto w-10/12 overflow-auto flex">
+                        {appDetalis?.screenshots.map((image) => {
+                            return (
+                                <img src={image} alt="" draggable={false}
+                                     className="rounded-md mx-4"/>
+                            )
+                        })}
                     </div>
                 </div>
             }

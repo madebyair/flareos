@@ -50,7 +50,7 @@ const StoreComponent = () => {
                     <div className="h-24 w-full flex">
                         <div className="w-[200px] h-24 flex">
                             <div className="m-auto">
-                                <img src="/src/assets/images/airstorewhite.png" alt=""/>
+                                <img src="/src/assets/images/airstorewhite.png" draggable={false} alt=""/>
                             </div>
                         </div>
                         <div className="m-auto">
