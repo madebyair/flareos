@@ -57,7 +57,7 @@ const StoreView = ({app} : {app: string}) => {
             }
             {!loading &&
                 <div className="h-96 mt-8 bg-slate-300 dark:bg-zinc-900 rounded-md flex">
-                    <div className="m-auto w-10/12 overflow-auto flex">
+                    <div className="m-auto w-10/12 h-80 overflow-auto flex">
                         {appDetalis?.screenshots.map((image) => {
                             if (image.startsWith("YTVID")) {
                                 return (
