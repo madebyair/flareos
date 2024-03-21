@@ -1,6 +1,11 @@
 import { storeApp } from "../../../types/storeApp.ts"
+import { useAtomState } from "@zedux/react"
+import { storeComponent } from "../storeState.tsx"
+import StoreView from "../StoreView.tsx"
 
 const GenericSixRow = ({apps, name}: {name: string | undefined, apps: storeApp[]}) => {
+    const [, setComponent] = useAtomState(storeComponent)
+
     return (
         <div className="">
             <h1 className="text-xl font-bold">{name}</h1>
@@ -17,6 +22,7 @@ const GenericSixRow = ({apps, name}: {name: string | undefined, apps: storeApp[]
                                 maxWidth: "calc(33.33% - 4%)",
                                 margin: "0 2% 10px 10px"
                             }}
+                            onClick={() => setComponent(<StoreView app={app.uuid} />)}
                         >
                             <div className="w-[90px] flex">
                                 <img src={app.icon} width="50px" className="m-auto rounded-xl" alt=""/>

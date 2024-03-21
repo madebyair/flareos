@@ -7,12 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHome, faSearch } from "@fortawesome/free-solid-svg-icons"
 import { useAtomState } from "@zedux/react"
 import { storeComponent } from "./storeState.tsx"
+import StoreApps from "./StoreApps.tsx"
 
 const StoreComponent = () => {
     const [user, setUser] = useState<User>(defaultUser)
     const [input, setInput] = useState("")
     const [, i18n] = useTranslation()
-    const [component] = useAtomState(storeComponent)
+    const [component, setComponent] = useAtomState(storeComponent)
 
     useEffect(() => {
         emit("user-request")
@@ -37,6 +38,12 @@ const StoreComponent = () => {
 
     return (
         <div className={user.theme}>
+            {user.theme == "dark" &&
+                <style>{" :root {\n" +
+                    "        --base-color: #2b2929;\n" +
+                    "        --highlight-color: #312f2f;\n" +
+                    "    }"}</style>
+            }
             <div className="w-screen h-screen bg-slate-200 dark:bg-black dark:text-white select-none ">
                 <div className="w-full h-24">
                     <div className="h-24 w-full flex">
@@ -64,7 +71,7 @@ const StoreComponent = () => {
                 </div>
                 <div className="w-full flex">
                     <div className="w-1/4">
-                        <div className="mt-8 w-10/12 text-xl font-bold ml-4">
+                        <div className="mt-8 w-10/12 text-xl font-bold ml-4" onClick={() => setComponent(<StoreApps channel="home" />)}>
                             <FontAwesomeIcon icon={faHome}/>
                             <span className="ml-4">Home</span>
                         </div>
