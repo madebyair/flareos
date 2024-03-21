@@ -58,6 +58,13 @@ const StoreView = ({app} : {app: string}) => {
                 <div className="h-96 mt-8 bg-slate-300 dark:bg-zinc-900 rounded-md flex">
                     <div className="m-auto w-10/12 overflow-auto flex">
                         {appDetalis?.screenshots.map((image) => {
+                            if (image.startsWith("YTVID")) {
+                                return (
+                                    <iframe width="100%" height="315" key={image}
+                                        src={image.replace("YTVID ", "") + "?autoplay=1&mute=1"}>
+                                    </iframe>
+                                )
+                            }
                             return (
                                 <img src={image} alt="" draggable={false} key={image}
                                     className="rounded-md mx-4"/>
