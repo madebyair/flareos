@@ -60,7 +60,10 @@ const StoreComponent = () => {
                     <div className="h-24 w-full flex">
                         <div className="w-[200px] h-24 flex">
                             <div className="m-auto">
-                                <img src="/src/assets/images/airstorewhite.png" draggable={false} alt="" />
+                                <img src="/src/assets/images/airstorewhite.png" draggable={false} alt=""
+                                    className="hidden dark:block"/>
+                                <img src="/src/assets/images/airstoreblack.png" draggable={false} alt=""
+                                    className="dark:hidden"/>
                             </div>
                         </div>
                         <div className="m-auto">

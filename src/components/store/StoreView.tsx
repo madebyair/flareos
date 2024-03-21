@@ -40,7 +40,7 @@ const StoreView = ({app} : {app: string}) => {
                     </div>
                     <div className="mt-auto mb-auto ml-4 font-bold text-2xl">
                         {appDetalis?.name}
-                        <p className="text-lg font-normal dark:text-zinc-500">{appDetalis?.author}</p>
+                        <p className="text-lg font-normal text-zinc-700 dark:text-zinc-500">{appDetalis?.author}</p>
                     </div>
                     <div className="absolute h-36 right-8 flex">
                         <div className="mt-auto mb-auto">
@@ -90,7 +90,7 @@ const StoreView = ({app} : {app: string}) => {
                             <div className="mt-auto mb-auto ml-3 text-sm">
                                 {t("Latest release")}
                                 <br/>
-                                <p className="dark:text-zinc-500">{appDetalis?.latest_version}</p>
+                                <p className="text-zinc-700 dark:text-zinc-500">{appDetalis?.latest_version}</p>
                             </div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@ const StoreView = ({app} : {app: string}) => {
                             <div className="mt-auto mb-auto ml-3 text-sm">
                                 {t("Developer")}
                                 <br/>
-                                <p className="dark:text-zinc-500">{appDetalis?.author}</p>
+                                <p className="text-zinc-700 dark:text-zinc-500">{appDetalis?.author}</p>
                             </div>
                         </div>
                     </div>
@@ -114,7 +114,7 @@ const StoreView = ({app} : {app: string}) => {
                             <div className="mt-auto mb-auto ml-3 text-sm">
                                 {t("Downloads")}
                                 <br/>
-                                <p className="dark:text-zinc-500">{appDetalis?.downloads.toString()}</p>
+                                <p className="text-zinc-700 dark:text-zinc-500">{appDetalis?.downloads.toString()}</p>
                             </div>
                         </div>
                     </div>
