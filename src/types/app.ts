@@ -26,4 +26,11 @@ type App = {
     "icon": string
 }
 
-export type { AppTranslation, App }
+interface UserApp extends App {
+    source: string,
+    source_id: string,
+    version: string,
+    uuid: string
+}
+
+export type { AppTranslation, App, UserApp }
