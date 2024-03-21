@@ -9,6 +9,8 @@ import { useAtomState } from "@zedux/react"
 import { storeComponent } from "./storeState.tsx"
 import StoreApps from "./StoreApps.tsx"
 import StoreSearch from "./StoreSearch.tsx"
+import axios from "axios"
+import NoInternet from "./NoInternet.tsx"
 
 const StoreComponent = () => {
     const [user, setUser] = useState<User>(defaultUser)
@@ -16,6 +18,7 @@ const StoreComponent = () => {
     const [, i18n] = useTranslation()
     const [component, setComponent] = useAtomState(storeComponent)
     const [t] = useTranslation()
+    const [noNetwork, setNoNetwork] = useState(false)
 
     useEffect(() => {
         emit("user-request")
@@ -36,10 +39,16 @@ const StoreComponent = () => {
             window.addEventListener("contextmenu", e => e.preventDefault())
         }
 
+        axios.get("https://api.made-by-air.com", { timeout: 1000 }).catch(() => {
+            setNoNetwork(true)
+        })
     }, [])
 
     return (
         <div className={user.theme}>
+            {noNetwork &&
+                <NoInternet />
+            }
             {user.theme === "dark" && (
                 <style>
                     {":root {\n" +
