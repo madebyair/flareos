@@ -7,6 +7,7 @@ import Button from "../../elements/Button.tsx"
 import { useTranslation } from "react-i18next"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBox, faCode, faDownload } from "@fortawesome/free-solid-svg-icons"
+import { BarLoader } from "react-spinners"
 
 type StoreResponse = {
     status: "success" | "failed",
@@ -17,6 +18,7 @@ const StoreView = ({app} : {app: string}) => {
     const [appDetalis, setAppDetalis] = useState<storeApp>()
     const [loading, setLoading] = useState(true)
     const [t] = useTranslation()
+    const [isInstalling, setIsInstalling] = useState(false)
 
     useEffect(() => {
         setLoading(true)
@@ -44,7 +46,27 @@ const StoreView = ({app} : {app: string}) => {
                     </div>
                     <div className="absolute h-36 right-8 flex">
                         <div className="mt-auto mb-auto">
-                            <Button submit={() => console.log("install")} label={t("Install")} />
+                            {!isInstalling &&
+                                <Button submit={() => {
+                                    setIsInstalling(true)
+                                }} label={t("Install")} />
+                            }
+                            {isInstalling &&
+                                <>
+                                    <BarLoader
+                                        height={8}
+                                        cssOverride={{
+                                            borderRadius: "10px"
+                                        }}
+                                        aria-label="Loading Spinner"
+                                        data-testid="loader"
+                                        color="#2563eb"
+                                    />
+                                    <div className="w-full text-center mt-2">
+                                        {t("Installing")}
+                                    </div>
+                                </>
+                            }
                         </div>
                     </div>
                 </div>
