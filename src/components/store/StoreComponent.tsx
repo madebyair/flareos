@@ -14,6 +14,7 @@ const StoreComponent = () => {
     const [input, setInput] = useState("")
     const [, i18n] = useTranslation()
     const [component, setComponent] = useAtomState(storeComponent)
+    const [t] = useTranslation()
 
     useEffect(() => {
         emit("user-request")
@@ -60,7 +61,7 @@ const StoreComponent = () => {
                                 </div>
                                 <input
                                     type="text"
-                                    placeholder={"Search..."}
+                                    placeholder={t("Search...")}
                                     className="outline-none bg-transparent border-b-gray-300 rounded-md py-2 px-10 focus:outline-none focus:border-purple-500"
                                     value={input}
                                     onChange={(event) => setInput(event.target.value)}
@@ -73,7 +74,7 @@ const StoreComponent = () => {
                     <div className="w-1/4">
                         <div className="mt-8 w-10/12 text-xl font-bold ml-4" onClick={() => setComponent(<StoreApps channel="home" />)}>
                             <FontAwesomeIcon icon={faHome}/>
-                            <span className="ml-4">Home</span>
+                            <span className="ml-4">{t("Home")}</span>
                         </div>
                     </div>
                     <div className="w-3/4 h-scren overflow-auto">

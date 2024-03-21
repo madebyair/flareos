@@ -4,6 +4,7 @@ import axios from "axios"
 import Skeleton from "react-loading-skeleton"
 import "./../../assets/css/Skeleton.css"
 import Button from "../../elements/Button.tsx"
+import { useTranslation } from "react-i18next"
 
 type StoreResponse = {
     status: "success" | "failed",
@@ -13,6 +14,7 @@ type StoreResponse = {
 const StoreView = ({app} : {app: string}) => {
     const [appDetalis, setAppDetalis] = useState<storeApp>()
     const [loading, setLoading] = useState(true)
+    const [t] = useTranslation()
 
     useEffect(() => {
         setLoading(true)
@@ -39,7 +41,7 @@ const StoreView = ({app} : {app: string}) => {
                     </div>
                     <div className="absolute h-36 right-8 flex">
                         <div className="mt-auto mb-auto">
-                            <Button submit={() => console.log("install")} label="Install" />
+                            <Button submit={() => console.log("install")} label={t("Install")} />
                         </div>
                     </div>
                 </div>
