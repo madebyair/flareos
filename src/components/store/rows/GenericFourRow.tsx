@@ -2,13 +2,17 @@ import { storeApp } from "../../../types/storeApp.ts"
 import { useAtomState } from "@zedux/react"
 import { storeComponent } from "../storeState.tsx"
 import StoreView from "../StoreView.tsx"
+import { useTranslation } from "react-i18next"
 
 const GenericFourRow = ({apps, name}: {name: string | undefined, apps: storeApp[]}) => {
     const [, setComponent] = useAtomState(storeComponent)
+    const [ t ] = useTranslation()
 
     return (
         <div className="">
-            <h1 className="text-xl font-bold">{name}</h1>
+            {name &&
+                <h1 className="text-xl font-bold">{t(name)}</h1>
+            }
             <div className="flex flex-wrap justify-between mt-6">
                 {apps.map((app, index) => {
                     app.name = app.name.replace(/Desktop/g, "")
