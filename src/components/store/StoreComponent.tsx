@@ -46,7 +46,7 @@ const StoreComponent = () => {
 
     return (
         <div className={user.theme}>
-            {noNetwork &&
+            {noNetwork || user.email == "" &&
                 <NoInternet />
             }
             {user.theme === "dark" && (
