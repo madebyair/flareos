@@ -13,7 +13,7 @@ import useBlobUrl from "../../../functions/useBlobUrl.ts"
 import login from "../../../api/auth/login.ts"
 import { useAtomState } from "@zedux/react"
 import { userState } from "../../../state/currentUserState.ts"
-import { set } from "../../../store_manager.ts"
+import { set } from "../../../manager/store_manager.ts"
 import { invoke } from "@tauri-apps/api/core"
 import { colorSchemeState } from "../../../state/themeState.ts"
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import AuthCurrentUser from "./AuthCurrentUser.tsx"
-import { get } from "../../store_manager.ts"
+import { get } from "../../manager/store_manager.ts"
 import User from "../../types/user.ts"
 import Desktop from "../desktop/Desktop.tsx"
 import { useAtomState } from "@zedux/react"
