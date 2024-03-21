@@ -57,7 +57,7 @@ const StoreView = ({app} : {app: string}) => {
                     <div className="m-auto w-10/12 overflow-auto flex">
                         {appDetalis?.screenshots.map((image) => {
                             return (
-                                <img src={image} alt="" draggable={false}
+                                <img src={image} alt="" draggable={false} key={image}
                                     className="rounded-md mx-4"/>
                             )
                         })}
