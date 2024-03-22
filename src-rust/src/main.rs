@@ -34,6 +34,7 @@ mod gamma {
 
 mod store {
     pub mod download_icon;
+    pub mod installer;
 }
 
 use utils::encryption::encrypt;
@@ -63,6 +64,7 @@ use wm::add_permissions::add_permissions;
 use gamma::get_current_gamma::get_current_gamma;
 use gamma::set_current_gamma::set_current_gamma;
 use store::download_icon::download_icon;
+use store::installer::install_snap;
 
 fn main() {
     if !Uid::effective().is_root() {
@@ -100,7 +102,7 @@ fn main() {
             read_dir,
             create_user,
             get_current_gamma, set_current_gamma,
-            download_icon
+            download_icon, install_snap
          ])
         .register_asynchronous_uri_scheme_protocol("icons", move |_app, request, responder| {
               match get_icon(request, &boundary_id) {
