@@ -12,6 +12,7 @@ import { isInstalling } from "../../manager/install_manager.ts"
 import { emit, listen } from "@tauri-apps/api/event"
 import { useAtomState } from "@zedux/react"
 import { userState } from "../../state/currentUserState.ts"
+import { invoke } from "@tauri-apps/api/core"
 
 type StoreResponse = {
     status: "success" | "failed",
@@ -24,6 +25,7 @@ const StoreView = ({app} : {app: string}) => {
     const [t] = useTranslation()
     const [installing, setIsInstalling] = useState(false)
     const [isInstalled, setIsInstalled] = useState(false)
+    const [exec, setExec] = useState("")
     const [user] = useAtomState(userState)
 
     useEffect(() => {
@@ -36,6 +38,7 @@ const StoreView = ({app} : {app: string}) => {
         user.apps.forEach((appp) => {
             // @ts-ignore
             if (appp?.uuid == app) {
+                setExec(appp?.exec)
                 setIsInstalled(true)
             }
         })
@@ -75,7 +78,7 @@ const StoreView = ({app} : {app: string}) => {
                             }
                             {isInstalled &&
                                 <Button submit={() => {
-                                    // TODO start app here
+                                    invoke("run_app", { command: exec })
                                 }} label={t("Run")} />
                             }
                             {installing &&
