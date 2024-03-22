@@ -10,8 +10,9 @@ import Auth from "./components/auth/Auth.tsx"
 import { emit, listen } from "@tauri-apps/api/event"
 import { userState } from "./state/currentUserState.ts"
 import User from "./types/user.ts"
+import { install, isInstalling } from "./manager/install_manager.ts"
+import { storeApp } from "./types/storeApp.ts"
 import { supportedLanguagesType } from "./types/supportedLanguages.ts"
-import getCurrentGamma from "./manager/gamma/getCurrentGamma.ts"
 
 function App() {
     const [colorScheme] = useAtomState(colorSchemeState)
@@ -84,8 +85,17 @@ function App() {
             })
         })
 
-        getCurrentGamma().then((r) => {
-            console.log(r)
+        listen<storeApp>("app-install", (e) => {
+            const app = e.payload
+
+            setUser(prevuser => {
+                if (!isInstalling(app.uuid)) {
+                    install(app, prevuser.uuid)
+                }
+                return {
+                    ...prevuser
+                }
+            })
         })
     }, [])
 

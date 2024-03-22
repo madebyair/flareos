@@ -8,6 +8,8 @@ export function isInstalling(uuid: string): boolean {
 }
 
 export async function install(app: storeApp, user: string) {
+    if (isInstalling(app.uuid)) return
+
     installing.push(app.uuid)
     console.log("Installing app", user)
     const icon = await invoke("download_icon", { icon: app.icon })

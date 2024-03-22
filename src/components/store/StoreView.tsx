@@ -8,9 +8,8 @@ import { useTranslation } from "react-i18next"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBox, faCode, faDownload } from "@fortawesome/free-solid-svg-icons"
 import { BarLoader } from "react-spinners"
-import { install, isInstalling } from "../../manager/install_manager.ts"
-import { useAtomState } from "@zedux/react"
-import { userState } from "../../state/currentUserState.ts"
+import { isInstalling } from "../../manager/install_manager.ts"
+import { emit } from "@tauri-apps/api/event"
 
 type StoreResponse = {
     status: "success" | "failed",
@@ -22,7 +21,6 @@ const StoreView = ({app} : {app: string}) => {
     const [loading, setLoading] = useState(true)
     const [t] = useTranslation()
     const [installing, setIsInstalling] = useState(false)
-    const [user] = useAtomState(userState)
 
     useEffect(() => {
         setLoading(true)
@@ -54,7 +52,7 @@ const StoreView = ({app} : {app: string}) => {
                             {!installing &&
                                 <Button submit={() => {
                                     setIsInstalling(true)
-                                    install(appDetalis, user.uuid)
+                                    emit("app-install", appDetalis)
                                 }} label={t("Install")} />
                             }
                             {installing &&
