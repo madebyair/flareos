@@ -32,6 +32,10 @@ mod gamma {
     pub mod set_current_gamma;
 }
 
+mod store {
+    pub mod download_icon;
+}
+
 use utils::encryption::encrypt;
 use utils::encryption::decrypt;
 use apps::terminal::{async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty, TerminalState};
@@ -58,6 +62,7 @@ use nix::unistd::Uid;
 use wm::add_permissions::add_permissions;
 use gamma::get_current_gamma::get_current_gamma;
 use gamma::set_current_gamma::set_current_gamma;
+use store::download_icon::download_icon;
 
 fn main() {
     if !Uid::effective().is_root() {
@@ -94,7 +99,8 @@ fn main() {
             get_windows, activate, get_active_window, add_permissions,
             read_dir,
             create_user,
-            get_current_gamma, set_current_gamma
+            get_current_gamma, set_current_gamma,
+            download_icon
          ])
         .register_asynchronous_uri_scheme_protocol("icons", move |_app, request, responder| {
               match get_icon(request, &boundary_id) {
