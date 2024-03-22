@@ -10,6 +10,8 @@ import { faBox, faCode, faDownload } from "@fortawesome/free-solid-svg-icons"
 import { BarLoader } from "react-spinners"
 import { isInstalling } from "../../manager/install_manager.ts"
 import { emit, listen } from "@tauri-apps/api/event"
+import { useAtomState } from "@zedux/react"
+import { userState } from "../../state/currentUserState.ts"
 
 type StoreResponse = {
     status: "success" | "failed",
@@ -21,6 +23,8 @@ const StoreView = ({app} : {app: string}) => {
     const [loading, setLoading] = useState(true)
     const [t] = useTranslation()
     const [installing, setIsInstalling] = useState(false)
+    const [isInstalled, setIsInstalled] = useState(false)
+    const [user] = useAtomState(userState)
 
     useEffect(() => {
         setLoading(true)
@@ -29,6 +33,12 @@ const StoreView = ({app} : {app: string}) => {
             setTimeout(() => setLoading(false), 300)
         })
         setIsInstalling(isInstalling(app))
+        user.apps.forEach((appp) => {
+            // @ts-ignore
+            if (appp?.uuid == app) {
+                setIsInstalled(true)
+            }
+        })
     }, [app])
 
     useEffect(() => {
@@ -57,11 +67,16 @@ const StoreView = ({app} : {app: string}) => {
                     </div>
                     <div className="absolute h-36 right-8 flex">
                         <div className="mt-auto mb-auto">
-                            {!installing &&
+                            {!installing && !isInstalled &&
                                 <Button submit={() => {
                                     setIsInstalling(true)
                                     emit("app-install", appDetalis)
                                 }} label={t("Install")} />
+                            }
+                            {isInstalled &&
+                                <Button submit={() => {
+                                    // TODO start app here
+                                }} label={t("Run")} />
                             }
                             {installing &&
                                 <>

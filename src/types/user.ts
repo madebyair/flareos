@@ -1,4 +1,4 @@
-import { App } from "./app.ts"
+import { App, UserApp } from "./app.ts"
 import { supportedLanguagesType } from "./supportedLanguages.ts"
 
 type User = {
@@ -9,7 +9,7 @@ type User = {
     "sessionUuid": string,
     "sessionSecret": string,
     "password": string,
-    "apps": Array<App>,
+    "apps": Array<App | UserApp>,
     "theme": "light"|"dark",
     "language": supportedLanguagesType,
     "unixUser": string
