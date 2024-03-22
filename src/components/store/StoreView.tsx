@@ -8,6 +8,9 @@ import { useTranslation } from "react-i18next"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBox, faCode, faDownload } from "@fortawesome/free-solid-svg-icons"
 import { BarLoader } from "react-spinners"
+import { install, isInstalling } from "../../manager/install_manager.ts"
+import { useAtomState } from "@zedux/react"
+import { userState } from "../../state/currentUserState.ts"
 
 type StoreResponse = {
     status: "success" | "failed",
@@ -18,7 +21,8 @@ const StoreView = ({app} : {app: string}) => {
     const [appDetalis, setAppDetalis] = useState<storeApp>()
     const [loading, setLoading] = useState(true)
     const [t] = useTranslation()
-    const [isInstalling, setIsInstalling] = useState(false)
+    const [installing, setIsInstalling] = useState(false)
+    const [user] = useAtomState(userState)
 
     useEffect(() => {
         setLoading(true)
@@ -26,6 +30,7 @@ const StoreView = ({app} : {app: string}) => {
             setAppDetalis(r.data.app)
             setTimeout(() => setLoading(false), 300)
         })
+        setIsInstalling(isInstalling(app))
     }, [app])
     return (
         <div className="mr-4 overflow-auto" style={{height: "calc(100vh - 96px)"}}>
@@ -46,12 +51,13 @@ const StoreView = ({app} : {app: string}) => {
                     </div>
                     <div className="absolute h-36 right-8 flex">
                         <div className="mt-auto mb-auto">
-                            {!isInstalling &&
+                            {!installing &&
                                 <Button submit={() => {
                                     setIsInstalling(true)
+                                    install(app, user.uuid)
                                 }} label={t("Install")} />
                             }
-                            {isInstalling &&
+                            {installing &&
                                 <>
                                     <BarLoader
                                         height={8}

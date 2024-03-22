@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { emit, listen } from "@tauri-apps/api/event"
-import User, { defaultUser } from "../../types/user.ts"
+import User from "../../types/user.ts"
 import { useTranslation } from "react-i18next"
 import "../../assets/css/App.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -11,9 +11,10 @@ import StoreApps from "./StoreApps.tsx"
 import StoreSearch from "./StoreSearch.tsx"
 import axios from "axios"
 import NoInternet from "./NoInternet.tsx"
+import { userState } from "../../state/currentUserState.ts"
 
 const StoreComponent = () => {
-    const [user, setUser] = useState<User>(defaultUser)
+    const [user, setUser] = useAtomState(userState)
     const [input, setInput] = useState("")
     const [, i18n] = useTranslation()
     const [component, setComponent] = useAtomState(storeComponent)
