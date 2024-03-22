@@ -8,6 +8,7 @@ import { userState } from "../../state/currentUserState"
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow"
 import { App } from "../../types/app"
 import embededApps from "../../apps/embededApps"
+import { invoke } from "@tauri-apps/api/core"
 
 type EventResponse = {
     user: User;
@@ -87,6 +88,8 @@ const StartComponent = () => {
             })
             break
         default:
+            invoke("run_app", { command: command })
+
             break
         }
 
