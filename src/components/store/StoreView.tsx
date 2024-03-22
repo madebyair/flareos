@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBox, faCode, faDownload } from "@fortawesome/free-solid-svg-icons"
 import { BarLoader } from "react-spinners"
 import { isInstalling } from "../../manager/install_manager.ts"
-import { emit } from "@tauri-apps/api/event"
+import { emit, listen } from "@tauri-apps/api/event"
 
 type StoreResponse = {
     status: "success" | "failed",
@@ -30,6 +30,14 @@ const StoreView = ({app} : {app: string}) => {
         })
         setIsInstalling(isInstalling(app))
     }, [app])
+
+    useEffect(() => {
+        listen<string>("installed", (r) => {
+            if (r.payload == app) {
+                setIsInstalling(false)
+            }
+        })
+    }, [])
     return (
         <div className="mr-4 overflow-auto" style={{height: "calc(100vh - 96px)"}}>
             {loading &&

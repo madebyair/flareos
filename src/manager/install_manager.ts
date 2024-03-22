@@ -1,7 +1,7 @@
 import { storeApp } from "../types/storeApp.ts"
 import { invoke } from "@tauri-apps/api/core"
 import axios from "axios"
-import { listen } from "@tauri-apps/api/event"
+import { emit, listen } from "@tauri-apps/api/event"
 
 export const installing: string[] = []
 
@@ -20,11 +20,9 @@ export async function install(app: storeApp, user: string) {
 
     if (app.source == "snap") {
         invoke("install_snap", { package: app.source_id })
-        let proc = false
         listen("install_complete__" + app.source_id, () => {
-            proc = true
-
             console.log("install complete")
+            emit("installed", app.uuid)
         })
     }
 
