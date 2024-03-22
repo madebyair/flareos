@@ -48,6 +48,7 @@ const StoreView = ({app} : {app: string}) => {
         listen<string>("installed", (r) => {
             if (r.payload == app) {
                 setIsInstalling(false)
+                setIsInstalled(true)
             }
         })
     }, [])
