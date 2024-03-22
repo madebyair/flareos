@@ -1,10 +1,10 @@
-use std::Command;
+use std::process::Command;
 
 #[tauri::command]
-pub fn download_icon(String icon) -> &str {
-    let id = uuid::Uuid::new_v4();
+pub fn download_icon(icon: String) -> String {
+    let id = uuid::Uuid::new_v4().to_string();
 
-    Command::new("sh").arg("-c").arg(format!("curl -O /usr/airos/icons/{}", id)).output()
+    Command::new("sh").arg("-c").arg(format!("wget {} -O /usr/airos/icons/{}", icon, id)).output().unwrap();
 
     id
 }

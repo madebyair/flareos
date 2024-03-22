@@ -40,7 +40,7 @@ const StoreView = ({app} : {app: string}) => {
                     height="144px"
                 />
             }
-            {!loading &&
+            {!loading && appDetalis &&
                 <div className="h-36 w-full bg-slate-300 dark:bg-zinc-900 flex relative rounded-md">
                     <div className="h-36 w-36 flex">
                         <img src={appDetalis?.icon} className="m-auto" draggable={false} width="80px" alt=""/>
@@ -54,7 +54,7 @@ const StoreView = ({app} : {app: string}) => {
                             {!installing &&
                                 <Button submit={() => {
                                     setIsInstalling(true)
-                                    install(app, user.uuid)
+                                    install(appDetalis, user.uuid)
                                 }} label={t("Install")} />
                             }
                             {installing &&
