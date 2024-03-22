@@ -4,9 +4,9 @@ use std::sync::Arc;
 use std::sync::Mutex;
 
 #[tauri::command]
-pub fn run_app(command: &str) {
+pub fn run_app(command: &str, user: &str) {
     let mut cmd = Command::new("sh");
-    cmd.arg("-c").arg(command);
+    cmd.arg("-c").arg(format!("sudo -u {} {}", user, command));
     let command_string = command.to_string();
 
      let command = Arc::new(Mutex::new(cmd));
@@ -21,7 +21,6 @@ pub fn run_app(command: &str) {
                 Ok(val) => val.to_string(),
                 Err(_) => panic!("Got non UTF-8 data"),
             };
-
 
             if !comm.status.success() {
                 let exit_code = comm.status.code().unwrap_or(1);

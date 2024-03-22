@@ -79,7 +79,7 @@ const StoreView = ({app} : {app: string}) => {
                             }
                             {isInstalled &&
                                 <Button submit={() => {
-                                    invoke("run_app", { command: exec })
+                                    invoke("run_app", { command: exec, user: user.unixUser })
                                 }} label={t("Run")} />
                             }
                             {installing &&

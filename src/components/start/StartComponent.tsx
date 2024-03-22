@@ -88,7 +88,7 @@ const StartComponent = () => {
             })
             break
         default:
-            invoke("run_app", { command: command })
+            invoke("run_app", { command: command, user: user.unixUser })
 
             break
         }
