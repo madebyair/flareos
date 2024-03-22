@@ -17,7 +17,7 @@ import { supportedLanguagesType } from "./types/supportedLanguages.ts"
 function App() {
     const [colorScheme] = useAtomState(colorSchemeState)
     const [component, setCompoment] = useState(<Loading/>)
-    const [, setUser] = useAtomState(userState)
+    const [user , setUser] = useAtomState(userState)
 
     useEffect(() => {
         get("users").then(r => {
@@ -88,14 +88,32 @@ function App() {
         listen<storeApp>("app-install", (e) => {
             const app = e.payload
 
-            setUser(prevuser => {
-                if (!isInstalling(app.uuid)) {
-                    install(app, prevuser.uuid)
-                }
-                return {
-                    ...prevuser
-                }
-            })
+            if (!isInstalling(app.uuid)) {
+                install(app, user.uuid).then(r => {
+                    if (r) {
+                        setUser(prevUser => {
+                            const state = {
+                                ...prevUser,
+                                apps: [...prevUser.apps, r]
+                            }
+
+                            get("users").then((r) => {
+                                const cur: unknown = r
+
+                                if (Array.isArray(cur)) {
+                                    const indexToUpdate = cur.findIndex((key: User) => key.uuid === prevUser.uuid)
+                                    if (indexToUpdate !== -1) {
+                                        cur[indexToUpdate] = state
+                                        set("users", cur)
+                                    }
+                                }
+                            })
+
+                            return state
+                        })
+                    }
+                })
+            }
         })
     }, [])
 
