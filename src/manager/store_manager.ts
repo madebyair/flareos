@@ -7,11 +7,9 @@ export function get(key: string) {
 }
 
 export function set(key: string, value : Array<never>|string) {
-    store.set(key, value).then(() => {
+    return store.set(key, value).then(() => {
         save()
     })
-
-    return
 }
 
 export function save() {
