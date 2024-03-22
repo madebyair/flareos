@@ -65,7 +65,7 @@ use wm::add_permissions::add_permissions;
 use gamma::get_current_gamma::get_current_gamma;
 use gamma::set_current_gamma::set_current_gamma;
 use store::download_icon::download_icon;
-use store::installer::install_snap;
+use store::installer::{install_snap, install_deb};
 use apps::run_app::run_app;
 
 fn main() {
@@ -104,7 +104,7 @@ fn main() {
             read_dir,
             create_user,
             get_current_gamma, set_current_gamma,
-            download_icon, install_snap,
+            download_icon, install_snap, install_deb,
             run_app
          ])
         .register_asynchronous_uri_scheme_protocol("icons", move |_app, request, responder| {

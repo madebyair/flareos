@@ -25,12 +25,21 @@ export async function install(app: storeApp, user: string) : Promise<UserApp | n
             console.log("install complete")
             emit("installed", app.uuid)
         })
+    } else if (app.source == "deb") {
+        invoke("install_deb", { package: app.source_id })
+
+        await listen("install_complete_deb", (r) => {
+            if (r.payload == app.source_id) {
+                console.log("install complete")
+                emit("installed", app.uuid)
+            }
+        })
     }
 
     return <UserApp>{
         name: app.name,
         description: app.description,
-        exec: "snap run " + app.source_id,
+        exec: app.exec ? app.exec : "snap run " + app.source_id,
         icon: "icons://" + icon,
         source: app.source,
         source_id: app.source_id,
