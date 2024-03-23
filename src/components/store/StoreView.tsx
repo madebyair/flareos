@@ -49,6 +49,9 @@ const StoreView = ({app} : {app: string}) => {
             if (r.payload == app) {
                 setIsInstalling(false)
                 setIsInstalled(true)
+                if (appDetalis) {
+                    setExec(appDetalis.exec)
+                }
             }
         })
     }, [])
