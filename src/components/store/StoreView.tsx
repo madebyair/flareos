@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBox, faCode, faDownload } from "@fortawesome/free-solid-svg-icons"
 import { BarLoader } from "react-spinners"
-import { isInstalling } from "../../manager/install_manager.ts"
+import { isInstalling, isUnInstalling } from "../../manager/install_manager.ts"
 import { emit, listen } from "@tauri-apps/api/event"
 import { useAtomState } from "@zedux/react"
 import { userState } from "../../state/currentUserState.ts"
@@ -27,6 +27,7 @@ const StoreView = ({app} : {app: string}) => {
     const [isInstalled, setIsInstalled] = useState(false)
     const [exec, setExec] = useState("")
     const [user] = useAtomState(userState)
+    const [uninstalling, setIsUninstalling] = useState(false)
 
     useEffect(() => {
         setLoading(true)
@@ -35,6 +36,7 @@ const StoreView = ({app} : {app: string}) => {
             setTimeout(() => setLoading(false), 300)
         })
         setIsInstalling(isInstalling(app))
+        setIsUninstalling(isUnInstalling(app))
         user.apps.forEach((appp) => {
             // @ts-ignore
             if (appp?.uuid == app) {
@@ -80,12 +82,13 @@ const StoreView = ({app} : {app: string}) => {
                                     emit("app-install", appDetalis)
                                 }} label={t("Install")} />
                             }
-                            {isInstalled &&
+                            {isInstalled && !uninstalling &&
                                 <>
                                     <Button submit={() => {
                                         invoke("run_app", { command: exec, user: user.unixUser })
                                     }} label={t("Run")} />
                                     <Button submit={() => {
+                                        setIsUninstalling(true)
                                         emit("app-uninstall", appDetalis)
                                     }} label={t("Uninstall")} />
                                 </>
@@ -103,6 +106,22 @@ const StoreView = ({app} : {app: string}) => {
                                     />
                                     <div className="w-full text-center mt-2">
                                         {t("Installing")}
+                                    </div>
+                                </>
+                            }
+                            {uninstalling &&
+                                <>
+                                    <BarLoader
+                                        height={8}
+                                        cssOverride={{
+                                            borderRadius: "10px"
+                                        }}
+                                        aria-label="Loading Spinner"
+                                        data-testid="loader"
+                                        color="#2563eb"
+                                    />
+                                    <div className="w-full text-center mt-2">
+                                        {t("Uninstalling")}
                                     </div>
                                 </>
                             }
