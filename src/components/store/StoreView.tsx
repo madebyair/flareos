@@ -86,7 +86,7 @@ const StoreView = ({app} : {app: string}) => {
                                         invoke("run_app", { command: exec, user: user.unixUser })
                                     }} label={t("Run")} />
                                     <Button submit={() => {
-                                        // TODO implement uninstallinun
+                                        emit("app-uninstall", appDetalis)
                                     }} label={t("Uninstall")} />
                                 </>
                             }

@@ -5,9 +5,14 @@ import { emit, listen } from "@tauri-apps/api/event"
 import { UserApp } from "../types/app.ts"
 
 export const installing: string[] = []
+export const uninstalling: string[] = []
 
 export function isInstalling(uuid: string): boolean {
     return installing.includes(uuid)
+}
+
+export function isUnInstalling(uuid: string): boolean {
+    return uninstalling.includes(uuid)
 }
 
 export async function install(app: storeApp, user: string) : Promise<UserApp | null> {
@@ -47,4 +52,25 @@ export async function install(app: storeApp, user: string) : Promise<UserApp | n
         uuid: app.uuid,
         class: app.class
     }
+}
+
+export async function uninstall(app: storeApp){
+    if (isUnInstalling(app.uuid)) return null
+
+    uninstalling.push(app.uuid)
+
+    console.log("Uninstalling " + app.name)
+
+    if (app.source == "snap") {
+        invoke("uninstall_snap", { package: app.source_id })
+        await listen("uninstall_complete__" + app.source_id, () => {
+            console.log("uninstall complete")
+            emit("uninstalled", app.uuid)
+        })
+    } else if (app.source == "deb") {
+        // TODO implement deb uninstalling
+        return null
+    }
+
+    return null
 }

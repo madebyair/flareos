@@ -10,7 +10,7 @@ import Auth from "./components/auth/Auth.tsx"
 import { emit, listen } from "@tauri-apps/api/event"
 import { userState } from "./state/currentUserState.ts"
 import User from "./types/user.ts"
-import { install, isInstalling } from "./manager/install_manager.ts"
+import { install, isInstalling, isUnInstalling, uninstall } from "./manager/install_manager.ts"
 import { storeApp } from "./types/storeApp.ts"
 import { supportedLanguagesType } from "./types/supportedLanguages.ts"
 
@@ -112,6 +112,38 @@ function App() {
                             return state
                         })
                     }
+                })
+            }
+        })
+
+        listen<storeApp>("app-uninstall", (e) => {
+            const app = e.payload
+
+            if (!isUnInstalling(app.uuid)) {
+                uninstall(app).then(() => {
+                    setUser(prevUser => {
+                        // @ts-ignore
+                        const filteredArray = prevUser.apps.filter(item => ![app.uuid].includes(item.uuid))
+
+                        const state = {
+                            ...prevUser,
+                            apps: filteredArray
+                        }
+
+                        get("users").then((r) => {
+                            const cur: unknown = r
+
+                            if (Array.isArray(cur)) {
+                                const indexToUpdate = cur.findIndex((key: User) => key.uuid === prevUser.uuid)
+                                if (indexToUpdate !== -1) {
+                                    cur[indexToUpdate] = state
+                                    set("users", cur)
+                                }
+                            }
+                        })
+
+                        return state
+                    })
                 })
             }
         })
