@@ -15,5 +15,6 @@ export type storeApp = {
     is_arm: boolean,
     author: string,
     downloads: number,
-    exec: string
+    exec: string,
+    class: string
 }

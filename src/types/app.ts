@@ -30,7 +30,8 @@ interface UserApp extends App {
     source: string,
     source_id: string,
     version: string,
-    uuid: string
+    uuid: string,
+    class: string
 }
 
 export type { AppTranslation, App, UserApp }

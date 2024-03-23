@@ -44,6 +44,7 @@ export async function install(app: storeApp, user: string) : Promise<UserApp | n
         source: app.source,
         source_id: app.source_id,
         version: app.latest_version,
-        uuid: app.uuid
+        uuid: app.uuid,
+        class: app.class
     }
 }
