@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 import { invoke } from "@tauri-apps/api/core"
 import Window from "../../types/window.ts"
+import getIcon from "../../manager/icon_manager.ts"
+import { useAtomState } from "@zedux/react"
+import { userState } from "../../state/currentUserState.ts"
 
 type InvokeResponse = {
     windows: Array<Window>
@@ -44,6 +47,9 @@ const TaskbarApps = () => {
 }
 
 const TaskbarApp = ({name, className, active} : {name: string, className: string, active: string}) => {
+    const [icon, setIcon] = useState("")
+    const [user] = useAtomState(userState)
+
     if (name == "airos" || name == "__airos_start_menu__" || name == "__airos_actions_menu__") {
         return
     }
@@ -52,11 +58,20 @@ const TaskbarApp = ({name, className, active} : {name: string, className: string
         invoke("activate", { "name": name })
     }
 
+    useEffect(() => {
+        setIcon(getIcon(user, className))
+    }, [className])
+
     return (
         <div className="flex w-10 h-10 relative">
             <div className="w-8 h-8 flex m-auto dark:text-white rounded bg-slate-300 dark:bg-zinc-900" onClick={() => activate()}>
                 <div className="m-auto">
-                    {className.charAt(0).toUpperCase()}
+                    {icon == "" &&
+                        className.charAt(0).toUpperCase()
+                    }
+                    {icon !== "" &&
+                        <img src={icon} alt=""/>
+                    }
                 </div>
             </div>
             {active === name &&
