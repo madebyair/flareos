@@ -16,8 +16,6 @@ export function isUnInstalling(uuid: string): boolean {
 }
 
 export async function install(app: storeApp, user: string) : Promise<UserApp | null> {
-    if (isInstalling(app.uuid)) return null
-
     await axios.get("https://api.made-by-air.com/store/download?uuid=" + app.uuid)
 
     installing.push(app.uuid)
@@ -41,6 +39,11 @@ export async function install(app: storeApp, user: string) : Promise<UserApp | n
         })
     }
 
+    //const index = installing.indexOf(app.uuid)
+    //installing.slice(index, 1)
+
+    console.log(installing)
+
     return <UserApp>{
         name: app.name,
         description: app.description,
@@ -55,8 +58,6 @@ export async function install(app: storeApp, user: string) : Promise<UserApp | n
 }
 
 export async function uninstall(app: storeApp){
-    if (isUnInstalling(app.uuid)) return null
-
     uninstalling.push(app.uuid)
 
     console.log("Uninstalling " + app.name)
@@ -71,6 +72,11 @@ export async function uninstall(app: storeApp){
         // TODO implement deb uninstalling
         return null
     }
+
+    //const index = uninstalling.indexOf(app.uuid)
+    //uninstalling.splice(index, 1)
+
+    console.log(uninstalling)
 
     return null
 }
