@@ -59,14 +59,16 @@ const TaskbarApp = ({name, className, active} : {name: string, className: string
     }
 
     useEffect(() => {
-        setIcon(getIcon(user, className))
-    }, [className])
+        if (className) {
+            setIcon(getIcon(user, className))
+        }
+    }, [className, user])
 
     return (
         <div className="flex w-10 h-10 relative">
             <div className="w-8 h-8 flex m-auto dark:text-white rounded bg-slate-300 dark:bg-zinc-900" onClick={() => activate()}>
                 <div className="m-auto">
-                    {icon == "" &&
+                    {icon === "" && className && className.length > 0 &&
                         className.charAt(0).toUpperCase()
                     }
                     {icon !== "" &&
