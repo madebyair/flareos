@@ -81,9 +81,14 @@ const StoreView = ({app} : {app: string}) => {
                                 }} label={t("Install")} />
                             }
                             {isInstalled &&
-                                <Button submit={() => {
-                                    invoke("run_app", { command: exec, user: user.unixUser })
-                                }} label={t("Run")} />
+                                <>
+                                    <Button submit={() => {
+                                        invoke("run_app", { command: exec, user: user.unixUser })
+                                    }} label={t("Run")} />
+                                    <Button submit={() => {
+                                        // TODO implement uninstallinun
+                                    }} label={t("Uninstall")} />
+                                </>
                             }
                             {installing &&
                                 <>
