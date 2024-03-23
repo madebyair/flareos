@@ -7,6 +7,7 @@ import { faMoon, faPalette, faPlane, faShare, faWifi } from "@fortawesome/free-s
 import ActionsButton from "./ActionsButton.tsx"
 import { disableNightLight, enableNightLight } from "../../manager/nightlight/setNightLight.ts"
 import isNightLight from "../../manager/nightlight/isNightLight.ts"
+import ActionsMixer from "./ActionsMixer.tsx"
 
 type EventResponse = {
     user: User;
@@ -73,6 +74,7 @@ const ActionsMenu = () => {
                         </div>
                     </div>
                 </div>
+                <ActionsMixer />
             </div>
         </div>
     )
