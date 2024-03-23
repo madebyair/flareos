@@ -56,6 +56,13 @@ const StoreView = ({app} : {app: string}) => {
                 }
             }
         })
+
+        listen<string>("uninstalled", (r) => {
+            if (r.payload == app) {
+                setIsUninstalling(false)
+                setIsInstalled(false)
+            }
+        })
     }, [])
     return (
         <div className="mr-4 overflow-auto" style={{height: "calc(100vh - 96px)"}}>
