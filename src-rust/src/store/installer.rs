@@ -32,3 +32,15 @@ pub fn install_deb(package: String, window: tauri::Window) {
         window.emit("install_complete_deb", package);
     });
 }
+
+#[tauri::command]
+pub fn uninstall_snap(package: String, window: tauri::Window) {
+    thread::spawn(move || {
+        let _ = Command::new("sh")
+            .arg("-c")
+            .arg(format!("snap remove {}", package))
+            .output();
+
+        window.emit(format!("uninstall_complete__{}", package).as_str(), "");
+    });
+}
