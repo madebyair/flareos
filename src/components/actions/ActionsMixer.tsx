@@ -1,9 +1,16 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { invoke } from "@tauri-apps/api/core"
 
 const ActionsMixer = () => {
     const [volume, setVolume] = useState(50)
 
-    // TODO implement current volume
+    useEffect(() => {
+        invoke<string>("get_current_volume").then((r) => {
+            const i = Number(r.replace("%", ""))
+
+            setVolume(i)
+        })
+    }, [])
 
     return (
         <div className="w-screen">
