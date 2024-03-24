@@ -2,9 +2,12 @@ import { ChangeEvent, useEffect, useState } from "react"
 import { invoke } from "@tauri-apps/api/core"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
+import { useAtomState } from "@zedux/react"
+import { isFullMixer } from "./actionsState.ts"
 
 const ActionsMixer = () => {
     const [volume, setVolume] = useState(50)
+    const [, setFullMixer] = useAtomState(isFullMixer)
 
     useEffect(() => {
         invoke<string>("get_current_volume").then((r) => {
@@ -23,7 +26,7 @@ const ActionsMixer = () => {
     return (
         <div className="w-screen">
             <div className="mx-10">
-                <h1 className="hover:bg-gray-500 transition duration-300 w-32 rounded-md">Speaker {/* TODO */} <FontAwesomeIcon icon={faArrowRight} /></h1>
+                <h1 className="hover:bg-gray-500 transition duration-300 w-32 rounded-md" onClick={() => setFullMixer(true)}>Speaker {/* TODO */} <FontAwesomeIcon icon={faArrowRight} /></h1>
                 <input type="range" value={volume} onChange={(event) => onChange(event)}
                     className="h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 w-full"/>
             </div>

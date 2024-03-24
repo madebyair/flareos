@@ -8,6 +8,8 @@ import ActionsButton from "./ActionsButton.tsx"
 import { disableNightLight, enableNightLight } from "../../manager/nightlight/setNightLight.ts"
 import isNightLight from "../../manager/nightlight/isNightLight.ts"
 import ActionsMixer from "./ActionsMixer.tsx"
+import { useAtomState } from "@zedux/react"
+import { isFullMixer } from "./actionsState.ts"
 
 type EventResponse = {
     user: User;
@@ -17,6 +19,7 @@ type EventResponse = {
 const ActionsMenu = () => {
     const [user, setUser] = useState<User>(defaultUser)
     const [nightLight, setIsNightLight] = useState(false)
+    const [fullMixer] = useAtomState(isFullMixer)
 
     useEffect(() => {
         listen<EventResponse>("actions-display-event", (event) => {
@@ -52,6 +55,9 @@ const ActionsMenu = () => {
     return (
         <div className={user?.theme}>
             <div className="start bg-slate-200/95 dark:bg-zinc-950/95 w-screen h-screen rounded-xl dark:text-white select-none">
+                {fullMixer &&
+                    <h1>Full mixer</h1>
+                }
                 <div className="w-screen h-3/4 flex">
                     <div className="w-11/12 h-5/6 m-auto">
                         <div className="w-full h-1/3 flex">
