@@ -40,6 +40,7 @@ mod store {
 
 mod volume {
     pub mod get_current_volume;
+    pub mod set_current_volume;
 }
 
 use utils::encryption::encrypt;
@@ -72,6 +73,7 @@ use store::download_icon::download_icon;
 use store::installer::{install_snap, install_deb, uninstall_snap};
 use apps::run_app::run_app;
 use volume::get_current_volume::get_current_volume;
+use volume::set_current_volume::set_current_volume;
 
 fn main() {
     if !Uid::effective().is_root() {
@@ -111,7 +113,7 @@ fn main() {
             get_current_gamma, set_current_gamma,
             download_icon, install_snap, install_deb, uninstall_snap,
             run_app,
-            get_current_volume
+            get_current_volume, set_current_volume
          ])
         .register_asynchronous_uri_scheme_protocol("icons", move |_app, request, responder| {
               match get_icon(request, &boundary_id) {

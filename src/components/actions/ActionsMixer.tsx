@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { invoke } from "@tauri-apps/api/core"
 
 const ActionsMixer = () => {
@@ -12,12 +12,17 @@ const ActionsMixer = () => {
         })
     }, [])
 
+    function onChange(event : ChangeEvent<HTMLInputElement>) {
+        // @ts-ignore
+        setVolume(event.target.value)
+        invoke("set_current_volume", { volume: event.target.value + "%" })
+    }
+
     return (
         <div className="w-screen">
             <div className="mx-10">
                 <h1>Speaker {/* TODO */}</h1>
-                { /* @ts-ignore */ }
-                <input type="range" value={volume} onChange={(event) => setVolume(event.target.value)}
+                <input type="range" value={volume} onChange={(event) => onChange(event)}
                     className="h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 w-full"/>
             </div>
         </div>
