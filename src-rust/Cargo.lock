@@ -3308,9 +3308,9 @@ checksum = "69758bda2e78f098e4ccb393021a0963bb3442eac05f135c30f61b7370bbafae"
 
 [[package]]
 name = "tauri"
-version = "2.0.0-beta.12"
+version = "2.0.0-beta.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c33d0026c6146b73322833bc8e51fc4ee400a814c4cbfe489e3c2aa92cfedcec"
+checksum = "3b119a486a9075ae20bfb8ed9a1883aff862c61a9c1cb1ef1336620536f032cc"
 dependencies = [
  "anyhow",
  "bytes",
@@ -3456,9 +3456,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-plugin-store"
-version = "2.0.0-beta.3"
+version = "2.0.0-beta.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7c8c6c17a02d39359c480d57aa603afd2b917ecbc4f593adbf42d0569066a338"
+checksum = "0142026264556b634203155a0751474e2e1aeed0c38707dd6ce2abe435160ff8"
 dependencies = [
  "log",
  "serde",

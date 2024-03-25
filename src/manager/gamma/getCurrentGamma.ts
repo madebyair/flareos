@@ -8,7 +8,6 @@ async function getCurrentGamma() {
         let rt = ""
 
         c.forEach((key: string) => {
-            console.log(key)
             if (key !== "Gamma:" && key !== "") {
                 rt = key
             }

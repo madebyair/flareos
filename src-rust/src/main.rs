@@ -38,6 +38,14 @@ mod store {
     pub mod installer;
 }
 
+mod volume {
+    pub mod get_current_volume;
+    pub mod set_current_volume;
+    pub mod list_sinks;
+    pub mod set_current_sink;
+    pub mod get_current_sink;
+}
+
 use utils::encryption::encrypt;
 use utils::encryption::decrypt;
 use apps::terminal::{async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty, TerminalState};
@@ -67,6 +75,11 @@ use gamma::set_current_gamma::set_current_gamma;
 use store::download_icon::download_icon;
 use store::installer::{install_snap, install_deb, uninstall_snap};
 use apps::run_app::run_app;
+use volume::get_current_volume::get_current_volume;
+use volume::set_current_volume::set_current_volume;
+use volume::list_sinks::list_sinks;
+use volume::set_current_sink::set_current_sink;
+use volume::get_current_sink::get_current_sink;
 
 fn main() {
     if !Uid::effective().is_root() {
@@ -105,7 +118,8 @@ fn main() {
             create_user,
             get_current_gamma, set_current_gamma,
             download_icon, install_snap, install_deb, uninstall_snap,
-            run_app
+            run_app,
+            get_current_volume, set_current_volume, list_sinks, set_current_sink, get_current_sink
          ])
         .register_asynchronous_uri_scheme_protocol("icons", move |_app, request, responder| {
               match get_icon(request, &boundary_id) {

@@ -7,6 +7,10 @@ import { faMoon, faPalette, faPlane, faShare, faWifi } from "@fortawesome/free-s
 import ActionsButton from "./ActionsButton.tsx"
 import { disableNightLight, enableNightLight } from "../../manager/nightlight/setNightLight.ts"
 import isNightLight from "../../manager/nightlight/isNightLight.ts"
+import ActionsMixer from "./ActionsMixer.tsx"
+import { useAtomState } from "@zedux/react"
+import { isFullMixer } from "./actionsState.ts"
+import FullMixer from "./FullMixer.tsx"
 
 type EventResponse = {
     user: User;
@@ -16,6 +20,7 @@ type EventResponse = {
 const ActionsMenu = () => {
     const [user, setUser] = useState<User>(defaultUser)
     const [nightLight, setIsNightLight] = useState(false)
+    const [fullMixer] = useAtomState(isFullMixer)
 
     useEffect(() => {
         listen<EventResponse>("actions-display-event", (event) => {
@@ -42,7 +47,6 @@ const ActionsMenu = () => {
         const interval = setInterval(() => {
             isNightLight().then((r) => {
                 setIsNightLight(r)
-                console.log(r)
             })
         }, 100)
 
@@ -51,6 +55,11 @@ const ActionsMenu = () => {
     return (
         <div className={user?.theme}>
             <div className="start bg-slate-200/95 dark:bg-zinc-950/95 w-screen h-screen rounded-xl dark:text-white select-none">
+                {fullMixer &&
+                    <div className="absolute top-0">
+                        <FullMixer />
+                    </div>
+                }
                 <div className="w-screen h-3/4 flex">
                     <div className="w-11/12 h-5/6 m-auto">
                         <div className="w-full h-1/3 flex">
@@ -73,6 +82,7 @@ const ActionsMenu = () => {
                         </div>
                     </div>
                 </div>
+                <ActionsMixer />
             </div>
         </div>
     )
