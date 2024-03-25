@@ -47,7 +47,6 @@ const ActionsMenu = () => {
         const interval = setInterval(() => {
             isNightLight().then((r) => {
                 setIsNightLight(r)
-                console.log(r)
             })
         }, 100)
 
