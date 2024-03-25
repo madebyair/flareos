@@ -17,6 +17,15 @@ const FullMixer = () => {
             const objects = parseStringToObject(r)
             setSinks(objects)
         })
+
+        const interval = setInterval(() => {
+            invoke<string>("list_sinks").then((r) => {
+                const objects = parseStringToObject(r)
+                setSinks(objects)
+            })
+        }, 500)
+
+        return () => clearInterval(interval)
     }, [])
 
     return (
@@ -61,8 +70,22 @@ const Speaker = ({name, id} : {name: string, id: number}) => {
         invoke("get_current_sink").then((r) => {
             if (r == id) {
                 setCls("w-full h-10 flex bg-slate-200 rounded-md transition duration-300 dark:bg-zinc-900 mt-4")
+            } else {
+                setCls("w-full h-10 flex hover:bg-slate-200 rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4")
             }
         })
+
+        const interval = setInterval(() => {
+            invoke("get_current_sink").then((r) => {
+                if (r == id) {
+                    setCls("w-full h-10 flex bg-slate-200 rounded-md transition duration-300 dark:bg-zinc-900 mt-4")
+                } else {
+                    setCls("w-full h-10 flex hover:bg-slate-200 rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4")
+                }
+            })
+        }, 500)
+
+        return () => clearInterval(interval)
     }, [])
 
     return (
