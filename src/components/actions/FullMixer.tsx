@@ -133,16 +133,18 @@ const FullMixer = () => {
                 }
 
                 return (
-                    <Speaker name={name} key={name} />
+                    <Speaker name={name} id={sink.id} key={name} />
                 )
             })}
         </div>
     )
 }
 
-const Speaker = ({name} : {name: string}) => {
+const Speaker = ({name, id} : {name: string, id: number}) => {
     return (
-        <div className="w-full h-10 flex hover:bg-slate-200 rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4">
+        <div className="w-full h-10 flex hover:bg-slate-200 rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4" onClick={() => {
+            invoke("set_current_sink", { id: String(id) })
+        }}>
             <div className="h-10 w-10 flex">
                 <div className="m-auto">
                     <FontAwesomeIcon icon={faVolumeLow}/>

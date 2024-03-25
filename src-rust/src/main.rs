@@ -42,6 +42,7 @@ mod volume {
     pub mod get_current_volume;
     pub mod set_current_volume;
     pub mod list_sinks;
+    pub mod set_current_sink;
 }
 
 use utils::encryption::encrypt;
@@ -76,6 +77,7 @@ use apps::run_app::run_app;
 use volume::get_current_volume::get_current_volume;
 use volume::set_current_volume::set_current_volume;
 use volume::list_sinks::list_sinks;
+use volume::set_current_sink::set_current_sink;
 
 fn main() {
     if !Uid::effective().is_root() {
@@ -115,7 +117,7 @@ fn main() {
             get_current_gamma, set_current_gamma,
             download_icon, install_snap, install_deb, uninstall_snap,
             run_app,
-            get_current_volume, set_current_volume, list_sinks
+            get_current_volume, set_current_volume, list_sinks, set_current_sink
          ])
         .register_asynchronous_uri_scheme_protocol("icons", move |_app, request, responder| {
               match get_icon(request, &boundary_id) {
