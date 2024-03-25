@@ -18,11 +18,16 @@ type EventResponse = {
     current: boolean;
 };
 
+type BluetoothState = {
+    available: boolean,
+    enabled: boolean
+}
+
 const ActionsMenu = () => {
     const [user, setUser] = useState<User>(defaultUser)
     const [nightLight, setIsNightLight] = useState(false)
     const [fullMixer] = useAtomState(isFullMixer)
-    const [bluetooth, setBluetooth] = useState(false)
+    const [bluetooth, setBluetooth] = useState<BluetoothState>({available: false, enabled: false})
 
     useEffect(() => {
         listen<EventResponse>("actions-display-event", (event) => {
@@ -52,7 +57,21 @@ const ActionsMenu = () => {
             })
 
             invoke<boolean>("is_bluetooth_adapter_available").then((r) => {
-                setBluetooth(r)
+                setBluetooth(prevState => {
+                    return {
+                        ...prevState,
+                        available: r
+                    }
+                })
+            })
+
+            invoke<string>("get_bluetooth_adapter_status").then((r) => {
+                setBluetooth(prevState => {
+                    return {
+                        ...prevState,
+                        enabled: r == "yes"
+                    }
+                })
             })
         }, 100)
 
@@ -70,8 +89,8 @@ const ActionsMenu = () => {
                     <div className="w-11/12 h-5/6 m-auto">
                         <div className="w-full h-1/3 flex">
                             <ActionsButton text="Wifi" subtext="Connected" icon={faWifi} enabled onClick={() => {}}/>
-                            {bluetooth &&
-                                <ActionsButton text="Bluetooth" subtext="Ready" iconSvg={<BluetoothIcon/>} enabled onClick={() => {}}/>
+                            {bluetooth.available &&
+                                <ActionsButton text="Bluetooth" subtext="Ready" iconSvg={<BluetoothIcon/>} enabled={bluetooth.enabled} onClick={() => {}}/>
                             }
                             <ActionsButton text="Plane mode" icon={faPlane} enabled={false} onClick={() => {}}/>
                         </div>
