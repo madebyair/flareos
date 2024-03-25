@@ -11,6 +11,7 @@ import ActionsMixer from "./ActionsMixer.tsx"
 import { useAtomState } from "@zedux/react"
 import { isFullMixer } from "./actionsState.ts"
 import FullMixer from "./FullMixer.tsx"
+import { invoke } from "@tauri-apps/api/core"
 
 type EventResponse = {
     user: User;
@@ -21,6 +22,7 @@ const ActionsMenu = () => {
     const [user, setUser] = useState<User>(defaultUser)
     const [nightLight, setIsNightLight] = useState(false)
     const [fullMixer] = useAtomState(isFullMixer)
+    const [bluetooth, setBluetooth] = useState(false)
 
     useEffect(() => {
         listen<EventResponse>("actions-display-event", (event) => {
@@ -48,6 +50,10 @@ const ActionsMenu = () => {
             isNightLight().then((r) => {
                 setIsNightLight(r)
             })
+
+            invoke<boolean>("is_bluetooth_adapter_available").then((r) => {
+                setBluetooth(r)
+            })
         }, 100)
 
         return () => clearInterval(interval)
@@ -64,7 +70,9 @@ const ActionsMenu = () => {
                     <div className="w-11/12 h-5/6 m-auto">
                         <div className="w-full h-1/3 flex">
                             <ActionsButton text="Wifi" subtext="Connected" icon={faWifi} enabled onClick={() => {}}/>
-                            <ActionsButton text="Bluetooth" subtext="Ready" iconSvg={<BluetoothIcon/>} enabled onClick={() => {}}/>
+                            {bluetooth &&
+                                <ActionsButton text="Bluetooth" subtext="Ready" iconSvg={<BluetoothIcon/>} enabled onClick={() => {}}/>
+                            }
                             <ActionsButton text="Plane mode" icon={faPlane} enabled={false} onClick={() => {}}/>
                         </div>
                         <div className="w-full h-1/3 flex">
@@ -101,7 +109,7 @@ function BluetoothIcon() {
             <path
                 d="M4.41 16.192l1.18 1.615L10 14.584V21a1 1 0 001.541.841l7-4.5a.999.999 0 00.049-1.649L13.537 12l5.053-3.692a1.002 1.002 0 00-.049-1.65l-7-4.5a1.002 1.002 0 00-1.021-.037c-.32.176-.52.513-.52.879v6.416L5.59 6.192 4.41 7.808 10 11.893v.215l-5.59 4.084zM12 4.832l4.232 2.721L12 10.646V4.832zm0 8.522l4.232 3.093L12 19.168v-5.814z"></path>
         </svg>
-    );
+    )
 }
 
 export default ActionsMenu
