@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import { useAtomState } from "@zedux/react"
 import { isFullMixer } from "./actionsState.ts"
+import { parseStringToObject } from "../../manager/speaker_manager.ts"
 
 const ActionsMixer = () => {
     const [volume, setVolume] = useState(50)
+    const [speaker, setSpeaker] = useState("")
     const [, setFullMixer] = useAtomState(isFullMixer)
 
     useEffect(() => {
@@ -15,6 +17,37 @@ const ActionsMixer = () => {
 
             setVolume(i)
         })
+
+        const interval = setInterval(() => {
+            invoke<string>("list_sinks").then((r) => {
+                const objects = parseStringToObject(r)
+                let name = ""
+
+                invoke("get_current_sink").then((r) => {
+                    objects.forEach((sink) => {
+                        if (sink.id == r) {
+                            if (sink.node?.description) {
+                                if (sink.node?.nick) {
+                                    name = sink.node?.nick + " - " + sink.node?.description
+                                } else {
+                                    name = sink.node?.description
+                                }
+                            } else {
+                                if (sink.node?.nick) {
+                                    name = sink.node.nick
+                                } else if (sink.node?.name) {
+                                    name = sink.node?.name
+                                }
+                            }
+                        }
+                    })
+
+                    setSpeaker(name)
+                })
+            })
+        }, 500)
+
+        return () => clearInterval(interval)
     }, [])
 
     function onChange(event : ChangeEvent<HTMLInputElement>) {
@@ -26,7 +59,7 @@ const ActionsMixer = () => {
     return (
         <div className="w-screen">
             <div className="mx-10">
-                <h1 className="hover:bg-gray-500 transition duration-300 w-32 rounded-md" onClick={() => setFullMixer(true)}>Speaker {/* TODO */} <FontAwesomeIcon icon={faArrowRight} /></h1>
+                <h1 className="hover:bg-gray-500 transition duration-300 max-w-max rounded-md flex" onClick={() => setFullMixer(true)}>{speaker} <div className="ml-4 mr-2"><FontAwesomeIcon icon={faArrowRight} /></div></h1>
                 <input type="range" value={volume} onChange={(event) => onChange(event)}
                     className="h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 w-full"/>
             </div>
