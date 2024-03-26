@@ -5,10 +5,23 @@ import { actionsComponent } from "../actionsState.tsx"
 import { useTranslation } from "react-i18next"
 import { useEffect, useState } from "react"
 import BluetoothPopup from "./BluetoothPopup.tsx"
+import { invoke } from "@tauri-apps/api/core"
+import { BluetoothDevice, transformBluetooth } from "../../../types/bluetooth.ts"
 
 const ActionsBluetooth = () => {
     const [, setComponent] = useAtomState(actionsComponent)
     const [ t ] = useTranslation()
+    const [devices, setDevices] = useState<BluetoothDevice[]>()
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            invoke<string>("get_paired_devices").then((r) => {
+                setDevices(transformBluetooth(JSON.parse(r), "paired"))
+            })
+        }, 1000)
+
+        return () => clearInterval(interval)
+    }, [])
 
     return (
         <div className="w-screen h-screen top-0 p-8 bg-slate-200 dark:bg-zinc-950/95 rounded-xl absolute top-0">
@@ -20,12 +33,16 @@ const ActionsBluetooth = () => {
                 </div>
                 <h1 className="my-auto ml-2">{t("Available devices")}</h1>
             </header>
-            <Device name={"Idk"} id={1} />
+            {devices && devices.map((key) => {
+                return (
+                    <Device device={key} key={key.mac} />
+                )
+            })}
         </div>
     )
 }
 
-const Device = ({name, id} : {name: string, id: number}) => {
+const Device = ({device} : { device: BluetoothDevice }) => {
     const [cls, setCls] = useState("w-full h-10 flex hover:bg-slate-300 relative rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4")
     const [popup, setPopup] = useState(false)
     
@@ -48,11 +65,11 @@ const Device = ({name, id} : {name: string, id: number}) => {
                     </div>
                 </div>
                 <div className="mt-auto mb-auto">
-                    {name}
+                    {device.name}
                 </div>
                 <div className="absolute right-4 flex h-full">
                     <div className="mt-auto mb-auto">
-                    Connected
+                        {device.state[0].toUpperCase() + device.state.slice(1)}
                     </div>
                 </div>
             </div>

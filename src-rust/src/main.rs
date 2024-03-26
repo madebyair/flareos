@@ -86,7 +86,7 @@ use volume::list_sinks::list_sinks;
 use volume::set_current_sink::set_current_sink;
 use volume::get_current_sink::get_current_sink;
 use bluetooth::is_bluetooth::{is_bluetooth_adapter_available, get_bluetooth_adapter_status};
-use bluetooth::bt_devices::get_connected_devices;
+use bluetooth::bt_devices::{get_connected_devices, get_paired_devices};
 
 fn main() {
     if !Uid::effective().is_root() {
@@ -127,7 +127,7 @@ fn main() {
             download_icon, install_snap, install_deb, uninstall_snap,
             run_app,
             get_current_volume, set_current_volume, list_sinks, set_current_sink, get_current_sink,
-            is_bluetooth_adapter_available, get_bluetooth_adapter_status, get_connected_devices
+            is_bluetooth_adapter_available, get_bluetooth_adapter_status, get_connected_devices, get_paired_devices
          ])
         .register_asynchronous_uri_scheme_protocol("icons", move |_app, request, responder| {
               match get_icon(request, &boundary_id) {
