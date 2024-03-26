@@ -12,6 +12,8 @@ import { useAtomState } from "@zedux/react"
 import { isFullMixer } from "./actionsState.ts"
 import FullMixer from "./FullMixer.tsx"
 import { invoke } from "@tauri-apps/api/core"
+import "../../i18n.ts"
+import { useTranslation } from "react-i18next"
 
 type EventResponse = {
     user: User;
@@ -43,10 +45,12 @@ const ActionsMenu = () => {
     const [nightLight, setIsNightLight] = useState(false)
     const [fullMixer] = useAtomState(isFullMixer)
     const [bluetooth, setBluetooth] = useState<BluetoothState>({available: false, enabled: false, devices: []})
+    const [t, i18n] = useTranslation()
 
     useEffect(() => {
         listen<EventResponse>("actions-display-event", (event) => {
             setUser(event.payload.user)
+            i18n.changeLanguage(event.payload.user.language)
 
             if (!event.payload.current) {
                 getCurrent().hide()
@@ -116,7 +120,7 @@ const ActionsMenu = () => {
                         <div className="w-full h-1/3 flex">
                             <ActionsButton text="Wifi" subtext="Connected" icon={faWifi} enabled onClick={() => {}}/>
                             {bluetooth.available &&
-                                <ActionsButton text="Bluetooth" subtext={bluetooth.devices.length > 0 ? bluetooth.devices.length.toString() + " Connected" : "Ready"} iconSvg={<BluetoothIcon/>} enabled={bluetooth.enabled} onClick={() => {}}/>
+                                <ActionsButton text="Bluetooth" subtext={bluetooth.devices.length > 0 ? bluetooth.devices.length.toString() + " " + t("Connected") : t("Ready")} iconSvg={<BluetoothIcon/>} enabled={bluetooth.enabled} onClick={() => {}}/>
                             }
                             <ActionsButton text="Plane mode" icon={faPlane} enabled={false} onClick={() => {}}/>
                         </div>
