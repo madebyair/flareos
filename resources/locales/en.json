@@ -41,5 +41,8 @@
   "Available speakers": "Available speakers",
   "Connected": "Connected",
   "Ready": "Ready",
-  "Available devices": "Available devices"
+  "Available devices": "Available devices",
+  "Bluetooth device": "Bluetooth device",
+  "Name:": "Name:",
+  "MAC address:": "MAC address:"
 }

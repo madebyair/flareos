@@ -52,7 +52,7 @@ const Device = ({device} : { device: BluetoothDevice }) => {
     return (
         <>
             {popup &&
-                <BluetoothPopup hide={setPopup} />
+                <BluetoothPopup hide={setPopup} device={device} />
             }
             <div className="w-full h-10 flex hover:bg-slate-300 relative rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4" onClick={() => {
                 // TODO connect device
