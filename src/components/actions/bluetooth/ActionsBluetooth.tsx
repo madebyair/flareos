@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
 import { useAtomState } from "@zedux/react"
-import { actionsComponent } from "./actionsState.tsx"
+import { actionsComponent } from "../actionsState.tsx"
 import { useTranslation } from "react-i18next"
 import { useEffect, useState } from "react"
 

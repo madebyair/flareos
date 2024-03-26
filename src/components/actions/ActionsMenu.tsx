@@ -13,7 +13,7 @@ import { invoke } from "@tauri-apps/api/core"
 import "../../i18n.ts"
 import { useTranslation } from "react-i18next"
 import { actionsComponent } from "./actionsState.tsx"
-import ActionsBluetooth from "./ActionsBluetooth.tsx"
+import ActionsBluetooth from "./bluetooth/ActionsBluetooth.tsx"
 
 type EventResponse = {
     user: User;
