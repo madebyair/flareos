@@ -2,14 +2,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowLeft, faVolumeLow } from "@fortawesome/free-solid-svg-icons"
 import { useTranslation } from "react-i18next"
 import { useAtomState } from "@zedux/react"
-import { isFullMixer } from "./actionsState.ts"
+import { actionsComponent } from "./actionsState.tsx"
 import { useEffect, useState } from "react"
 import { invoke } from "@tauri-apps/api/core"
 import { MediaObject, parseStringToObject } from "../../manager/speaker_manager.ts"
 
 const FullMixer = () => {
     const [ t ] = useTranslation()
-    const [, setFullMixer] = useAtomState(isFullMixer)
+    const [, setComponent] = useAtomState(actionsComponent)
     const [sinks, setSinks] = useState<MediaObject[]>([])
 
     useEffect(() => {
@@ -31,7 +31,7 @@ const FullMixer = () => {
     return (
         <div className="w-screen h-screen top-0 p-8 bg-slate-200 dark:bg-zinc-950/95 rounded-xl">
             <header className="flex h-10">
-                <div className="h-10 w-10 flex hover:bg-slate-300 rounded-md transition duration-300 dark:hover:bg-zinc-900" onClick={() => setFullMixer(false)}>
+                <div className="h-10 w-10 flex hover:bg-slate-300 rounded-md transition duration-300 dark:hover:bg-zinc-900" onClick={() => setComponent(null)}>
                     <div className="m-auto">
                         <FontAwesomeIcon icon={faArrowLeft} />
                     </div>

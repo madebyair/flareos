@@ -31,7 +31,7 @@ const ActionsButton = ({ text, subtext, icon, iconSvg, enabled, onClick }: Actio
                         <div className="my-auto">
                             <span className="text-sm block -mb-1 font-bold">{text}</span>
                             <span
-                                className="text-[12px] block text-zinc-600 dark:text-zinc-300 hover:text-white">{subtext}</span>
+                                className="text-[12px] block text-zinc-600 dark:text-zinc-300">{subtext}</span>
                         </div>
                     }
                     {!subtext &&

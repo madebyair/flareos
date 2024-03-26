@@ -9,11 +9,11 @@ import { disableNightLight, enableNightLight } from "../../manager/nightlight/se
 import isNightLight from "../../manager/nightlight/isNightLight.ts"
 import ActionsMixer from "./ActionsMixer.tsx"
 import { useAtomState } from "@zedux/react"
-import { isFullMixer } from "./actionsState.ts"
-import FullMixer from "./FullMixer.tsx"
 import { invoke } from "@tauri-apps/api/core"
 import "../../i18n.ts"
 import { useTranslation } from "react-i18next"
+import { actionsComponent } from "./actionsState.tsx"
+import ActionsBluetooth from "./ActionsBluetooth.tsx"
 
 type EventResponse = {
     user: User;
@@ -43,7 +43,7 @@ const transformDevices = (devices: { device: string }[]): DeviceInfo[] => {
 const ActionsMenu = () => {
     const [user, setUser] = useState<User>(defaultUser)
     const [nightLight, setIsNightLight] = useState(false)
-    const [fullMixer] = useAtomState(isFullMixer)
+    const [component, setComponent] = useAtomState(actionsComponent)
     const [bluetooth, setBluetooth] = useState<BluetoothState>({available: false, enabled: false, devices: []})
     const [t, i18n] = useTranslation()
 
@@ -110,17 +110,15 @@ const ActionsMenu = () => {
     return (
         <div className={user?.theme}>
             <div className="start bg-slate-200/95 dark:bg-zinc-950/95 w-screen h-screen rounded-xl dark:text-white select-none">
-                {fullMixer &&
-                    <div className="absolute top-0">
-                        <FullMixer />
-                    </div>
+                {component &&
+                    component
                 }
                 <div className="w-screen h-3/4 flex">
                     <div className="w-11/12 h-5/6 m-auto">
                         <div className="w-full h-1/3 flex">
                             <ActionsButton text="Wifi" subtext="Connected" icon={faWifi} enabled onClick={() => {}}/>
                             {bluetooth.available &&
-                                <ActionsButton text="Bluetooth" subtext={bluetooth.devices.length > 0 ? bluetooth.devices.length.toString() + " " + t("Connected") : t("Ready")} iconSvg={<BluetoothIcon/>} enabled={bluetooth.enabled} onClick={() => {}}/>
+                                <ActionsButton text="Bluetooth" subtext={bluetooth.devices.length > 0 ? bluetooth.devices.length.toString() + " " + t("Connected") : t("Ready")} iconSvg={<BluetoothIcon/>} enabled={bluetooth.enabled} onClick={() => setComponent(<ActionsBluetooth />)}/>
                             }
                             <ActionsButton text="Plane mode" icon={faPlane} enabled={false} onClick={() => {}}/>
                         </div>
