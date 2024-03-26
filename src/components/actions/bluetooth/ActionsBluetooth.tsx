@@ -4,6 +4,7 @@ import { useAtomState } from "@zedux/react"
 import { actionsComponent } from "../actionsState.tsx"
 import { useTranslation } from "react-i18next"
 import { useEffect, useState } from "react"
+import BluetoothPopup from "./BluetoothPopup.tsx"
 
 const ActionsBluetooth = () => {
     const [, setComponent] = useAtomState(actionsComponent)
@@ -25,30 +26,37 @@ const ActionsBluetooth = () => {
 }
 
 const Device = ({name, id} : {name: string, id: number}) => {
-    const [cls, setCls] = useState("w-full h-10 flex hover:bg-slate-200 relative rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4")
-
+    const [cls, setCls] = useState("w-full h-10 flex hover:bg-slate-300 relative rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4")
+    const [popup, setPopup] = useState(false)
+    
     useEffect(() => {
         // setCls("w-full h-10 flex hover:bg-slate-300 rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4 relative")
     }, [])
 
     return (
-        <div className={cls} onClick={() => {
-            // TODO connect device
-        }}>
-            <div className="h-10 w-10 flex">
-                <div className="m-auto">
-                    <BluetoothIcon/>
+        <>
+            {popup &&
+                <BluetoothPopup hide={setPopup} />
+            }
+            <div className={cls} onClick={() => {
+                // TODO connect device
+                setPopup(true)
+            }}>
+                <div className="h-10 w-10 flex">
+                    <div className="m-auto">
+                        <BluetoothIcon/>
+                    </div>
                 </div>
-            </div>
-            <div className="mt-auto mb-auto">
-                {name}
-            </div>
-            <div className="absolute right-4 flex h-full">
                 <div className="mt-auto mb-auto">
+                    {name}
+                </div>
+                <div className="absolute right-4 flex h-full">
+                    <div className="mt-auto mb-auto">
                     Connected
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
