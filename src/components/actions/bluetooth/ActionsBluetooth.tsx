@@ -14,6 +14,10 @@ const ActionsBluetooth = () => {
     const [devices, setDevices] = useState<BluetoothDevice[]>()
 
     useEffect(() => {
+        invoke<string>("get_paired_devices").then((r) => {
+            setDevices(transformBluetooth(JSON.parse(r), "paired"))
+        })
+
         const interval = setInterval(() => {
             invoke<string>("get_paired_devices").then((r) => {
                 setDevices(transformBluetooth(JSON.parse(r), "paired"))
