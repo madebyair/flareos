@@ -43,19 +43,14 @@ const ActionsBluetooth = () => {
 }
 
 const Device = ({device} : { device: BluetoothDevice }) => {
-    const [cls, setCls] = useState("w-full h-10 flex hover:bg-slate-300 relative rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4")
     const [popup, setPopup] = useState(false)
-    
-    useEffect(() => {
-        // setCls("w-full h-10 flex hover:bg-slate-300 rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4 relative")
-    }, [])
 
     return (
         <>
             {popup &&
                 <BluetoothPopup hide={setPopup} />
             }
-            <div className={cls} onClick={() => {
+            <div className="w-full h-10 flex hover:bg-slate-300 relative rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4" onClick={() => {
                 // TODO connect device
                 setPopup(true)
             }}>
