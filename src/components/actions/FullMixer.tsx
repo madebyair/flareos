@@ -31,7 +31,7 @@ const FullMixer = () => {
     return (
         <div className="w-screen h-screen top-0 p-8 bg-slate-200 dark:bg-zinc-950/95 rounded-xl">
             <header className="flex h-10">
-                <div className="h-10 w-10 flex hover:bg-slate-200 rounded-md transition duration-300 dark:hover:bg-zinc-900" onClick={() => setFullMixer(false)}>
+                <div className="h-10 w-10 flex hover:bg-slate-300 rounded-md transition duration-300 dark:hover:bg-zinc-900" onClick={() => setFullMixer(false)}>
                     <div className="m-auto">
                         <FontAwesomeIcon icon={faArrowLeft} />
                     </div>
@@ -69,18 +69,18 @@ const Speaker = ({name, id} : {name: string, id: number}) => {
     useEffect(() => {
         invoke("get_current_sink").then((r) => {
             if (r == id) {
-                setCls("w-full h-10 flex bg-slate-200 rounded-md transition duration-300 dark:bg-zinc-900 mt-4")
+                setCls("w-full h-10 flex bg-slate-300 rounded-md transition duration-300 dark:bg-zinc-900 mt-4")
             } else {
-                setCls("w-full h-10 flex hover:bg-slate-200 rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4")
+                setCls("w-full h-10 flex hover:bg-slate-300 rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4")
             }
         })
 
         const interval = setInterval(() => {
             invoke("get_current_sink").then((r) => {
                 if (r == id) {
-                    setCls("w-full h-10 flex bg-slate-200 rounded-md transition duration-300 dark:bg-zinc-900 mt-4")
+                    setCls("w-full h-10 flex bg-slate-300 rounded-md transition duration-300 dark:bg-zinc-900 mt-4")
                 } else {
-                    setCls("w-full h-10 flex hover:bg-slate-200 rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4")
+                    setCls("w-full h-10 flex hover:bg-slate-300 rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4")
                 }
             })
         }, 500)

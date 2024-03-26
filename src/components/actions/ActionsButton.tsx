@@ -14,7 +14,7 @@ const ActionsButton = ({ text, subtext, icon, iconSvg, enabled, onClick }: Actio
     let className = "w-9/12 h-3/4 bg-sky-500/65 hover:bg-sky-500 m-auto rounded-md transition duration-300 flex"
 
     if (!enabled) {
-        className = "w-9/12 h-3/4 bg-gray-500/65 hover:bg-gray-500 m-auto rounded-md transition duration-300 flex"
+        className = "w-9/12 h-3/4 bg-sky-300/55 hover:bg-sky-500 dark:bg-zinc-900 dark:hover:bg-zinc-900/60 m-auto rounded-md transition duration-300 flex"
     }
 
     return (

@@ -59,7 +59,7 @@ const ActionsMixer = () => {
     return (
         <div className="w-screen">
             <div className="mx-10">
-                <h1 className="hover:bg-gray-500 transition duration-300 max-w-max rounded-md flex" onClick={() => setFullMixer(true)}>{speaker} <div className="ml-4 mr-2"><FontAwesomeIcon icon={faArrowRight} /></div></h1>
+                <h1 className="hover:bg-slate-300 dark:hover:bg-zinc-900 transition duration-300 max-w-max rounded-md flex" onClick={() => setFullMixer(true)}>{speaker} <div className="ml-4 mr-2"><FontAwesomeIcon icon={faArrowRight} /></div></h1>
                 <input type="range" value={volume} onChange={(event) => onChange(event)}
                     className="h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 w-full"/>
             </div>
