@@ -98,8 +98,7 @@ const Device = ({device}: { device: BluetoothDevice }) => {
                 <BluetoothPopup hide={setPopup} device={device} />
             }
             <div className="w-full h-10 flex hover:bg-slate-300 relative rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4" onClick={() => {
-                // TODO connect device
-                setPopup(true)
+                if (device.state == "connected") setPopup(true)
             }}>
                 <div className="h-10 w-10 flex">
                     <div className="m-auto">
