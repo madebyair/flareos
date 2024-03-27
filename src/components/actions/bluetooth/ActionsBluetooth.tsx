@@ -55,7 +55,7 @@ const ActionsBluetooth = () => {
                         <Device device={key} key={key.mac}/>
                     )
                 })}
-                <h1 className="mt-2">{t("Paired")} - {paired?.length.toString()}</h1>
+                <h1 className="mt-2">{t("Paired")} - {paired?.filter(pairedDevice => !connected?.some(connectedDevice => connectedDevice.mac === pairedDevice.mac)).length.toString()}</h1>
                 {paired && paired
                     .filter(pairedDevice => !connected?.some(connectedDevice => connectedDevice.mac === pairedDevice.mac))
                     .map((key) => {
