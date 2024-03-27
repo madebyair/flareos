@@ -90,6 +90,7 @@ const ActionsBluetooth = () => {
 
 const Device = ({device}: { device: BluetoothDevice }) => {
     const [popup, setPopup] = useState(false)
+    const [ t ] = useTranslation()
 
     return (
         <>
@@ -110,7 +111,8 @@ const Device = ({device}: { device: BluetoothDevice }) => {
                 </div>
                 <div className="absolute right-4 flex h-full">
                     <div className="mt-auto mb-auto">
-                        {device.state !== "available" && device.state[0].toUpperCase() + device.state.slice(1)}
+                        {device.state == "connected" && t("Connected")}
+                        {device.state == "paired" && t("Disconnected")}
                     </div>
                 </div>
             </div>
