@@ -44,5 +44,6 @@
   "Available devices": "Available devices",
   "Bluetooth device": "Bluetooth device",
   "Name:": "Name:",
-  "MAC address:": "MAC address:"
+  "MAC address:": "MAC address:",
+  "Paired": "Paired"
 }

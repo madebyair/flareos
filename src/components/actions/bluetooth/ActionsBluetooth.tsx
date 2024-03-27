@@ -11,16 +11,25 @@ import { BluetoothDevice, transformBluetooth } from "../../../types/bluetooth.ts
 const ActionsBluetooth = () => {
     const [, setComponent] = useAtomState(actionsComponent)
     const [ t ] = useTranslation()
-    const [devices, setDevices] = useState<BluetoothDevice[]>()
+    const [paired, setPaired] = useState<BluetoothDevice[]>()
+    const [connected, setConnected] = useState<BluetoothDevice[]>()
 
     useEffect(() => {
+        invoke<string>("get_connected_devices").then((r) => {
+            setConnected(transformBluetooth(JSON.parse(r), "connected"))
+        })
+
         invoke<string>("get_paired_devices").then((r) => {
-            setDevices(transformBluetooth(JSON.parse(r), "paired"))
+            setPaired(transformBluetooth(JSON.parse(r), "paired"))
         })
 
         const interval = setInterval(() => {
+            invoke<string>("get_connected_devices").then((r) => {
+                setConnected(transformBluetooth(JSON.parse(r), "connected"))
+            })
+
             invoke<string>("get_paired_devices").then((r) => {
-                setDevices(transformBluetooth(JSON.parse(r), "paired"))
+                setPaired(transformBluetooth(JSON.parse(r), "paired"))
             })
         }, 1000)
 
@@ -30,23 +39,34 @@ const ActionsBluetooth = () => {
     return (
         <div className="w-screen h-screen top-0 p-8 bg-slate-200 dark:bg-zinc-950/95 rounded-xl absolute top-0">
             <header className="flex h-10">
-                <div className="h-10 w-10 flex hover:bg-slate-300 rounded-md transition duration-300 dark:hover:bg-zinc-900" onClick={() => setComponent(null)}>
+                <div
+                    className="h-10 w-10 flex hover:bg-slate-300 rounded-md transition duration-300 dark:hover:bg-zinc-900"
+                    onClick={() => setComponent(null)}>
                     <div className="m-auto">
-                        <FontAwesomeIcon icon={faArrowLeft} />
+                        <FontAwesomeIcon icon={faArrowLeft}/>
                     </div>
                 </div>
                 <h1 className="my-auto ml-2">{t("Available devices")}</h1>
             </header>
-            {devices && devices.map((key) => {
-                return (
-                    <Device device={key} key={key.mac} />
-                )
-            })}
+            <main className="overflow-auto" style={{height: "calc(100vh - 104px)"}}>
+                <h1 className="mt-2">{t("Connected")} - {connected?.length.toString()}</h1>
+                {connected && connected.map((key) => {
+                    return (
+                        <Device device={key} key={key.mac}/>
+                    )
+                })}
+                <h1 className="mt-2">{t("Paired")} - {paired?.length.toString()}</h1>
+                {paired && paired.map((key) => {
+                    return (
+                        <Device device={key} key={key.mac}/>
+                    )
+                })}
+            </main>
         </div>
     )
 }
 
-const Device = ({device} : { device: BluetoothDevice }) => {
+const Device = ({device}: { device: BluetoothDevice }) => {
     const [popup, setPopup] = useState(false)
 
     return (
