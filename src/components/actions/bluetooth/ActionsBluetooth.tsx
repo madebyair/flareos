@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import BluetoothPopup from "./BluetoothPopup.tsx"
 import { invoke } from "@tauri-apps/api/core"
 import { BluetoothDevice, transformBluetooth } from "../../../types/bluetooth.ts"
+import "./spinner.css"
 
 const ActionsBluetooth = () => {
     const [, setComponent] = useAtomState(actionsComponent)
@@ -90,6 +91,7 @@ const ActionsBluetooth = () => {
 
 const Device = ({device}: { device: BluetoothDevice }) => {
     const [popup, setPopup] = useState(false)
+    const [connecting, setConnecting] = useState(false)
     const [ t ] = useTranslation()
 
     return (
@@ -98,7 +100,12 @@ const Device = ({device}: { device: BluetoothDevice }) => {
                 <BluetoothPopup hide={setPopup} device={device} />
             }
             <div className="w-full h-10 flex hover:bg-slate-300 relative rounded-md transition duration-300 dark:hover:bg-zinc-900 mt-4" onClick={() => {
-                if (device.state == "connected") setPopup(true)
+                if (device.state == "connected") {
+                    setPopup(true)
+                    return
+                }
+
+                setConnecting(true)
             }}>
                 <div className="h-10 w-10 flex">
                     <div className="m-auto">
@@ -110,8 +117,9 @@ const Device = ({device}: { device: BluetoothDevice }) => {
                 </div>
                 <div className="absolute right-4 flex h-full">
                     <div className="mt-auto mb-auto">
+                        {connecting && <div><Spinner /></div>}
                         {device.state == "connected" && t("Connected")}
-                        {device.state == "paired" && t("Disconnected")}
+                        {device.state == "paired" && !connecting && t("Disconnected")}
                     </div>
                 </div>
             </div>
@@ -130,6 +138,18 @@ function BluetoothIcon() {
         >
             <path
                 d="M4.41 16.192l1.18 1.615L10 14.584V21a1 1 0 001.541.841l7-4.5a.999.999 0 00.049-1.649L13.537 12l5.053-3.692a1.002 1.002 0 00-.049-1.65l-7-4.5a1.002 1.002 0 00-1.021-.037c-.32.176-.52.513-.52.879v6.416L5.59 6.192 4.41 7.808 10 11.893v.215l-5.59 4.084zM12 4.832l4.232 2.721L12 10.646V4.832zm0 8.522l4.232 3.093L12 19.168v-5.814z"></path>
+        </svg>
+    )
+}
+
+function Spinner() {
+    return (
+        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"/>
+            <path
+                d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"
+                className="spinner_ajPY"
+            />
         </svg>
     )
 }
