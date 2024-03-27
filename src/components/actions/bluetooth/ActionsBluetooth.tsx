@@ -13,14 +13,21 @@ const ActionsBluetooth = () => {
     const [ t ] = useTranslation()
     const [paired, setPaired] = useState<BluetoothDevice[]>()
     const [connected, setConnected] = useState<BluetoothDevice[]>()
+    const [devices, setDevices] = useState<BluetoothDevice[]>()
 
     useEffect(() => {
+        invoke("scan_on")
+
         invoke<string>("get_connected_devices").then((r) => {
             setConnected(transformBluetooth(JSON.parse(r), "connected"))
         })
 
         invoke<string>("get_paired_devices").then((r) => {
             setPaired(transformBluetooth(JSON.parse(r), "paired"))
+        })
+
+        invoke<string>("get_devices").then((r) => {
+            setDevices(transformBluetooth(JSON.parse(r), "available"))
         })
 
         const interval = setInterval(() => {
@@ -30,6 +37,10 @@ const ActionsBluetooth = () => {
 
             invoke<string>("get_paired_devices").then((r) => {
                 setPaired(transformBluetooth(JSON.parse(r), "paired"))
+            })
+
+            invoke<string>("get_devices").then((r) => {
+                setDevices(transformBluetooth(JSON.parse(r), "available"))
             })
         }, 1000)
 
@@ -63,6 +74,15 @@ const ActionsBluetooth = () => {
                             <Device device={key} key={key.mac}/>
                         )
                     })}
+
+                <h1 className="mt-2">{t("Available")} - {devices?.filter(pairedDevice => !paired?.some(connectedDevice => connectedDevice.mac === pairedDevice.mac)).length.toString()}</h1>
+                {devices && devices
+                    .filter(pairedDevice => !paired?.some(connectedDevice => connectedDevice.mac === pairedDevice.mac))
+                    .map((key) => {
+                        return (
+                            <Device device={key} key={key.mac}/>
+                        )
+                    })}
             </main>
         </div>
     )
@@ -90,7 +110,7 @@ const Device = ({device}: { device: BluetoothDevice }) => {
                 </div>
                 <div className="absolute right-4 flex h-full">
                     <div className="mt-auto mb-auto">
-                        {device.state[0].toUpperCase() + device.state.slice(1)}
+                        {device.state !== "available" && device.state[0].toUpperCase() + device.state.slice(1)}
                     </div>
                 </div>
             </div>
