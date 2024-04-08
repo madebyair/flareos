@@ -13,6 +13,7 @@ import User from "./types/user.ts"
 import { install, uninstall } from "./manager/install_manager.ts"
 import { storeApp } from "./types/storeApp.ts"
 import { supportedLanguagesType } from "./types/supportedLanguages.ts"
+import isLatest from "./updater/isLatest.ts"
 
 function App() {
     const [colorScheme] = useAtomState(colorSchemeState)
@@ -143,6 +144,8 @@ function App() {
                 })
             })
         })
+
+        isLatest()
     }, [])
 
 

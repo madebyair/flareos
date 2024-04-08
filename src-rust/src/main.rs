@@ -52,6 +52,10 @@ mod bluetooth {
     pub mod bt_scan;
 }
 
+mod vendor {
+    pub mod get_platform;
+}
+
 use utils::encryption::encrypt;
 use utils::encryption::decrypt;
 use apps::terminal::{async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty, TerminalState};
@@ -89,6 +93,7 @@ use volume::get_current_sink::get_current_sink;
 use bluetooth::is_bluetooth::{is_bluetooth_adapter_available, get_bluetooth_adapter_status};
 use bluetooth::bt_devices::{get_connected_devices, get_paired_devices, get_devices};
 use bluetooth::bt_scan::scan_on;
+use vendor::get_platform::get_platform;
 
 fn main() {
     if !Uid::effective().is_root() {
@@ -129,7 +134,8 @@ fn main() {
             download_icon, install_snap, install_deb, uninstall_snap,
             run_app,
             get_current_volume, set_current_volume, list_sinks, set_current_sink, get_current_sink,
-            is_bluetooth_adapter_available, get_bluetooth_adapter_status, get_connected_devices, get_paired_devices, get_devices, scan_on
+            is_bluetooth_adapter_available, get_bluetooth_adapter_status, get_connected_devices, get_paired_devices, get_devices, scan_on,
+            get_platform
          ])
         .register_asynchronous_uri_scheme_protocol("icons", move |_app, request, responder| {
               match get_icon(request, &boundary_id) {
