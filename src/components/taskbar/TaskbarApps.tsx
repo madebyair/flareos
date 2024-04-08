@@ -50,9 +50,6 @@ const TaskbarApp = ({name, className, active} : {name: string, className: string
     const [icon, setIcon] = useState("")
     const [user] = useAtomState(userState)
 
-    if (name == "airos" || name == "__airos_start_menu__" || name == "__airos_actions_menu__") {
-        return
-    }
 
     function activate() {
         invoke("activate", { "name": name })
@@ -63,6 +60,10 @@ const TaskbarApp = ({name, className, active} : {name: string, className: string
             setIcon(getIcon(user, className))
         }
     }, [className, user])
+
+    if (name == "airos" || name == "__airos_start_menu__" || name == "__airos_actions_menu__") {
+        return
+    }
 
     return (
         <div className="flex w-10 h-10 relative">
