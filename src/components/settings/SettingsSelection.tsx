@@ -6,7 +6,7 @@ type SettingsSelectionType = {
 
 const SettingsSelection = ({name, subtext, onClick} : SettingsSelectionType) => {
     return (
-        <div className="w-full h-16 bg-slate-400/60 mt-2 mb-2 dark:bg-zinc-800 hover:bg-slate-400 dark:hover:bg-zinc-900 transition duration-300 rounded-md" onClick={() => onClick()}>
+        <div className="w-full h-16 bg-slate-400/60 mt-2 mb-2 dark:bg-zinc-900 hover:bg-slate-400 dark:hover:bg-zinc-900/80 transition duration-300 rounded-md" onClick={() => onClick()}>
             {subtext == undefined &&
                 <div className="h-16 w-full flex">
                     <span className="ml-4 mt-auto mb-auto">

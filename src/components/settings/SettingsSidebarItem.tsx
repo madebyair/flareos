@@ -14,7 +14,7 @@ const SettingsSidebarItem = ({name, icon, description, component} : SettingsSide
     const [, setComponent] = useAtomState(settingsComponent)
 
     return (
-        <div className="bg-slate-400/30 hover:bg-slate-400/80 dark:bg-zinc-800 dark:hover:dark:bg-zinc-800/70 transition duration-300
+        <div className="bg-slate-400/30 hover:bg-slate-400/80 dark:bg-zinc-900 dark:hover:dark:bg-zinc-900/80 transition duration-300
          w-full h-28 rounded-xl mt-4 mb-4" onClick={() => {
             setComponent(component)
         }}>
