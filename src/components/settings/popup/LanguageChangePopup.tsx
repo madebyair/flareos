@@ -39,6 +39,7 @@ function Language({name, short, flag, setChanged} : LanguageType) {
 export default function LanguageChangePopup() {
     const [changed, setChanged] = useState(false)
     const [, setComponent] = useAtomState(settingsComponent)
+    const [ t ] = useTranslation()
 
     return (
         <>
@@ -73,10 +74,10 @@ export default function LanguageChangePopup() {
                                         className="text-lg font-medium leading-6 text-white"
                                     >
                                         {!changed &&
-                                            <span>Change your language</span>
+                                            <span>{t("Change your language")}</span>
                                         }
                                         {changed &&
-                                            <span>Language was changed</span>
+                                            <span>{t("Language was changed")}</span>
                                         }
                                     </Dialog.Title>
                                     <div className="mt-2 h-52 overflow-auto">
@@ -87,9 +88,9 @@ export default function LanguageChangePopup() {
                                         }
                                         {changed &&
                                             <>
-                                                <span className="text-white">Your language was updated, but to update language in all apps, you should log out, or even restart your PC.</span>
+                                                <span className="text-white">{t("Your language was updated, but to update language in all apps, you should log out, or even restart your PC.")}</span>
                                                 <div className="mt-4">
-                                                    <Button label={"Continue"}
+                                                    <Button label={t("Continue")}
                                                         submit={() => setComponent(<></>)}></Button>
                                                 </div>
                                             </>

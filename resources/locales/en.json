@@ -47,5 +47,21 @@
   "MAC address:": "MAC address:",
   "Paired": "Paired",
   "Available": "Available",
-  "Disconnected": "Disconnected"
+  "Disconnected": "Disconnected",
+  "Connections": "Connections",
+  "Wifi ・ Bluetooth": "Wifi ・ Bluetooth",
+  "Personalization": "Personalization",
+  "Dark mode ・ Wallpaper": "Dark mode ・ Wallpaper",
+  "General": "General",
+  "Language ・ Date and time": "Language ・ Date and time",
+  "Information": "Information",
+  "Airos Version ・ Updates": "Airos Version ・ Updates",
+  "Change your language": "Change your language",
+  "Language was changed": "Language was changed",
+  "Your language was updated, but to update language in all apps, you should log out, or even restart your PC.": "Your language was updated, but to update language in all apps, you should log out, or even restart your PC.",
+  "Light mode": "Light mode",
+  "Perfect looking Airos": "Perfect looking Airos",
+  "Saving planet, cause your display needs less power": "Saving planet, cause your display needs less power",
+  "Language": "Language",
+  "Date": "Date"
 }

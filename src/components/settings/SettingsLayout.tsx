@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next"
 const SettingsLayout = () => {
     const [component] = useAtomState(settingsComponent)
     const [user, setUser] = useState<User>(defaultUser)
-    const [, i18n] = useTranslation()
+    const [t, i18n] = useTranslation()
 
     useEffect(() => {
         emit("user-request")
@@ -42,15 +42,15 @@ const SettingsLayout = () => {
             <div className={"w-screen h-screen bg-slate-300 dark:bg-zinc-950 flex select-none dark:text-white"}>
                 <div className="w-1/2 p-4">
                     <div className="mt-2 mb-2">
-                        <SettingsSidebarItem name="Connections" icon={faWifi} description="Wifi ・ Bluetooth"
+                        <SettingsSidebarItem name={t("Connections")} icon={faWifi} description={t("Wifi ・ Bluetooth")}
                             component={<></>}/>
-                        <SettingsSidebarItem name="Personalization" icon={faPalette}
-                            description="Dark mode ・ Wallpaper"
+                        <SettingsSidebarItem name={t("Personalization")} icon={faPalette}
+                            description={t("Dark mode ・ Wallpaper")}
                             component={<SettingsPersonalization/>}/>
-                        <SettingsSidebarItem name="General" icon={faGear}
-                            description="Language ・ Date and time"
+                        <SettingsSidebarItem name={t("General")} icon={faGear}
+                            description={t("Language ・ Date and time")}
                             component={<SettingsGeneral />}/>
-                        <SettingsSidebarItem name="Information" icon={faDownload} description="Airos Version ・ Updates"
+                        <SettingsSidebarItem name={t("Information")} icon={faDownload} description={t("Airos Version ・ Updates")}
                             component={<></>}/>
                     </div>
                 </div>

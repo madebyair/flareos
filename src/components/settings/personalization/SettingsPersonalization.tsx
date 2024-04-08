@@ -6,7 +6,7 @@ const SettingsPersonalization = () => {
             <div className="bg-slate-400/60 w-full dark:bg-zinc-800 rounded h-20 flex" onClick={() => emit("theme-change", "light")}>
                 <div className="mt-auto mb-auto ml-2">
                     Light mode
-                    <p className="text-xs">Perfect looking airos</p>
+                    <p className="text-xs">Perfect looking Airos</p>
                 </div>
             </div>
             <div className="bg-slate-400/60 dark:bg-zinc-800 w-full mt-4 rounded h-20 flex" onClick={() => emit("theme-change", "dark")}>
