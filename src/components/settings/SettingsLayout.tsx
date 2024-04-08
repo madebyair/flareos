@@ -1,6 +1,6 @@
 import SettingsSidebarItem from "./SettingsSidebarItem.tsx"
 import "../../assets/css/App.css"
-import { faDownload, faGear, faPalette, faWifi } from "@fortawesome/free-solid-svg-icons"
+import { faGear, faInfo, faPalette, faWifi } from "@fortawesome/free-solid-svg-icons"
 import { settingsComponent } from "./settingsState.tsx"
 import { useAtomState } from "@zedux/react"
 import SettingsPersonalization from "./personalization/SettingsPersonalization.tsx"
@@ -50,7 +50,7 @@ const SettingsLayout = () => {
                         <SettingsSidebarItem name={t("General")} icon={faGear}
                             description={t("Language ・ Date and time")}
                             component={<SettingsGeneral />}/>
-                        <SettingsSidebarItem name={t("Information")} icon={faDownload} description={t("Airos Version ・ Updates")}
+                        <SettingsSidebarItem name={t("Information")} icon={faInfo} description={t("Airos Version ・ Updates")}
                             component={<></>}/>
                     </div>
                 </div>
