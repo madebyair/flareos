@@ -1,10 +1,34 @@
 import { invoke } from "@tauri-apps/api/core"
+import axios, { AxiosResponse } from "axios"
+
+type Response = {
+    status: string,
+    patches: Version[]
+}
+
+type Version = {
+    download: string,
+    beta: string,
+    public: string,
+    platform: string,
+    released: string,
+    version: string
+}
 
 export default async function isLatest() {
     const platform = await invoke("get_platform")
+    const response : AxiosResponse<Response> = await axios.get("https://api.made-by-air.com/updates/" + platform + "/patches")
+    // @ts-ignore
+    const versions = response.data.patches.sort((a, b) => new Date(a.released) - new Date(b.released))
+    let version : Version | null = null
 
-    console.log(platform)
-    console.log(canInstallVersion("1.0.0", "2.0.21"))
+    versions.forEach((key: Version) => {
+        if (key.beta == "false" && key.public == "true") {
+            version = key
+        }
+    })
+
+    console.log(version)
 }
 
 function canInstallVersion(userVersion: string, targetVersion: string): boolean {
