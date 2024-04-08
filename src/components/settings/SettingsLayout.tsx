@@ -50,7 +50,7 @@ const SettingsLayout = () => {
                         <SettingsSidebarItem name="General" icon={faGear}
                             description="Language ・ Date and time"
                             component={<SettingsGeneral />}/>
-                        <SettingsSidebarItem name="Updates" icon={faDownload} description="Download and Install ・ Labs"
+                        <SettingsSidebarItem name="Information" icon={faDownload} description="Airos Version ・ Updates"
                             component={<></>}/>
                     </div>
                 </div>
