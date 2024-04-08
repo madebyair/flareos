@@ -10,6 +10,7 @@ import User, { defaultUser } from "../../types/user.ts"
 import SettingsGeneral from "./general/SettingsGeneral.tsx"
 import "../../i18n.ts"
 import { useTranslation } from "react-i18next"
+import SettingsInformation from "./information/SettingsInformation.tsx"
 
 const SettingsLayout = () => {
     const [component] = useAtomState(settingsComponent)
@@ -51,7 +52,7 @@ const SettingsLayout = () => {
                             description={t("Language ・ Date and time")}
                             component={<SettingsGeneral />}/>
                         <SettingsSidebarItem name={t("Information")} icon={faInfo} description={t("Airos Version ・ Updates")}
-                            component={<></>}/>
+                            component={<SettingsInformation />} />
                     </div>
                 </div>
                 <div className="w-1/2 mt-2 mb-2 mx-2">
