@@ -1,5 +1,6 @@
 import { invoke } from "@tauri-apps/api/core"
 import axios, { AxiosResponse } from "axios"
+import packageJson from '../../package.json'
 
 type Response = {
     status: string,
@@ -23,7 +24,7 @@ export default async function isLatest() {
     let version : Version | null = null
 
     versions.forEach((key: Version) => {
-        if (key.beta == "false" && key.public == "true") {
+        if (key.beta == "false" && key.public == "true" && canInstallVersion(packageJson.version, key.version)) {
             version = key
         }
     })
