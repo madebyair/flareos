@@ -64,5 +64,8 @@
   "Saving planet, cause your display needs less power": "Saving planet, cause your display needs less power",
   "Language": "Language",
   "Date": "Date",
-  "Version": "Version"
+  "Version": "Version",
+  "Software information": "Software information",
+  "Hardware information": "Hardware information",
+  "Updates": "Updates"
 }
