@@ -3,9 +3,8 @@ import Setup from "./components/setup/Setup.tsx"
 import { useAtomState } from "@zedux/react"
 import { colorSchemeState } from "./state/themeState.ts"
 import "./i18n"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { get, set } from "./manager/store_manager.ts"
-import Loading from "./components/Loading.tsx"
 import Auth from "./components/auth/Auth.tsx"
 import { emit, listen } from "@tauri-apps/api/event"
 import { userState } from "./state/currentUserState.ts"
@@ -14,10 +13,11 @@ import { install, uninstall } from "./manager/install_manager.ts"
 import { storeApp } from "./types/storeApp.ts"
 import { supportedLanguagesType } from "./types/supportedLanguages.ts"
 import isLatest from "./updater/isLatest.ts"
+import { componentState } from "./state/componentState.tsx"
 
 function App() {
     const [colorScheme] = useAtomState(colorSchemeState)
-    const [component, setCompoment] = useState(<Loading/>)
+    const [component, setCompoment] = useAtomState(componentState)
     const [user , setUser] = useAtomState(userState)
 
     useEffect(() => {

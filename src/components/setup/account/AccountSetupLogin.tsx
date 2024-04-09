@@ -17,7 +17,7 @@ import { set } from "../../../manager/store_manager.ts"
 import { invoke } from "@tauri-apps/api/core"
 import { colorSchemeState } from "../../../state/themeState.ts"
 
-const AccountSetupLogin = () => {
+const AccountSetupLogin = ({isFromAuth} : {isFromAuth?: boolean}) => {
     const { t } = useTranslation()
     const [value, setValue] = useState("")
     const [error, setError] = useState("")
@@ -127,7 +127,7 @@ const AccountSetupLogin = () => {
 
     // tbh that's almost 1 to 1 code from made-by-air.com website I'm just lazy :)
     return (
-        <AccountSetupLayout>
+        <AccountSetupLayout isFromAuth={isFromAuth}>
             <>
                 <div
                     className="w-full h-full rounded-xl text-center relative">
@@ -193,4 +193,17 @@ const AccountSetupLogin = () => {
     )
 }
 
+const AuthLogin = () => {
+    return (
+        <div className="w-screen h-screen auth-bg select-none absolute top-0 z-20 dark">
+            <div className="w-screen h-screen backdrop-blur-md flex">
+                <div className="w-[800px] h-[500px] bg-slate-200 dark:bg-black m-auto rounded-xl" >
+                    <AccountSetupLogin isFromAuth />
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export { AuthLogin }
 export default AccountSetupLogin
