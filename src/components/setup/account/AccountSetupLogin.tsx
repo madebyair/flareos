@@ -13,7 +13,7 @@ import useBlobUrl from "../../../functions/useBlobUrl.ts"
 import login from "../../../api/auth/login.ts"
 import { useAtomState } from "@zedux/react"
 import { userState } from "../../../state/currentUserState.ts"
-import { set } from "../../../manager/store_manager.ts"
+import { get, set } from "../../../manager/store_manager.ts"
 import { invoke } from "@tauri-apps/api/core"
 import { colorSchemeState } from "../../../state/themeState.ts"
 
@@ -100,21 +100,25 @@ const AccountSetupLogin = ({isFromAuth} : {isFromAuth?: boolean}) => {
                                 "language": "en",
                                 "unixUser": unixUser
                             })
-                            set("users", [
-                                {
-                                    "firstName": first,
-                                    "lastName": last,
-                                    "email": email,
-                                    "uuid": uuid,
-                                    "sessionUuid": r?.data.uuid,
-                                    "sessionSecret": r?.data.secret,
-                                    "password": password,
-                                    "apps": [],
-                                    "theme": theme,
-                                    "language": "en",
-                                    "unixUser": unixUser
-                                },
-                            ])
+                            get("users").then((c) => {
+                                set("users", [
+                                    // @ts-ignore
+                                    ...(c),
+                                    {
+                                        "firstName": first,
+                                        "lastName": last,
+                                        "email": email,
+                                        "uuid": uuid,
+                                        "sessionUuid": r?.data.uuid,
+                                        "sessionSecret": r?.data.secret,
+                                        "password": password,
+                                        "apps": [],
+                                        "theme": theme,
+                                        "language": "en",
+                                        "unixUser": unixUser
+                                    },
+                                ])
+                            })
                         }
                     })
                 }
