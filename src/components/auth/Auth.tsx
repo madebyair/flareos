@@ -7,6 +7,7 @@ import { useAtomState } from "@zedux/react"
 import { userState } from "../../state/currentUserState.ts"
 import { invoke } from "@tauri-apps/api/core"
 import AuthFooter from "./AuthFooter.tsx"
+import AuthUsers from "./AuthUsers.tsx"
 
 const Auth = () => {
     const currentUser = 0
@@ -45,6 +46,7 @@ const Auth = () => {
                             ) : <span>Loading</span>}
                         </div>
                         <AuthFooter />
+                        <AuthUsers />
                     </div>
                 </div>
             }
