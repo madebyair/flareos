@@ -29,7 +29,7 @@ const Desktop = () => {
         <div className={"desktop-bg w-screen h-screen bg-black relative select-none overflow-hidden " + user.theme}>
             <div ref={ref}>
                 {/* @ts-ignore */}
-                <DesktopContextMenu context={context} />
+                <DesktopContextMenu context={context} hide={() => setContext({x: 0, y: 0, displayed: false})} />
             </div>
             <div className="absolute bottom-0">
                 <Taskbar />

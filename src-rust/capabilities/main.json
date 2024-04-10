@@ -9,7 +9,8 @@
     "settings",
     "files",
     "actions",
-    "store"
+    "store",
+    "widgets"
   ],
   "permissions": [
     "path:default",

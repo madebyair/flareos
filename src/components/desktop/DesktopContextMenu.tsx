@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faImage, faPlus } from "@fortawesome/free-solid-svg-icons"
 import { useTranslation } from "react-i18next"
+import { WebviewWindow } from "@tauri-apps/api/webviewWindow"
 
 type ContextType = {
     x: number,
@@ -8,7 +9,7 @@ type ContextType = {
     displayed: false
 }
 
-const DesktopContextMenu = ({context} : {context: ContextType}) => {
+const DesktopContextMenu = ({context, hide} : {context: ContextType, hide: () => void}) => {
     const [ t ] = useTranslation()
 
     return (
@@ -19,7 +20,18 @@ const DesktopContextMenu = ({context} : {context: ContextType}) => {
                     left: context.x
                 }}>
                     <div className="m-4">
-                        <div className="w-full h-10 hover:bg-slate-400/50 dark:hover:bg-zinc-900/95 rounded-md transition duration-300 flex">
+                        <div className="w-full h-10 hover:bg-slate-400/50 dark:hover:bg-zinc-900/95 rounded-md transition duration-300 flex" onClick={() => {
+                            new WebviewWindow("widgets", {
+                                url: "widgets.html",
+                                title: "Widgets",
+                                minWidth: 600,
+                                minHeight: 500,
+                                width: 600,
+                                height: 500,
+                                visible: false
+                            })
+                            hide()
+                        }}>
                             <div className="h-10 w-10 flex">
                                 <div className="m-auto">
                                     <FontAwesomeIcon icon={faPlus} />
