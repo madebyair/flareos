@@ -94,6 +94,7 @@ use bluetooth::is_bluetooth::{is_bluetooth_adapter_available, get_bluetooth_adap
 use bluetooth::bt_devices::{get_connected_devices, get_paired_devices, get_devices};
 use bluetooth::bt_scan::scan_on;
 use vendor::get_platform::get_platform;
+use tauri::Manager;
 
 fn main() {
     if !Uid::effective().is_root() {
@@ -117,13 +118,18 @@ fn main() {
     let boundary_id = Arc::new(Mutex::new(0));
 
     tauri::Builder::default()
+        .setup(|app| {
+            #[cfg(debug_assertions)]
+            app.get_webview("main").unwrap().open_devtools();
+            Ok(())
+        })
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_store::Builder::default().build())
         .manage(TerminalState {
                     pty_pair: Arc::new(AsyncMutex::new(pty_pair)),
                     writer: Arc::new(AsyncMutex::new(writer)),
                     reader: Arc::new(AsyncMutex::new(BufReader::new(reader))),
-                })
+        })
         .invoke_handler(tauri::generate_handler![
             encrypt, decrypt,
             async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty,
