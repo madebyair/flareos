@@ -31,6 +31,7 @@
     "window:allow-show",
     "window:allow-minimize",
     "window:allow-close",
-    "window:allow-start-dragging"
+    "window:allow-start-dragging",
+    "window:allow-set-always-on-top"
   ]
 }
