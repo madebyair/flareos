@@ -16,6 +16,8 @@ import { userState } from "../../../state/currentUserState.ts"
 import { get, set } from "../../../manager/store_manager.ts"
 import { invoke } from "@tauri-apps/api/core"
 import { colorSchemeState } from "../../../state/themeState.ts"
+import { componentState } from "../../../state/componentState.tsx"
+import AccountFromAuth from "./AccountFromAuth.tsx"
 
 const AccountSetupLogin = ({isFromAuth} : {isFromAuth?: boolean}) => {
     const { t } = useTranslation()
@@ -28,6 +30,7 @@ const AccountSetupLogin = ({isFromAuth} : {isFromAuth?: boolean}) => {
     const [avatar, setAvatar] = useState("")
     const [first, setFirst] = useState("")
     const [last, setLast] = useState("")
+    const [, setComponent] = useAtomState(componentState)
     const [, setUser] = useAtomState(userState)
     const avatarBlob = useBlobUrl(avatar)
     const [theme] = useAtomState(colorSchemeState)
@@ -119,6 +122,9 @@ const AccountSetupLogin = ({isFromAuth} : {isFromAuth?: boolean}) => {
                                     },
                                 ])
                             })
+                            if (isFromAuth) {
+                                setComponent(<AccountFromAuth />)
+                            }
                         }
                     })
                 }
