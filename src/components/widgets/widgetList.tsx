@@ -1,10 +1,9 @@
 import { Widget } from "../../types/widget.ts"
-import ClockWidget from "./clock/ClockWidget.tsx"
 
 const defaultWidgets: Widget[] = [
     {
         name: "Clock",
-        component: <ClockWidget />,
+        component: "clockwidget",
         x: 10,
         y: 20,
         default: "clock"

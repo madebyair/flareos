@@ -104,9 +104,10 @@ const AccountSetupLogin = ({isFromAuth} : {isFromAuth?: boolean}) => {
                                 "widgets": widgetList
                             })
                             get("users").then((c) => {
+                                const d = Array.isArray(c) ? c : []
                                 set("users", [
                                     // @ts-ignore
-                                    ...(c),
+                                    ...(d),
                                     {
                                         "firstName": first,
                                         "lastName": last,

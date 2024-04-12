@@ -1,8 +1,6 @@
-import React from "react"
-
 export type Widget = {
     name: string,
-    component: React.ReactElement,
+    component: string,
     x: number,
     y: number,
     default?: string
