@@ -16,8 +16,8 @@ import { userState } from "../../../state/currentUserState.ts"
 import { get, set } from "../../../manager/store_manager.ts"
 import { invoke } from "@tauri-apps/api/core"
 import { colorSchemeState } from "../../../state/themeState.ts"
-import { componentState } from "../../../state/componentState.tsx"
-import AccountFromAuth from "./AccountFromAuth.tsx"
+import widgetList from "../../widgets/widgetList.tsx"
+import { emit } from "@tauri-apps/api/event"
 
 const AccountSetupLogin = ({isFromAuth} : {isFromAuth?: boolean}) => {
     const { t } = useTranslation()
@@ -30,7 +30,6 @@ const AccountSetupLogin = ({isFromAuth} : {isFromAuth?: boolean}) => {
     const [avatar, setAvatar] = useState("")
     const [first, setFirst] = useState("")
     const [last, setLast] = useState("")
-    const [, setComponent] = useAtomState(componentState)
     const [, setUser] = useAtomState(userState)
     const avatarBlob = useBlobUrl(avatar)
     const [theme] = useAtomState(colorSchemeState)
@@ -101,7 +100,8 @@ const AccountSetupLogin = ({isFromAuth} : {isFromAuth?: boolean}) => {
                                 "apps": [],
                                 "theme": theme,
                                 "language": "en",
-                                "unixUser": unixUser
+                                "unixUser": unixUser,
+                                "widgets": widgetList
                             })
                             get("users").then((c) => {
                                 set("users", [
@@ -118,12 +118,13 @@ const AccountSetupLogin = ({isFromAuth} : {isFromAuth?: boolean}) => {
                                         "apps": [],
                                         "theme": theme,
                                         "language": "en",
-                                        "unixUser": unixUser
+                                        "unixUser": unixUser,
+                                        "widgets": widgetList
                                     },
                                 ])
                             })
                             if (isFromAuth) {
-                                setComponent(<AccountFromAuth />)
+                                emit("component", "fromauth")
                             }
                         }
                     })

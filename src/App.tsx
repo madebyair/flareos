@@ -3,7 +3,7 @@ import Setup from "./components/setup/Setup.tsx"
 import { useAtomState } from "@zedux/react"
 import { colorSchemeState } from "./state/themeState.ts"
 import "./i18n"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { get, set } from "./manager/store_manager.ts"
 import Auth from "./components/auth/Auth.tsx"
 import { emit, listen } from "@tauri-apps/api/event"
@@ -13,11 +13,13 @@ import { install, uninstall } from "./manager/install_manager.ts"
 import { storeApp } from "./types/storeApp.ts"
 import { supportedLanguagesType } from "./types/supportedLanguages.ts"
 import isLatest from "./updater/isLatest.ts"
-import { componentState } from "./state/componentState.tsx"
+import Loading from "./components/Loading.tsx"
+import { AuthLogin } from "./components/setup/account/AccountSetupLogin.tsx"
+import AccountFromAuth from "./components/setup/account/AccountFromAuth.tsx"
 
 function App() {
     const [colorScheme] = useAtomState(colorSchemeState)
-    const [component, setCompoment] = useAtomState(componentState)
+    const [component, setCompoment] = useState(<Loading />)
     const [user , setUser] = useAtomState(userState)
 
     useEffect(() => {
@@ -36,6 +38,20 @@ function App() {
         if (window.location.port !== "1420") {
             window.addEventListener("contextmenu", e => e.preventDefault())
         }
+
+        listen("component", (event) => {
+            if (event.payload == "authlogin") {
+                setCompoment(<AuthLogin />)
+            }
+
+            if (event.payload == "fromauth") {
+                setCompoment(<AccountFromAuth />)
+            }
+
+            if (event.payload == "auth") {
+                setCompoment(<Auth />)
+            }
+        })
 
         listen<"light" | "dark">("theme-change", (event) => {
             setUser(prevUser => {

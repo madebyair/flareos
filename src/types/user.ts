@@ -1,5 +1,7 @@
 import { App, UserApp } from "./app.ts"
 import { supportedLanguagesType } from "./supportedLanguages.ts"
+import { Widget } from "./widget.ts"
+import defaultWidgets from "../components/widgets/widgetList.tsx"
 
 type User = {
     "firstName": string,
@@ -12,7 +14,8 @@ type User = {
     "apps": Array<App | UserApp>,
     "theme": "light"|"dark",
     "language": supportedLanguagesType,
-    "unixUser": string
+    "unixUser": string,
+    widgets: Widget[]
 }
 
 export const defaultUser : User = {
@@ -26,7 +29,8 @@ export const defaultUser : User = {
     "apps": [],
     "theme": "light",
     "language": "en",
-    "unixUser": ""
+    "unixUser": "",
+    widgets: defaultWidgets
 }
 
 export default User
