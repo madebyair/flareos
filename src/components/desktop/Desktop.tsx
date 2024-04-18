@@ -10,6 +10,7 @@ import Button from "../../elements/Button.tsx"
 import Draggable, { DraggableEvent } from "react-draggable"
 import ClockWidget from "../widgets/clock/ClockWidget.tsx"
 import { useTranslation } from "react-i18next"
+import DesktopWidgets from "./DesktopWidgets.tsx"
 
 const Desktop = () => {
     const [user] = useAtomState(userState)
@@ -70,6 +71,7 @@ const Desktop = () => {
                     </Draggable>
                 </div>
             }
+            <DesktopWidgets />
             <div ref={ref}>
                 {/* @ts-ignore */}
                 <DesktopContextMenu context={context} hide={() => setContext({x: 0, y: 0, displayed: false})}/>
