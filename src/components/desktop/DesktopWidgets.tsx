@@ -9,6 +9,11 @@ const DesktopWidgets = () => {
     return (
         <div className="w-screen h-screen absolute top-0 z-50">
             {user.widgets.map((w) => {
+                let component: JSX.Element = <ClockWidget />
+
+                if (w.component == "clockwidget") {
+                    component = <ClockWidget />
+                }
                 return (
                     <Draggable
                         key={w.name + w.x}
@@ -19,7 +24,7 @@ const DesktopWidgets = () => {
                         }}
                         scale={1}
                     >
-                        <div><ClockWidget /></div>
+                        <div>{component}</div>
                     </Draggable>
                 )
             })}
