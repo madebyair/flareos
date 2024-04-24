@@ -7,7 +7,7 @@ const DesktopWidgets = () => {
 
 
     return (
-        <div className="w-screen h-screen absolute top-0 z-10">
+        <div className="w-screen absolute top-0 z-10" style={{height: "calc(100vh - 40px)",}}>
             {user.widgets.map((k) => {
                 return (
                     <Widget w={k} key={k.component} />

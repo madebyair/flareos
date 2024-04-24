@@ -45,6 +45,8 @@ const Widget = ({ w }: { w: WidgetType }) => {
             position={{ x: x, y: y }}
             scale={1}
             onStop={handle}
+            bounds="parent"
+            defaultClassName="w-max"
         >
             <div>{component}</div>
         </Draggable>
