@@ -15,7 +15,7 @@ const DesktopContextMenu = ({context, hide} : {context: ContextType, hide: () =>
     return (
         <>
             {context.displayed &&
-                <div className="bg-slate-300 dark:bg-zinc-950 w-56 h-28 absolute rounded-md dark:text-white" style={{
+                <div className="bg-slate-300 dark:bg-zinc-950 w-56 h-28 absolute rounded-md dark:text-white z-50" style={{
                     top: context.y,
                     left: context.x
                 }}>

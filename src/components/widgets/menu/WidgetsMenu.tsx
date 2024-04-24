@@ -36,7 +36,13 @@ const WidgetsMenu = () => {
             <div className="w-screen h-screen p-8 bg-slate-200 dark:bg-black dark:text-white select-none">
                 <h1 className="text-3xl font-bold">{t("Widgets")}</h1>
                 { /* TODO widget list here */ }
-                <Button submit={() => emit("widget-add")} label="Test add" />
+                <Button submit={() => emit("widget-add", {
+                    name: "Clock",
+                    component: "clockwidget",
+                    x: 10,
+                    y: 20,
+                    default: "clock"
+                })} label="Test add" />
             </div>
         </div>
     )

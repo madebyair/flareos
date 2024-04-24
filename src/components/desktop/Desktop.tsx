@@ -6,21 +6,18 @@ import DesktopContextMenu from "./DesktopContextMenu.tsx"
 import { useDetectClickOutside } from "react-detect-click-outside"
 import { listen } from "@tauri-apps/api/event"
 import { getCurrent } from "@tauri-apps/api/window"
-import Button from "../../elements/Button.tsx"
-import Draggable, { DraggableEvent } from "react-draggable"
-import ClockWidget from "../widgets/clock/ClockWidget.tsx"
-import { useTranslation } from "react-i18next"
 import DesktopWidgets from "./DesktopWidgets.tsx"
+import { Widget } from "../../types/widget.ts"
+import { get, set } from "../../manager/store_manager.ts"
+import User from "../../types/user.ts"
 
 const Desktop = () => {
-    const [user] = useAtomState(userState)
+    const [user, setUser] = useAtomState(userState)
     const [context, setContext] = useState({
         x: 0,
         y: 0,
         displayed: false
     })
-    const [ t ] = useTranslation()
-    const [selectPlace, setSelectPlace] = useState(false)
     const ref = useDetectClickOutside({ allowAnyKey: true, onTriggered: () => setContext({x: 0, y: 0, displayed: false}) })
 
     useEffect(() => {
@@ -34,44 +31,29 @@ const Desktop = () => {
             })
         })
 
-        listen("widget-add", () => {
-            getCurrent().setAlwaysOnTop(true)
-            setSelectPlace(true)
+        listen<Widget>("widget-add", (event) => {
+            const payload = event.payload
+            getCurrent().setFocus()
+            setUser(prev => {
+                get("users").then((r) => {
+                    const cur: unknown = r
+
+                    if (Array.isArray(cur)) {
+                        const indexToUpdate = cur.findIndex((key: User) => key.uuid === prev.uuid)
+                        if (indexToUpdate !== -1) {
+                            cur[indexToUpdate].widgets.push(payload)
+                            set("users", cur)
+                        }
+                    }
+                })
+                prev.widgets.push(payload)
+                return prev
+            })
         })
     }, [])
 
-    function event(e: DraggableEvent) {
-        if ("screenY" in e) {
-            console.log(e.screenY)
-        }
-    }
-
     return (
         <div className={"desktop-bg w-screen h-screen bg-black relative select-none overflow-hidden " + user.theme} id="desktop">
-            {selectPlace &&
-                <div className="w-screen h-screen z-[100] bg-zinc-950/40 absolute top-0 dark:text-white">
-                    <div className="flex w-screen">
-                        <div className="mx-auto flex">
-                            <h1 className="text-center mt-2 text-lg">{t("Select place for Widget")} {/* TODO get widget name */}</h1>
-                            <div className="mt-1 ml-4">
-                                <Button submit={() => {
-                                    getCurrent().setAlwaysOnTop(false)
-                                    setSelectPlace(false)
-                                }} label={t("Close")} />
-                            </div>
-                        </div>
-                    </div>
-                    <Draggable
-                        defaultPosition={{x: 0, y: 0}}
-                        onStop={(e) => event(e)}
-                        scale={1}>
-                        <div>
-                            { /* TODO get widget from payload */ }
-                            <ClockWidget />
-                        </div>
-                    </Draggable>
-                </div>
-            }
             <DesktopWidgets />
             <div ref={ref}>
                 {/* @ts-ignore */}
