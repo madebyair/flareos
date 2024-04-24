@@ -46,6 +46,31 @@ const Widget = ({ w }: { w: WidgetType }) => {
             scale={1}
             onStop={handle}
             bounds="parent"
+            onMouseDown={(event) => {
+                if (event.button == 1) {
+                    // @ts-ignore
+                    setUser((prevUser: User) => {
+                        get("users").then((r) => {
+                            const cur: unknown = r
+
+                            if (Array.isArray(cur)) {
+                                const indexToUpdate = cur.findIndex((key: User) => key.uuid === prevUser.uuid)
+                                if (indexToUpdate !== -1) {
+                                    const widgetIndex = cur[indexToUpdate].widgets.findIndex((key: WidgetType) => key.component === w.component)
+                                    delete cur[indexToUpdate].widgets[widgetIndex]
+                                    set("users", cur)
+                                }
+                            }
+                        })
+                        const index = prevUser.widgets.findIndex((key: WidgetType) => key.component === w.component)
+                        delete prevUser.widgets[index]
+                        if (prevUser == null) {
+                            return []
+                        }
+                        return prevUser
+                    })
+                }
+            }}
             defaultClassName="w-max"
         >
             <div>{component}</div>

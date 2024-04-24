@@ -24,7 +24,8 @@ const Desktop = () => {
     const ref = useDetectClickOutside({ allowAnyKey: true, onTriggered: () => setContext({x: 0, y: 0, displayed: false}) })
 
     useEffect(() => {
-        window.addEventListener("contextmenu", e => {
+        // @ts-ignore
+        document.getElementById("desktop").addEventListener("contextmenu", e => {
             e.preventDefault()
             setContext({
                 x: e.clientX,
@@ -46,7 +47,7 @@ const Desktop = () => {
     }
 
     return (
-        <div className={"desktop-bg w-screen h-screen bg-black relative select-none overflow-hidden " + user.theme}>
+        <div className={"desktop-bg w-screen h-screen bg-black relative select-none overflow-hidden " + user.theme} id="desktop">
             {selectPlace &&
                 <div className="w-screen h-screen z-[100] bg-zinc-950/40 absolute top-0 dark:text-white">
                     <div className="flex w-screen">
