@@ -57,7 +57,15 @@ const Widget = ({ w }: { w: WidgetType }) => {
                                 const indexToUpdate = cur.findIndex((key: User) => key.uuid === prevUser.uuid)
                                 if (indexToUpdate !== -1) {
                                     const widgetIndex = cur[indexToUpdate].widgets.findIndex((key: WidgetType) => key.component === w.component)
-                                    delete cur[indexToUpdate].widgets[widgetIndex]
+                                    const widgets = cur[indexToUpdate].widgets
+                                    const fixed: WidgetType[] = []
+                                    delete widgets[widgetIndex]
+                                    widgets.forEach((widget: WidgetType) => {
+                                        if (widget !== null) {
+                                            fixed.push(widget)
+                                        }
+                                    })
+                                    cur[indexToUpdate].widgets = fixed
                                     set("users", cur)
                                 }
                             }
