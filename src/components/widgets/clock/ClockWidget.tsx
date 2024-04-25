@@ -34,7 +34,7 @@ const ClockWidget = () => {
     }, [])
 
     return (
-        <div className="bg-black rounded-md w-48 h-16 flex">
+        <div className="bg-slate-300 dark:bg-black rounded-md w-48 h-16 flex">
             <h1 className="m-auto text-xl font-bold dark:text-white">{time}</h1>
         </div>
     )
