@@ -4,15 +4,10 @@ import { userState } from "../../state/currentUserState.ts"
 import { useEffect, useState } from "react"
 import DesktopContextMenu from "./DesktopContextMenu.tsx"
 import { useDetectClickOutside } from "react-detect-click-outside"
-import { listen } from "@tauri-apps/api/event"
-import { getCurrent } from "@tauri-apps/api/window"
 import DesktopWidgets from "./DesktopWidgets.tsx"
-import { Widget } from "../../types/widget.ts"
-import { get, set } from "../../manager/store_manager.ts"
-import User from "../../types/user.ts"
 
 const Desktop = () => {
-    const [user, setUser] = useAtomState(userState)
+    const [user] = useAtomState(userState)
     const [context, setContext] = useState({
         x: 0,
         y: 0,
@@ -28,26 +23,6 @@ const Desktop = () => {
                 x: e.clientX,
                 y: e.clientY,
                 displayed: true
-            })
-        })
-
-        listen<Widget>("widget-add", (event) => {
-            const payload = event.payload
-            getCurrent().setFocus()
-            setUser(prev => {
-                get("users").then((r) => {
-                    const cur: unknown = r
-
-                    if (Array.isArray(cur)) {
-                        const indexToUpdate = cur.findIndex((key: User) => key.uuid === prev.uuid)
-                        if (indexToUpdate !== -1) {
-                            cur[indexToUpdate].widgets.push(payload)
-                            set("users", cur)
-                        }
-                    }
-                })
-                prev.widgets.push(payload)
-                return prev
             })
         })
     }, [])
