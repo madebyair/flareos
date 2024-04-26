@@ -24,10 +24,9 @@ const DesktopContextMenu = ({context, hide} : {context: ContextType, hide: () =>
                             new WebviewWindow("widgets", {
                                 url: "widgets.html",
                                 title: "Widgets",
-                                minWidth: 600,
-                                minHeight: 500,
                                 width: 600,
                                 height: 500,
+                                resizable: false,
                                 visible: false
                             })
                             hide()
