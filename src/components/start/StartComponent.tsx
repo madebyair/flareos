@@ -9,6 +9,7 @@ import { WebviewWindow } from "@tauri-apps/api/webviewWindow"
 import { App } from "../../types/app"
 import embededApps from "../../apps/embededApps"
 import { invoke } from "@tauri-apps/api/core"
+import StartSearchComponent from "./StartSearchComponent.tsx"
 
 type EventResponse = {
     user: User;
@@ -99,7 +100,8 @@ const StartComponent = () => {
     return (
         <div className={user?.theme}>
             <div className="start bg-slate-200/95 dark:bg-zinc-950/95 w-screen h-screen rounded-xl select-none">
-                <div className="mx-4 pt-2 grid grid-cols-4 gap-4 justify-items-center"> {/* Modified */}
+                <StartSearchComponent />
+                <div className="mx-4 pt-2 grid grid-cols-4 gap-4 justify-items-center">
                     {apps.map(app => (
                         <div key={app.name} onClick={() => run(app.exec)} className="hover:bg-slate-300 dark:hover:bg-zinc-800 transition duration-300 rounded-md w-20 h-24 flex flex-col items-center justify-center"> {/* Modified */}
                             <div className="flex justify-center w-full">
