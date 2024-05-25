@@ -51,8 +51,8 @@ function AccountSetupLayout({ isFromAuth }: { isFromAuth?: boolean }) {
                 <div className="text-blue-500 hover:text-blue-400 text-[17px] h-min transition duration-300 mb-8 ml-8 absolute bottom-0" onClick={() => emit("component", "auth")}>{t("Go back")}</div>
             }
             {uuid !== "" &&
-                <iframe id="auth" src={"https://made-by-air.com/airos/01/auth/en/" + uuid + "/" + theme} frameBorder="0"
-                    width="800px" style={{colorScheme: "dark", borderRadius: "10px"}}></iframe>
+                <iframe id="auth" src={"https://made-by-air.com/airos/01/auth/en/" + uuid + "/" + theme}
+                    width="100%" style={{colorScheme: "dark", borderRadius: "10px"}}></iframe>
             }
         </div>
     )
