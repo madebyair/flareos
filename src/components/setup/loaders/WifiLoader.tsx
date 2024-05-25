@@ -1,9 +1,9 @@
-import { BarLoader } from "react-spinners";
-import { useTranslation } from "react-i18next";
-import { useAtomState } from "@zedux/react";
-import { setupComponent, setupNoPadding } from "../setupState.tsx";
-import { useEffect } from "react";
-import AccountSetupLogin from "../account/AccountSetupLogin.tsx";
+import { BarLoader } from "react-spinners"
+import { useTranslation } from "react-i18next"
+import { useAtomState } from "@zedux/react"
+import { setupComponent, setupNoPadding } from "../setupState.tsx"
+import { useEffect } from "react"
+import AccountSetupLayout from "../account/AccountSetupLayout.tsx"
 
 const WifiLoader = () => {
     const { t } = useTranslation()
@@ -18,7 +18,7 @@ const WifiLoader = () => {
                 console.log("air servers are up and internet connection is correct")
 
                 setTimeout(() => {
-                    setComponent(<AccountSetupLogin />)
+                    setComponent(<AccountSetupLayout />)
                 }, 700)
             } else {
                 console.log("no network detected")

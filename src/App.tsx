@@ -14,7 +14,7 @@ import { storeApp } from "./types/storeApp.ts"
 import { supportedLanguagesType } from "./types/supportedLanguages.ts"
 import isLatest from "./updater/isLatest.ts"
 import Loading from "./components/Loading.tsx"
-import { AuthLogin } from "./components/setup/account/AccountSetupLogin.tsx"
+// import { AuthLogin } from "./components/setup/account/AccountSetupLogin.tsx"
 import AccountFromAuth from "./components/setup/account/AccountFromAuth.tsx"
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
 
         listen("component", (event) => {
             if (event.payload == "authlogin") {
-                setCompoment(<AuthLogin />)
+                // setCompoment(<AuthLogin />)
             }
 
             if (event.payload == "fromauth") {
