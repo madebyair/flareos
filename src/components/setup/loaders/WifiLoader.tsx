@@ -43,7 +43,7 @@ const WifiLoader = () => {
                 />
             </div>
             <div className="flex h-full absolute top-0 w-full">
-                <span className="m-auto dark:text-white text-2xl font-bold">{t("Just one secound")}</span>
+                <span className="m-auto dark:text-white text-2xl font-bold">{t("Just one second")}</span>
             </div>
         </div>
     )
