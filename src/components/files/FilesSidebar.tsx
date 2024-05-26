@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next"
 import { get_back, go_forward } from "./files_history.ts"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons"
@@ -6,17 +5,11 @@ import { useAtomState } from "@zedux/react"
 import { currentDirState } from "./filesState.tsx"
 
 const FilesSidebar = () => {
-    const [ t ] = useTranslation()
     const [, setCurrentDir] = useAtomState(currentDirState)
 
     return (
         <div className="w-full h-screen">
-            <div className="w-full h-10 flex">
-                <div className="m-auto font-bold">
-                    {t("Files")}
-                </div>
-            </div>
-            <div className="flex h-10 w-full">
+            <div className="flex h-10 w-full p-4">
                 <div onClick={() => {
                     const back = get_back()
                     if (back !== null) {

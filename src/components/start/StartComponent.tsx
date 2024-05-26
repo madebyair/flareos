@@ -72,10 +72,11 @@ const StartComponent = () => {
             new WebviewWindow("files", {
                 url: "files.html",
                 title: "Files",
-                minWidth: 800,
-                minHeight: 600,
-                visible: false,
-                decorations: false
+                minWidth: 900,
+                minHeight: 530,
+                width: 900,
+                height: 530,
+                visible: false
             })
             break
 

@@ -13,7 +13,7 @@ const FileEntry = ({path, is_dir} : Entry) => {
     const [, setDirectory] = useAtomState(currentDirState)
 
     return (
-        <div className="flex h-12 bg-slate-400/30 dark:bg-zinc-950/70 mt-2 mb-2 rounded-md" onClick={() => {
+        <div className="flex h-12 bg-slate-400/30 dark:bg-zinc-950/20 mt-2 mb-2 rounded-md" onClick={() => {
             if (is_dir) {
                 setDirectory(path)
                 push(path)
