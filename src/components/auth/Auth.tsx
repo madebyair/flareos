@@ -34,7 +34,7 @@ const Auth = () => {
                     <div className={`w-screen h-screen backdrop-blur-md flex ${
                         inDesktop && "fadeout"
                     }`}>
-                        <div className="m-auto">
+                        <div className="m-auto bg-black p-8 text-white bg-gray-800/50 backdrop-blur-2xl rounded-xl">
                             {users.length > 0 ? (
                                 <AuthCurrentUser key={users[currentUser]["uuid"]} user={users[currentUser]}
                                     onDesktop={() => {
