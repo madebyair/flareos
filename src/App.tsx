@@ -16,6 +16,7 @@ import isLatest from "./updater/isLatest.ts"
 import Loading from "./components/Loading.tsx"
 // import { AuthLogin } from "./components/setup/account/AccountSetupLogin.tsx"
 import AccountFromAuth from "./components/setup/account/AccountFromAuth.tsx"
+import Desktop from "./components/desktop/Desktop.tsx"
 
 function App() {
     const [colorScheme] = useAtomState(colorSchemeState)
@@ -50,6 +51,10 @@ function App() {
 
             if (event.payload == "auth") {
                 setCompoment(<Auth />)
+            }
+
+            if (event.payload == "desktop") {
+                setCompoment(<Desktop />)
             }
         })
 

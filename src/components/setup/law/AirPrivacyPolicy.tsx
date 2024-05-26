@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 import Button from "../../../elements/Button.tsx"
 import { useAtomState } from "@zedux/react"
 import { setupComponent, setupNoPadding } from "../setupState.tsx"
-import AccountSetupLayout from "../account/AccountSetupLayout.tsx"
+import AccountSetup from "../account/AccountSetup.tsx"
 
 const AirTermsOfService = () => {
     const [ t ] = useTranslation()
@@ -22,7 +22,7 @@ const AirTermsOfService = () => {
                 <p className="absolute bottom-16 dark:text-white">{t("Reading and accepting this document is required to proceed.")}</p>
                 <div className="absolute bottom-0">
                     <Button submit={() => {
-                        setComponent(<AccountSetupLayout />)
+                        setComponent(<AccountSetup />)
                         setNoPadding(true)
                     }}
                     label={t("I agree")} />

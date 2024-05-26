@@ -19,7 +19,7 @@ type ChallengeType = {
     password: string
 }
 
-function AccountSetupLayout({ isFromAuth }: { isFromAuth?: boolean }) {
+function AccountSetup({ isFromAuth }: { isFromAuth?: boolean }) {
     const [ t ] = useTranslation()
     const [theme] = useAtomState(colorSchemeState)
     const [uuid, setUuid] = useState("")
@@ -58,4 +58,4 @@ function AccountSetupLayout({ isFromAuth }: { isFromAuth?: boolean }) {
     )
 }
 
-export default AccountSetupLayout
+export default AccountSetup

@@ -1,7 +1,7 @@
 import { BarLoader } from "react-spinners"
 import { useTranslation } from "react-i18next"
 import { useAtomState } from "@zedux/react"
-import { /* setupComponent, */ setupNoPadding } from "../setupState.tsx"
+import { setupComponent, /* setupComponent, */ setupNoPadding } from "../setupState.tsx"
 import { useEffect } from "react"
 import axios from "axios"
 import { invoke } from "@tauri-apps/api/core"
@@ -12,6 +12,7 @@ import { get, set } from "../../../manager/store_manager.ts"
 import { userState } from "../../../state/currentUserState.ts"
 import { colorSchemeState } from "../../../state/themeState.ts"
 import User from "../../../types/user.ts"
+import EndOfSetup from "../end/EndOfSetup.tsx"
 
 type SessionResponse = {
     status: string;
@@ -26,6 +27,7 @@ const AccountLoader = ({ uuid, secret, password }: { uuid: string, secret: strin
     const [, setNoPadding] = useAtomState(setupNoPadding)
     // const [, setComponent] = useAtomState(setupComponent)
     const [theme] = useAtomState(colorSchemeState)
+    const [, setComponent] = useAtomState(setupComponent)
     const [, setUser] = useAtomState(userState)
 
     useEffect(() => {
@@ -65,6 +67,10 @@ const AccountLoader = ({ uuid, secret, password }: { uuid: string, secret: strin
                                     user
                                 ])
                             })
+                            setTimeout(() => {
+                                setComponent(<EndOfSetup />)
+                                setNoPadding(false)
+                            }, 500)
                             // if (isFromAuth) {
                             //     emit("component", "fromauth");
                             // }
