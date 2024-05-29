@@ -9,7 +9,6 @@ pub fn create_user(name: String, uuid: String, password: String) -> String {
         } else {
             name.clone() + "1"
         };
-        println!("Frontend requested creation of new user, but it's already used, so shell will create with new name: {}", new_name);
         return create_user(new_name, uuid.clone(), password.clone());
     }
 
@@ -21,13 +20,31 @@ pub fn create_user(name: String, uuid: String, password: String) -> String {
 
     Command::new("sh")
         .arg("-c")
-        .arg(format!("rm -f /usr/airos/users/{} && mkdir -p /usr/airos/users/{}", uuid, uuid))
+        .arg(format!("useradd -M {}", name))
         .output()
-        .expect(&format!("Failed to manage user directory for {}", uuid));
+        .expect(&format!("Failed to add user {}", name));
 
     Command::new("sh")
         .arg("-c")
-        .arg(format!("useradd -M {}", name))
+        .arg(format!("mkdir /storage/{}", uuid))
+        .output()
+        .expect(&format!("Failed to add user {}", name));
+
+    Command::new("sh")
+        .arg("-c")
+        .arg(format!("setfacl -m u:{}:0 /", name))
+        .output()
+        .expect(&format!("Failed to add user {}", name));
+
+    Command::new("sh")
+        .arg("-c")
+        .arg(format!("setfacl -m u:{}:rx /usr/bin/bash", name))
+        .output()
+        .expect(&format!("Failed to add user {}", name));
+
+    Command::new("sh")
+        .arg("-c")
+        .arg(format!("setfacl -m u:{}:rwx /storage/{}", name, uuid))
         .output()
         .expect(&format!("Failed to add user {}", name));
 
