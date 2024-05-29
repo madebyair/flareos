@@ -43,7 +43,7 @@ const AccountLoader = ({ uuid, secret, password }: { uuid: string, secret: strin
                 if (typeof password === "string") {
                     const unixUser: string = removeSpecialCharacters(r.data.first_name.toLowerCase() + r.data.last_name.toLowerCase())
 
-                    invoke<string>("create_user", { name: unixUser, uuid: uuid, password }).then((unix) => {
+                    invoke<string>("create_user", { name: unixUser, uuid: r.data.uuid, password }).then((unix) => {
                         if (unix !== "") {
                             const user: User = {
                                 firstName: r.data.first_name,
