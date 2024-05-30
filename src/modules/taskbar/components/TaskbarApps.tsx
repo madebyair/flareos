@@ -1,11 +1,11 @@
 import { Key, useEffect, useState } from "react"
 import { invoke } from "@tauri-apps/api/core"
-import Window from "../../../types/window.ts";
+import Window from "../../../types/window.ts"
 import { useAtomState } from "@zedux/react"
 import useActiveWindow from "../hooks/useActiveWindow.tsx"
-import useWindows from "../hooks/useWindows.tsx";
-import { userState } from "../../../state/currentUserState.ts";
-import getIcon from "../../../manager/icon_manager.ts";
+import useWindows from "../hooks/useWindows.tsx"
+import { userState } from "../../../state/currentUserState.ts"
+import getIcon from "../../../manager/icon_manager.ts"
 
 const TaskbarApps = () => {
     const windows = useWindows()

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { invoke } from "@tauri-apps/api/core"
-import Window from "../../../types/window.ts";
+import Window from "../../../types/window.ts"
 
 type InvokeResponse = {
     windows: Array<Window>

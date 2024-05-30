@@ -1,8 +1,8 @@
 import TaskbarClock from "./TaskbarClock.tsx"
 import TaskbarAirButton from "./TaskbarAirButton.tsx"
 import { useEffect } from "react"
-import { currentMonitor } from "@tauri-apps/api/window";
-import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
+import { currentMonitor } from "@tauri-apps/api/window"
+import { WebviewWindow } from "@tauri-apps/api/webviewWindow"
 
 const Taskbar = () => {
     useEffect(() => {

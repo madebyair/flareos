@@ -1,8 +1,8 @@
-import useTime from "../hooks/useTime.tsx";
-import { useAtomState } from "@zedux/react";
-import { userState } from "../../../state/currentUserState.ts";
-import { useEffect, useState } from "react";
-import { emit } from "@tauri-apps/api/event";
+import useTime from "../hooks/useTime.tsx"
+import { useAtomState } from "@zedux/react"
+import { userState } from "../../../state/currentUserState.ts"
+import { useEffect, useState } from "react"
+import { emit } from "@tauri-apps/api/event"
 
 const TaskbarClock = () => {
     const time = useTime()
