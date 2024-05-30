@@ -1,42 +1,20 @@
-import { useEffect, useState } from "react"
+import { Key, useEffect, useState } from "react"
 import { invoke } from "@tauri-apps/api/core"
-import Window from "../../types/window.ts"
-import getIcon from "../../manager/icon_manager.ts"
+import Window from "../../../types/window.ts";
 import { useAtomState } from "@zedux/react"
-import { userState } from "../../state/currentUserState.ts"
-
-type InvokeResponse = {
-    windows: Array<Window>
-}
+import useActiveWindow from "../hooks/useActiveWindow.tsx"
+import useWindows from "../hooks/useWindows.tsx";
+import { userState } from "../../../state/currentUserState.ts";
+import getIcon from "../../../manager/icon_manager.ts";
 
 const TaskbarApps = () => {
-    const [windowsState, setWindows] = useState<Array<Window>>()
-    const [activeWindow, setActiveWindow] = useState<string>("")
+    const windows = useWindows()
+    const activeWindow = useActiveWindow()
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            invoke<string>("get_windows").then((r) => {
-                const json : InvokeResponse = JSON.parse(r)
-
-                const windows : Array<Window> = json.windows
-
-                setWindows(windows)
-            })
-
-            invoke<string>("get_active_window").then((r) => {
-                setActiveWindow(r.replace(/\s/g, ""))
-            })
-        }, 100)
-
-        return () => {
-            clearInterval(interval)
-        }
-
-    }, [])
-    if (windowsState !== undefined) {
+    if (windows !== undefined) {
         return (
             <div className="flex">
-                {windowsState.map((window, index) => (
+                {windows.map((window: Window, index: Key | null | undefined) => (
                     <TaskbarApp key={index} name={window.name} className={window.className.split(".")[1]} active={activeWindow} />
                 ))}
             </div>

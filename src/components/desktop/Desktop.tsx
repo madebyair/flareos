@@ -1,4 +1,4 @@
-import Taskbar from "../taskbar/Taskbar.tsx"
+import Taskbar from "../../modules/taskbar/components/Taskbar.tsx"
 import { useAtomState } from "@zedux/react"
 import { userState } from "../../state/currentUserState.ts"
 import { useEffect, useState } from "react"
