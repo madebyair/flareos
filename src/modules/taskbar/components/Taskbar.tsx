@@ -3,6 +3,7 @@ import TaskbarAirButton from "./TaskbarAirButton.tsx"
 import { useEffect } from "react"
 import { currentMonitor } from "@tauri-apps/api/window"
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow"
+import TaskbarApps from "./TaskbarApps.tsx"
 
 const Taskbar = () => {
     useEffect(() => {
@@ -44,6 +45,7 @@ const Taskbar = () => {
     return (
         <div className="w-screen bg-zinc-300 dark:bg-zinc-950 h-10 z-10 flex">
             <TaskbarAirButton />
+            <TaskbarApps />
             <TaskbarClock />
         </div>
     )
