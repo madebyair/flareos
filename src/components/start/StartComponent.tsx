@@ -89,6 +89,15 @@ const StartComponent = () => {
                 visible: false
             })
             break
+        case "__airos_emebed_app_discover__":
+            new WebviewWindow("discover", {
+                url: "discover.html",
+                title: "Discover",
+                minWidth: 800,
+                minHeight: 600,
+                visible: false
+            })
+            break    
         default:
             invoke("run_app", { command: command, user: user.unixUser })
 

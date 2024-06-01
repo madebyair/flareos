@@ -10,7 +10,8 @@
     "files",
     "actions",
     "store",
-    "widgets"
+    "widgets",
+    "discover"
   ],
   "permissions": [
     "path:default",

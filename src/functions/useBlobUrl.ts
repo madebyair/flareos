@@ -16,7 +16,7 @@ const useBlobUrl = (imageUrl: string) => {
                 url = URL.createObjectURL(data) // create a "blob URL" (lasts per session)
                 sessionStorage.setItem(imageUrl, url) // save in session storage
             }
-            setBlobUrl(url) // set in state
+            setBlobUrl(url) // set in states
         }
 
         fetchData()

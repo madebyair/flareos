@@ -24,6 +24,12 @@ const embededApps : Array<App> = [
         "description": "airstore is app which allows you to download any app.",
         "exec": "__airos_emebed_app_store__",
         "icon": "icons://store.webp"
+    },
+    {
+        "name": "Discover",
+        "description": "Discover your computer.",
+        "exec": "__airos_emebed_app_discover__",
+        "icon": "icons://discover.webp"
     }
 ]
 
