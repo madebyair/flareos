@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api/core"
 import axios, { AxiosResponse } from "axios"
-import packageJson from "../../package.json"
+import packageJson from "../../../package.json"
 
 type Response = {
     status: string,
