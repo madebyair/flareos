@@ -1,6 +1,6 @@
-import Button from "../../../elements/Button.tsx"
+import Button from "../../../../elements/Button.tsx"
 import { Dispatch, SetStateAction } from "react"
-import { BluetoothDevice } from "../../../types/bluetooth.ts"
+import { BluetoothDevice } from "../../../../types/bluetooth.ts"
 import { useTranslation } from "react-i18next"
 
 const BluetoothPopup = ({hide, device} : {hide: Dispatch<SetStateAction<boolean>>, device: BluetoothDevice}) => {

@@ -5,7 +5,7 @@ import { useAtomState } from "@zedux/react"
 import { actionsComponent } from "./actionsState.tsx"
 import { useEffect, useState } from "react"
 import { invoke } from "@tauri-apps/api/core"
-import { MediaObject, parseStringToObject } from "../../manager/speaker_manager.ts"
+import { MediaObject, parseStringToObject } from "../../../manager/speaker_manager.ts"
 
 const FullMixer = () => {
     const [ t ] = useTranslation()

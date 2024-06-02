@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import { useAtomState } from "@zedux/react"
 import { actionsComponent } from "./actionsState.tsx"
-import { parseStringToObject } from "../../manager/speaker_manager.ts"
+import { parseStringToObject } from "../../../manager/speaker_manager.ts"
 import FullMixer from "./FullMixer.tsx"
 
 const ActionsMixer = () => {

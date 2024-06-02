@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
-import User, { defaultUser } from "../../types/user.ts"
+import User, { defaultUser } from "../../../types/user.ts"
 import { listen } from "@tauri-apps/api/event"
 import { getCurrent } from "@tauri-apps/api/window"
-import "../../assets/css/App.css"
+import "../../../assets/css/App.css"
 import { faMoon, faPalette, faPlane, faShare, faWifi } from "@fortawesome/free-solid-svg-icons"
 import ActionsButton from "./ActionsButton.tsx"
-import { disableNightLight, enableNightLight } from "../../manager/nightlight/setNightLight.ts"
-import isNightLight from "../../manager/nightlight/isNightLight.ts"
+import { disableNightLight, enableNightLight } from "../../../manager/nightlight/setNightLight.ts"
+import isNightLight from "../../../manager/nightlight/isNightLight.ts"
 import ActionsMixer from "./ActionsMixer.tsx"
 import { useAtomState } from "@zedux/react"
 import { invoke } from "@tauri-apps/api/core"
-import "../../i18n.ts"
+import "../../../i18n.ts"
 import { useTranslation } from "react-i18next"
 import { actionsComponent } from "./actionsState.tsx"
 import ActionsBluetooth from "./bluetooth/ActionsBluetooth.tsx"
@@ -48,7 +48,7 @@ const ActionsMenu = () => {
     const [t, i18n] = useTranslation()
 
     useEffect(() => {
-        listen<EventResponse>("actions-display-event", (event) => {
+        listen<EventResponse>("components-display-event", (event) => {
             setUser(event.payload.user)
             i18n.changeLanguage(event.payload.user.language)
 

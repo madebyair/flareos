@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 import { useEffect, useState } from "react"
 import BluetoothPopup from "./BluetoothPopup.tsx"
 import { invoke } from "@tauri-apps/api/core"
-import { BluetoothDevice, transformBluetooth } from "../../../types/bluetooth.ts"
+import { BluetoothDevice, transformBluetooth } from "../../../../types/bluetooth.ts"
 import "./spinner.css"
 
 const ActionsBluetooth = () => {
