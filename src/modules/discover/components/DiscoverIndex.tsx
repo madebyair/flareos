@@ -4,6 +4,9 @@ import { useTranslation } from "react-i18next"
 import { emit, listen } from "@tauri-apps/api/event"
 import { discoverComponent } from "../states/discoverComponent.tsx"
 import { useAtomState } from "@zedux/react"
+import "../../../i18n.ts"
+import "../../../assets/css/App.css"
+import DiscoverSidebar from "./DiscoverSidebar.tsx"
 
 const DiscoverIndex = () => {
     const [user, setUser] = useState<User>(defaultUser)
@@ -33,8 +36,13 @@ const DiscoverIndex = () => {
 
     return (
         <div className={user.theme}>
-            <div className="w-screen h-screen p-8 bg-slate-200 dark:bg-black dark:text-white select-none">
-                {component}
+            <div className="w-screen h-screen p-8 bg-slate-200 dark:bg-black dark:text-white select-none overflow-hidden">
+                <div className="w-1/3 h-full">
+                    <DiscoverSidebar />
+                </div>
+                <div className="w-2/3 h-full">
+                    {component}
+                </div>
             </div>
         </div>
     )
