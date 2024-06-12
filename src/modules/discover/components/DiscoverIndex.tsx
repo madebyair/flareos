@@ -36,7 +36,7 @@ const DiscoverIndex = () => {
 
     return (
         <div className={user.theme}>
-            <div className="w-screen h-screen p-8 bg-slate-200 dark:bg-black dark:text-white select-none overflow-hidden">
+            <div className="w-screen h-screen p-8 bg-slate-200 dark:bg-black dark:text-white select-none flex">
                 <div className="w-1/3 h-full">
                     <DiscoverSidebar />
                 </div>
