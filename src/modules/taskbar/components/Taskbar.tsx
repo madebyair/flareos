@@ -1,5 +1,5 @@
 import TaskbarClock from "./TaskbarClock.tsx"
-import TaskbarAirButton from "./TaskbarAirButton.tsx"
+import TaskbarAirButton from "./TaskbarFlareButton.tsx"
 import { useEffect } from "react"
 import { currentMonitor } from "@tauri-apps/api/window"
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow"
@@ -12,7 +12,7 @@ const Taskbar = () => {
                 const height = result.size.height - 655
 
                 new WebviewWindow("start", {
-                    title: "__airos_start_menu__",
+                    title: "__FlareOS_start_menu__",
                     url: "start.html",
                     x: 50,
                     y: height,
@@ -26,7 +26,7 @@ const Taskbar = () => {
                 })
 
                 new WebviewWindow("actions", {
-                    title: "__airos_actions_menu__",
+                    title: "__FlareOS_actions_menu__",
                     url: "actions.html",
                     x: result?.size.width - 580,
                     y: height + 200,

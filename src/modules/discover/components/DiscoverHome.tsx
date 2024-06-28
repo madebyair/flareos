@@ -20,7 +20,7 @@ const DiscoverHome = () => {
                             <img src={l1} alt="" className="opacity-80 brightness-150 rounded-[5px]" />
                         </div>
                         <div className="h-1/2 w-full">
-                            <p className="mt-2 font-bold">{t("Welcome to Airos")}</p>
+                            <p className="mt-2 font-bold">{t("Welcome to FlareOS")}</p>
                         </div>
                     </div>
                 </div>

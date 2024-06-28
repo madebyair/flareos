@@ -50,7 +50,7 @@ const StartComponent = () => {
 
     function run(command: string) {
         switch (command) {
-        case "__airos_emebed_app_terminal__":
+        case "__FlareOS_emebed_app_terminal__":
             new WebviewWindow("terminal", {
                 url: "terminal.html",
                 title: "Terminal",
@@ -59,7 +59,7 @@ const StartComponent = () => {
                 visible: false
             })
             break
-        case "__airos_emebed_app_settings__":
+        case "__FlareOS_emebed_app_settings__":
             new WebviewWindow("settings", {
                 url: "settings.html",
                 title: "Settings",
@@ -68,7 +68,7 @@ const StartComponent = () => {
                 visible: false
             })
             break
-        case "__airos_emebed_app_files__":
+        case "__FlareOS_emebed_app_files__":
             new WebviewWindow("files", {
                 url: "files.html",
                 title: "Files",
@@ -80,7 +80,7 @@ const StartComponent = () => {
             })
             break
 
-        case "__airos_emebed_app_store__":
+        case "__FlareOS_emebed_app_store__":
             new WebviewWindow("store", {
                 url: "store.html",
                 title: "Store",
@@ -89,7 +89,7 @@ const StartComponent = () => {
                 visible: false
             })
             break
-        case "__airos_emebed_app_discover__":
+        case "__FlareOS_emebed_app_discover__":
             new WebviewWindow("discover", {
                 url: "discover.html",
                 title: "Discover",

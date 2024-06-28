@@ -1,6 +1,6 @@
 import { Store } from "@tauri-apps/plugin-store"
 
-export const store = new Store("/usr/airos/data.dat")
+export const store = new Store("/usr/flareos/data.dat")
 
 export function get(key: string) {
     return store.get(key)

@@ -17,7 +17,7 @@ pub fn get_icon(
       let path = binding.replace("icons://", "").replace("/", "");
 
 
-      let entries = fs::read_dir("/usr/airos/icons")?;
+      let entries = fs::read_dir("/usr/flareos/icons")?;
       let mut found = false;
 
       for entry in entries {
@@ -34,7 +34,7 @@ pub fn get_icon(
         return Ok(ResponseBuilder::new().status(404).body(Vec::new())?);
       }
 
-      let mut file = std::fs::File::open(format!("/usr/airos/icons/{}", &path))?;
+      let mut file = std::fs::File::open(format!("/usr/flareos/icons/{}", &path))?;
 
       let len = {
         let old_pos = file.stream_position()?;

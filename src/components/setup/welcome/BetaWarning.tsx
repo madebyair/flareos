@@ -44,11 +44,11 @@ export default function BetaWarning() {
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-white"
                                     >
-                                        {t("You are now using beta of airos")}
+                                        {t("You are now using beta of FlareOS")}
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         <p className="text-sm text-gray-500">
-                                            {t("You are currently using the beta version of airos. This is associated with a large number of bugs and system instability. Currently, no stable version of the system has been released. When we release the stable release, you will need to download an update package approximately ~2GB in size. We do not currently recommend using this system on your main computer.")}
+                                            {t("You are currently using the beta version of FlareOS. This is associated with a large number of bugs and system instability. Currently, no stable version of the system has been released. When we release the stable release, you will need to download an update package approximately ~2GB in size. We do not currently recommend using this system on your main computer.")}
                                             <br /><b className="text-white">{t("BAD THINGS MAY HAPPEN IF YOU DON'T READ THIS")}</b>
                                         </p>
                                     </div>

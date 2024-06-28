@@ -21,9 +21,9 @@ const TaskbarClock = () => {
     }
 
     return (
-        <div className="absolute mx-12 right-0 text-white h-10 flex">
+        <div className="absolute mx-12 right-0 text-gray-500 hover:text-black hover:dark:text-gray-100 h-10 flex">
             <div
-                className="h-8 w-24 my-auto flex rounded-md hover:bg-zinc-400 dark:hover:bg-zinc-800 transition duration-300"
+                className="h-8 w-24 my-auto flex rounded-md hover:bg-zinc-400 dark:hover:bg-zinc-800 transition"
                 onClick={() => onActionsClick()}>
                 <span className="m-auto">{time}</span>
             </div>

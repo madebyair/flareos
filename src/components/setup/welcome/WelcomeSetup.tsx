@@ -30,7 +30,7 @@ const WelcomeSetup = () => {
             <div className="relative h-full">
                 <h1 className="text-5xl dark:text-white">{t("Welcome!")}</h1>
                 <h2 className="text-zinc-700 dark:text-zinc-300 mt-4 w-72">
-                    {t("Welcome to Airos! Before we begin, let's connect to the network and log in to your air account.")}
+                    {t("Welcome to FlareOS! Before we begin, let's connect to the network and log in to your air account.")}
                 </h2>
                 <div className="absolute bottom-0 w-full">
                     <div className="flex">

@@ -7,8 +7,8 @@ const InformationHeader = () => {
         <div className="w-full h-32 rounded-md bg-slate-400/30 dark:bg-zinc-900 flex">
             <div className="h-32 w-32 flex">
                 <div className="m-auto">
-                    <img src="icons://airos-white.webp" alt="" className="hidden dark:block" draggable={false}/>
-                    <img src="icons://airos-black.webp" alt="" className="dark:hidden" draggable={false} />
+                    <img src="icons://FlareOS-white.webp" alt="" className="hidden dark:block" draggable={false}/>
+                    <img src="icons://FlareOS-black.webp" alt="" className="dark:hidden" draggable={false} />
                 </div>
             </div>
             <div className="mt-auto mb-auto ml-4">

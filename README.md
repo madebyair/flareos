@@ -1,7 +1,7 @@
-# The air operating system
-*aka airos*
+# The Flare operating system
+*aka FlareOS*
 
-airos is an innovative operating system designed for seamless performance, enhanced security, and personalized user experience. With Airos, you can unlock a new level of productivity and efficiency.
+FlareOS is an innovative operating system designed for seamless performance, enhanced security, and personalized user experience. With FlareOS, you can unlock a new level of productivity and efficiency.
 
 Features:
 - Seamless performance
@@ -9,6 +9,6 @@ Features:
 - Personalized customization options
 - Intuitive user interface
 
-Get started with Airos today and discover the future of computing!
+Get started with FlareOS today and discover the future of computing!
 
 For more information and installation instructions, please visit our website: Soon (TM)

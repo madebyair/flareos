@@ -51,7 +51,7 @@ const SettingsLayout = () => {
                         <SettingsSidebarItem name={t("General")} icon={faGear}
                             description={t("Language ・ Date and time")}
                             component={<SettingsGeneral />}/>
-                        <SettingsSidebarItem name={t("Information")} icon={faInfo} description={t("Airos Version ・ Updates")}
+                        <SettingsSidebarItem name={t("Information")} icon={faInfo} description={t("FlareOS Version ・ Updates")}
                             component={<SettingsInformation />} />
                     </div>
                 </div>

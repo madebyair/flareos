@@ -20,7 +20,7 @@ const AccountFromAuth = () => {
                         <div className="w-screen h-screen backdrop-blur-md flex">
                             <div className="w-[800px] h-[500px] bg-slate-200 dark:bg-black m-auto rounded-xl p-16 relative">
                                 <h1 className="text-4xl font-bold">{t("Welcome")} {user.firstName}</h1>
-                                <h2>{t("Welcome to Airos! Below we provide you with a list of things you can do at the beginning of your Airos adventure. Clicking Continue will take you to the Airos desktop.")}</h2>
+                                <h2>{t("Welcome to FlareOS! Below we provide you with a list of things you can do at the beginning of your FlareOS adventure. Clicking Continue will take you to the FlareOS desktop.")}</h2>
                                 <div className="absolute bottom-16 right-16">
                                     <Button label="Continue" submit={() => {
                                         setInDesktop(true)

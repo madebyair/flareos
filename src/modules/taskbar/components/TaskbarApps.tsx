@@ -39,7 +39,7 @@ const TaskbarApp = ({name, className, active} : {name: string, className: string
         }
     }, [className, user])
 
-    if (name == "airos" || name == "__airos_start_menu__" || name == "__airos_actions_menu__") {
+    if (name == "FlareOS" || name == "__FlareOS_start_menu__" || name == "__FlareOS_actions_menu__") {
         return
     }
 

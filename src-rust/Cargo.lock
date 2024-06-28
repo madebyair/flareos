@@ -27,27 +27,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "airos"
-version = "1.0.0"
-dependencies = [
- "airos_wmctrl",
- "bcrypt",
- "http",
- "http-range",
- "nix 0.28.0",
- "percent-encoding",
- "portable-pty",
- "serde",
- "serde_json",
- "tauri",
- "tauri-build",
- "tauri-plugin",
- "tauri-plugin-shell",
- "tauri-plugin-store",
- "uuid",
-]
-
-[[package]]
 name = "airos_wmctrl"
 version = "0.1.8"
 source = "git+https://github.com/madebyair/airos-wmctrl#af49f13b7b836f81793568b3a2c25d15273b0602"
@@ -790,6 +769,27 @@ dependencies = [
  "libc",
  "thiserror",
  "winapi",
+]
+
+[[package]]
+name = "flareos"
+version = "1.0.0"
+dependencies = [
+ "airos_wmctrl",
+ "bcrypt",
+ "http",
+ "http-range",
+ "nix 0.28.0",
+ "percent-encoding",
+ "portable-pty",
+ "serde",
+ "serde_json",
+ "tauri",
+ "tauri-build",
+ "tauri-plugin",
+ "tauri-plugin-shell",
+ "tauri-plugin-store",
+ "uuid",
 ]
 
 [[package]]
