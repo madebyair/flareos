@@ -125,6 +125,7 @@ fn main() {
         })
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_store::Builder::default().build())
+        .plugin(tauri_plugin_global_shortcut::Builder::new().build())
         .manage(TerminalState {
                     pty_pair: Arc::new(AsyncMutex::new(pty_pair)),
                     writer: Arc::new(AsyncMutex::new(writer)),

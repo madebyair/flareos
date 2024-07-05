@@ -34,6 +34,7 @@
     "window:allow-close",
     "window:allow-start-dragging",
     "window:allow-set-always-on-top",
-    "window:allow-set-focus"
+    "window:allow-set-focus",
+    "global-shortcut:allow-register"
   ]
 }
