@@ -22,7 +22,7 @@ const AirTermsOfService = () => {
                 <p className="absolute bottom-16 dark:text-white">{t("Reading and accepting this document is required to proceed.")}</p>
                 <div className="absolute bottom-0">
                     <Button submit={() => {
-                        setComponent(<AccountSetup />)
+                        setComponent(<AccountSetup isFromAuth={false} />)
                         setNoPadding(true)
                     }}
                     label={t("I agree")} />

@@ -6,6 +6,9 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { setupComponent } from "../setupState.tsx"
 import AccountLoader from "../loaders/AccountLoader.tsx"
+import { userState } from "../../../state/currentUserState.ts"
+import embededApps from "../../../apps/embededApps.ts"
+import defaultWidgets from "../../../components/widgets/widgetList.tsx"
 
 type ResponseType = {
     status: string // status: "success" hehe
@@ -19,11 +22,12 @@ type ChallengeType = {
     password: string
 }
 
-function AccountSetup({ isFromAuth }: { isFromAuth?: boolean }) {
+function AccountSetup({ isFromAuth }: { isFromAuth: boolean }) {
     const [ t ] = useTranslation()
     const [theme] = useAtomState(colorSchemeState)
     const [uuid, setUuid] = useState("")
     const [, setComponent] = useAtomState(setupComponent)
+    const [, setUser] = useAtomState(userState)
 
     useEffect(() => {
         axios.post<ResponseType>("https://api.made-by-air.com/challenge").then((r) => {
@@ -37,7 +41,25 @@ function AccountSetup({ isFromAuth }: { isFromAuth?: boolean }) {
                 params: { uuid }
             }).then((r) => {
                 if (r.data.state == "resolved") {
-                    setComponent(<AccountLoader uuid={r.data.session_uuid} secret={r.data.session_secret} password={r.data.password} />)
+                    if (isFromAuth) {
+                        setUser({
+                            firstName: "",
+                            lastName: "",
+                            email: "",
+                            uuid: "",
+                            sessionUuid: r.data.session_uuid,
+                            sessionSecret: r.data.session_secret,
+                            password: r.data.password,
+                            apps: embededApps,
+                            theme: "dark",
+                            language: "en",
+                            unixUser: "",
+                            widgets: defaultWidgets
+                        })
+                        emit("component", "authlogin_loader")
+                    } else {
+                        setComponent(<AccountLoader isFromAuth={false} uuid={r.data.session_uuid} secret={r.data.session_secret} password={r.data.password} />)
+                    }
                 }
             })
         }, 1000)
@@ -51,7 +73,7 @@ function AccountSetup({ isFromAuth }: { isFromAuth?: boolean }) {
                 <div className="text-blue-500 hover:text-blue-400 text-[17px] h-min transition duration-300 mb-8 ml-8 absolute bottom-0" onClick={() => emit("component", "auth")}>{t("Go back")}</div>
             }
             {uuid !== "" &&
-                <iframe id="auth" src={"https://made-by-air.com/FlareOS/01/auth/en/" + uuid + "/" + theme}
+                <iframe id="auth" src={"https://made-by-air.com/flare/01/auth/en/" + uuid + "/" + `${isFromAuth ? "dark" : theme}`}
                     width="100%" style={{colorScheme: "dark", borderRadius: "10px"}}></iframe>
             }
         </div>

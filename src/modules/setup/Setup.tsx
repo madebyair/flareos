@@ -1,9 +1,9 @@
-import { setupComponent, setupNoPadding } from "./setupState.tsx";
-import { useAtomState } from "@zedux/react";
+import { setupComponent, setupNoPadding } from "./setupState.tsx"
+import { useAtomState } from "@zedux/react"
 
 const Setup = () => {
-    const [component] = useAtomState(setupComponent);
-    const [noPadding] = useAtomState(setupNoPadding);
+    const [component] = useAtomState(setupComponent)
+    const [noPadding] = useAtomState(setupNoPadding)
 
     return (
         <div className="w-screen h-screen flex select-none">
@@ -17,7 +17,7 @@ const Setup = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Setup;
+export default Setup

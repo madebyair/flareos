@@ -1,11 +1,11 @@
 import "./assets/css/App.css"
-import Setup from "./components/setup/Setup.tsx"
+import Setup from "./modules/setup/Setup.tsx"
 import { useAtomState } from "@zedux/react"
 import { colorSchemeState } from "./state/themeState.ts"
 import "./i18n"
 import { useEffect, useState } from "react"
 import { get, set } from "./manager/store_manager.ts"
-import Auth from "./components/auth/Auth.tsx"
+import Auth from "./modules/auth/Auth.tsx"
 import { emit, listen } from "@tauri-apps/api/event"
 import { userState } from "./state/currentUserState.ts"
 import User from "./types/user.ts"
@@ -14,9 +14,11 @@ import { storeApp } from "./types/storeApp.ts"
 import { supportedLanguagesType } from "./types/supportedLanguages.ts"
 import isLatest from "./modules/updater/isLatest.ts"
 import Loading from "./components/Loading.tsx"
-// import { AuthLogin } from "./components/setup/account/AccountSetupLogin.tsx"
-import AccountFromAuth from "./components/setup/account/AccountFromAuth.tsx"
+import AccountFromAuth from "./modules/setup/account/AccountFromAuth.tsx"
 import Desktop from "./components/desktop/Desktop.tsx"
+import AddPersonSetup from "./modules/setup/account/AddPersonSetup.tsx"
+import { AccountFailed } from "./modules/setup/loaders/AccountLoader.tsx"
+import AccountLoaderFromAuth from "./modules/setup/account/AccountLoaderFromAuth.tsx"
 
 function App() {
     const [colorScheme] = useAtomState(colorSchemeState)
@@ -42,7 +44,7 @@ function App() {
 
         listen("component", (event) => {
             if (event.payload == "authlogin") {
-                // setCompoment(<AuthLogin />)
+                setCompoment(<AddPersonSetup />)
             }
 
             if (event.payload == "fromauth") {
@@ -55,6 +57,14 @@ function App() {
 
             if (event.payload == "desktop") {
                 setCompoment(<Desktop />)
+            }
+
+            if (event.payload == "authlogin_failed") {
+                setCompoment(<AccountFailed />)
+            }
+
+            if (event.payload == "authlogin_loader") {
+                setCompoment(<AccountLoaderFromAuth />)
             }
         })
 
