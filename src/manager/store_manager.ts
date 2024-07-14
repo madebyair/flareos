@@ -7,13 +7,13 @@ export function get(key: string) {
 }
 
 export function set(key: string, value : unknown) {
-    return store.set(key, value).then(() => {
+    return void store.set(key, value).then(() => {
         save()
     })
 }
 
 export function save() {
-    store.save()
+    void store.save()
 
     return
 }

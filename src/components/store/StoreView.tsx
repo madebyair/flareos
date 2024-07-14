@@ -47,7 +47,7 @@ const StoreView = ({app} : {app: string}) => {
     }, [app])
 
     useEffect(() => {
-        listen<string>("installed", (r) => {
+        void listen<string>("installed", (r) => {
             if (r.payload == app) {
                 setIsInstalling(false)
                 setIsInstalled(true)
@@ -57,7 +57,7 @@ const StoreView = ({app} : {app: string}) => {
             }
         })
 
-        listen<string>("uninstalled", (r) => {
+        void listen<string>("uninstalled", (r) => {
             if (r.payload == app) {
                 setIsUninstalling(false)
                 setIsInstalled(false)
@@ -86,17 +86,17 @@ const StoreView = ({app} : {app: string}) => {
                             {!installing && !isInstalled &&
                                 <Button submit={() => {
                                     setIsInstalling(true)
-                                    emit("app-install", appDetalis)
+                                    void emit("app-install", appDetalis)
                                 }} label={t("Install")} />
                             }
                             {isInstalled && !uninstalling &&
                                 <>
                                     <Button submit={() => {
-                                        invoke("run_app", { command: exec, user: user.unixUser })
+                                        void invoke("run_app", { command: exec, user: user.unixUser })
                                     }} label={t("Run")} />
                                     <Button submit={() => {
                                         setIsUninstalling(true)
-                                        emit("app-uninstall", appDetalis)
+                                        void emit("app-uninstall", appDetalis)
                                     }} label={t("Uninstall")} />
                                 </>
                             }

@@ -9,13 +9,13 @@ const TaskbarFlareButton = () => {
     const [user] = useAtomState(userState)
 
     useEffect(() => {
-        listen<undefined>("start-hide-request", () => {
+        void listen<undefined>("start-hide-request", () => {
             setIsStartDisplayed(false)
         })
     }, [])
 
     useEffect(() => {
-        emit("start-display-event", {
+        void emit("start-display-event", {
             user: user,
             current: isStartDisplayed
         })

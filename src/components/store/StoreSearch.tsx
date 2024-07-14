@@ -29,7 +29,7 @@ const StoreSearch = ({input, setInput} : {input: string, setInput: Dispatch<SetS
     }
 
     useEffect(() => {
-        handleSearch()
+        void handleSearch()
     }, [input])
 
     const [, setComponent] = useAtomState(storeComponent)

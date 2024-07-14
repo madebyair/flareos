@@ -15,9 +15,9 @@ const DesktopWidgets = () => {
 
     useEffect(() => {
         setWidgets(user.widgets)
-        listen<WidgetType>("widget-add", (event) => {
+        void listen<WidgetType>("widget-add", (event) => {
             const payload = event.payload
-            getCurrent().setFocus()
+            void getCurrent().setFocus()
             setUser(prev => {
                 get("users").then((r) => {
                     const cur: unknown = r

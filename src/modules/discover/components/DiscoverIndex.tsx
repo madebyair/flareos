@@ -14,14 +14,14 @@ const DiscoverIndex = () => {
     const [component] = useAtomState(discoverComponent)
 
     useEffect(() => {
-        emit("user-request")
+        void emit("user-request")
 
-        listen<User>("user-response", (r) => {
+        void listen<User>("user-response", (r) => {
             setUser(r.payload)
-            i18n.changeLanguage(r.payload.language)
+            void i18n.changeLanguage(r.payload.language)
         })
 
-        listen<"light" | "dark">("theme-change", (event) => {
+        void listen<"light" | "dark">("theme-change", (event) => {
             setUser(prevUser => ({
                 ...prevUser,
                 theme: event.payload

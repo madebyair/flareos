@@ -1,9 +1,9 @@
 import { register, unregisterAll } from "@tauri-apps/plugin-global-shortcut"
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow"
 
-unregisterAll()
+void unregisterAll()
 
-register("Super+S", () => {
+void register("Super+S", () => {
     new WebviewWindow("settings", {
         url: "settings.html",
         title: "Settings",

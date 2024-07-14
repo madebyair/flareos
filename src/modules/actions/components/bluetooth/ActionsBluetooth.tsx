@@ -17,7 +17,7 @@ const ActionsBluetooth = () => {
     const [devices, setDevices] = useState<BluetoothDevice[]>()
 
     useEffect(() => {
-        invoke("scan_on")
+        void invoke("scan_on")
 
         invoke<string>("get_connected_devices").then((r) => {
             setConnected(transformBluetooth(JSON.parse(r), "connected"))

@@ -42,7 +42,7 @@ function App() {
             window.addEventListener("contextmenu", e => e.preventDefault())
         }
 
-        listen("component", (event) => {
+        void listen("component", (event) => {
             if (event.payload == "authlogin") {
                 setCompoment(<AddPersonSetup />)
             }
@@ -68,7 +68,7 @@ function App() {
             }
         })
 
-        listen<"light" | "dark">("theme-change", (event) => {
+        void listen<"light" | "dark">("theme-change", (event) => {
             setUser(prevUser => {
                 get("users").then((r) => {
                     const cur: unknown = r
@@ -88,7 +88,7 @@ function App() {
             })
         })
 
-        listen<supportedLanguagesType>("language-change", (event) => {
+        void listen<supportedLanguagesType>("language-change", (event) => {
             setUser(prevUser => {
                 get("users").then((r) => {
                     const cur: unknown = r
@@ -108,16 +108,16 @@ function App() {
             })
         })
 
-        listen("user-request", () => {
+        void listen("user-request", () => {
             setUser(prevUser => {
-                emit("user-response", prevUser)
+                void emit("user-response", prevUser)
                 return {
                     ...prevUser
                 }
             })
         })
 
-        listen<storeApp>("app-install", (e) => {
+        void listen<storeApp>("app-install", (e) => {
             const app = e.payload
             
             install(app, user.uuid).then(r => {
@@ -146,7 +146,7 @@ function App() {
             })
         })
 
-        listen<storeApp>("app-uninstall", (e) => {
+        void listen<storeApp>("app-uninstall", (e) => {
             const app = e.payload
             
             uninstall(app).then(() => {
@@ -176,7 +176,7 @@ function App() {
             })
         })
 
-        isLatest()
+        void isLatest()
     }, [])
 
 

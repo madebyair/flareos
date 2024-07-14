@@ -54,7 +54,7 @@ const ActionsMixer = () => {
     function onChange(event : ChangeEvent<HTMLInputElement>) {
         // @ts-ignore
         setVolume(event.target.value)
-        invoke("set_current_volume", { volume: event.target.value + "%" })
+        void invoke("set_current_volume", { volume: event.target.value + "%" })
     }
 
     return (

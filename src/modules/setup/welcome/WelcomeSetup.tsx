@@ -1,10 +1,10 @@
-import Button from "../../../elements/Button.tsx";
-import Toggle from "../../../elements/Toggle.tsx";
-import { useState } from "react";
-import { useAtomState } from "@zedux/react";
-import { colorSchemeState } from "../../../state/themeState.ts";
-import { useTranslation } from "react-i18next";
-import BetaWarning from "./BetaWarning.tsx";
+import Button from "../../../elements/Button.tsx"
+import Toggle from "../../../elements/Toggle.tsx"
+import { useState } from "react"
+import { useAtomState } from "@zedux/react"
+import { colorSchemeState } from "../../../state/themeState.ts"
+import { useTranslation } from "react-i18next"
+import BetaWarning from "./BetaWarning.tsx"
 
 const WelcomeSetup = () => {
     const [enabled, setEnabled] = useState(false)
@@ -16,9 +16,9 @@ const WelcomeSetup = () => {
     function trigger() {
         console.log("trigger")
         if (!enabled) {
-            setThemeScheme("dark");
+            setThemeScheme("dark")
         } else {
-            setThemeScheme("light");
+            setThemeScheme("light")
         }
     }
 
@@ -43,7 +43,7 @@ const WelcomeSetup = () => {
                 </div>
             </div>
         </>
-    );
-};
+    )
+}
 
-export default WelcomeSetup;
+export default WelcomeSetup

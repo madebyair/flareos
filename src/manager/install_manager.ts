@@ -23,13 +23,13 @@ export async function install(app: storeApp, user: string) : Promise<UserApp | n
     const icon = await invoke("download_icon", { icon: app.icon })
 
     if (app.source == "snap") {
-        invoke("install_snap", { package: app.source_id })
+        await invoke("install_snap", { package: app.source_id })
         await listen("install_complete__" + app.source_id, () => {
             console.log("install complete")
             emit("installed", app.uuid)
         })
     } else if (app.source == "deb") {
-        invoke("install_deb", { package: app.source_id })
+        await invoke("install_deb", { package: app.source_id })
 
         await listen("install_complete_deb", (r) => {
             if (r.payload == app.source_id) {
@@ -63,7 +63,7 @@ export async function uninstall(app: storeApp){
     console.log("Uninstalling " + app.name)
 
     if (app.source == "snap") {
-        invoke("uninstall_snap", { package: app.source_id })
+        await invoke("uninstall_snap", { package: app.source_id })
         await listen("uninstall_complete__" + app.source_id, () => {
             console.log("uninstall complete")
             emit("uninstalled", app.uuid)

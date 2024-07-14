@@ -11,14 +11,14 @@ const WidgetsMenu = () => {
     const [t, i18n] = useTranslation()
 
     useEffect(() => {
-        emit("user-request")
+        void emit("user-request")
 
-        listen<User>("user-response", (r) => {
+        void listen<User>("user-response", (r) => {
             setUser(r.payload)
-            i18n.changeLanguage(r.payload.language)
+            void i18n.changeLanguage(r.payload.language)
         })
 
-        listen<"light" | "dark">("theme-change", (event) => {
+        void listen<"light" | "dark">("theme-change", (event) => {
             setUser(prevUser => ({
                 ...prevUser,
                 theme: event.payload
@@ -38,7 +38,7 @@ const WidgetsMenu = () => {
                 <div className="w-full relative flex mt-6">
                     <div
                         className="absolute left-0 w-5/12 p-2 hover:bg-slate-400/50 dark:hover:bg-zinc-900/95 rounded-md transition duration-300" onClick={() => {
-                            emit("widget-add", {
+                            void emit("widget-add", {
                                 name: "Clock",
                                 component: "clockwidget",
                                 x: 10,
@@ -46,7 +46,7 @@ const WidgetsMenu = () => {
                                 default: "clock"
                             })
 
-                            getCurrent().close()
+                            void getCurrent().close()
                         }}>
                         <div
                             className="bg-gradient-to-r from-purple-900/70 via-purple-700/70 to-purple-500/70 h-24 rounded-xl flex">

@@ -90,7 +90,7 @@ const Speaker = ({name, id} : {name: string, id: number}) => {
 
     return (
         <div className={cls} onClick={() => {
-            invoke("set_current_sink", { id: String(id) })
+            void invoke("set_current_sink", { id: String(id) })
         }}>
             <div className="h-10 w-10 flex">
                 <div className="m-auto">

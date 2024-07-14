@@ -41,7 +41,7 @@ const Auth = () => {
                                         setInDesktop(true)
                                         setUser(users[currentUser])
                                         setTimeout(() => setHide(true), 800)
-                                        invoke("add_permissions", { user: users[currentUser].unixUser })
+                                        void invoke("add_permissions", { user: users[currentUser].unixUser })
                                     }}/>
                             ) : <span>Loading</span>}
                         </div>

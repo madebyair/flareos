@@ -56,7 +56,7 @@ function AccountSetup({ isFromAuth }: { isFromAuth: boolean }) {
                             unixUser: "",
                             widgets: defaultWidgets
                         })
-                        emit("component", "authlogin_loader")
+                        void emit("component", "authlogin_loader")
                     } else {
                         setComponent(<AccountLoader isFromAuth={false} uuid={r.data.session_uuid} secret={r.data.session_secret} password={r.data.password} />)
                     }

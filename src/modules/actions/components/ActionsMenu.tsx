@@ -48,18 +48,18 @@ const ActionsMenu = () => {
     const [t, i18n] = useTranslation()
 
     useEffect(() => {
-        listen<EventResponse>("components-display-event", (event) => {
+        void listen<EventResponse>("components-display-event", (event) => {
             setUser(event.payload.user)
-            i18n.changeLanguage(event.payload.user.language)
+            void i18n.changeLanguage(event.payload.user.language)
 
             if (!event.payload.current) {
-                getCurrent().hide()
+                void getCurrent().hide()
             } else {
-                getCurrent().show()
+                void getCurrent().show()
             }
         })
 
-        listen<"light" | "dark">("theme-change", (event) => {
+        void listen<"light" | "dark">("theme-change", (event) => {
             setUser(prevUser => ({
                 ...prevUser,
                 theme: event.payload

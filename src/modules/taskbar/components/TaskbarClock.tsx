@@ -10,7 +10,7 @@ const TaskbarClock = () => {
     const [isActionsDisplayed, setIsActionsDisplayed] = useState(false)
 
     useEffect(() => {
-        emit("components-display-event", {
+        void emit("components-display-event", {
             "user": user,
             "current": isActionsDisplayed
         })

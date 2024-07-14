@@ -21,8 +21,8 @@ function Language({name, short, flag, setChanged} : LanguageType) {
     return (
         <div className="h-12 w-full rounded-md flex hover:bg-zinc-900/70 transition duration-300" onClick={() => {
             setChanged(true)
-            i18n.changeLanguage(short)
-            emit("language-change", short)
+            void i18n.changeLanguage(short)
+            void emit("language-change", short)
         }}>
             <div className="h-12 w-12 flex ml-4">
                 {flag}

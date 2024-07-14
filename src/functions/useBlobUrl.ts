@@ -19,8 +19,8 @@ const useBlobUrl = (imageUrl: string) => {
             setBlobUrl(url) // set in states
         }
 
-        fetchData()
-    }, [imageUrl]) // only execure if imageUrl changes
+        void fetchData()
+    }, [imageUrl])
 
     return blobUrl
 }

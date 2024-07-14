@@ -83,7 +83,7 @@ const AccountLoader = ({ uuid, secret, password, isFromAuth }: { uuid: string, s
 
                     const currentUsers = await get("users")
                     const updatedUsers = Array.isArray(currentUsers) ? currentUsers : []
-                    set("users", [...updatedUsers, user])
+                    await set("users", [...updatedUsers, user])
 
                     setTimeout(() => {
                         if (isFromAuth) {
@@ -99,7 +99,7 @@ const AccountLoader = ({ uuid, secret, password, isFromAuth }: { uuid: string, s
             }
         }
 
-        create()
+        void create()
     }, [])
 
     return (

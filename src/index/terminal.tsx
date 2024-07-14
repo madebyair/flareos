@@ -55,8 +55,8 @@ function initShell() {
 initShell()
 term.onData(writeToPty)
 addEventListener("resize", fitTerminal)
-fitTerminal()
-getCurrent().show()
+void fitTerminal()
+void getCurrent().show()
 
 
 async function readFromPty() {

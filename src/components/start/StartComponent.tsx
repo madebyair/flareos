@@ -21,17 +21,17 @@ const StartComponent = () => {
     const [apps, setApps] = useState<Array<App>>([])
 
     useEffect(() => {
-        listen<EventResponse>("start-display-event", (event) => {
+        void listen<EventResponse>("start-display-event", (event) => {
             setUser(event.payload.user)
 
             if (!event.payload.current) {
-                getCurrent().hide()
+                void getCurrent().hide()
             } else {
-                getCurrent().show()
+                void getCurrent().show()
             }
         })
 
-        listen<"light" | "dark">("theme-change", (event) => {
+        void listen<"light" | "dark">("theme-change", (event) => {
             setUser(prevUser => ({
                 ...prevUser,
                 theme: event.payload
@@ -99,12 +99,12 @@ const StartComponent = () => {
             })
             break    
         default:
-            invoke("run_app", { command: command, user: user.unixUser })
+            void invoke("run_app", { command: command, user: user.unixUser })
 
             break
         }
 
-        emit("start-hide-request")
+        void emit("start-hide-request")
     }
 
     return (

@@ -1,10 +1,10 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
-import Button from "../../../elements/Button.tsx";
-import { useTranslation } from "react-i18next";
-import { useAtomState } from "@zedux/react";
-import { setupComponent } from "../setupState.tsx";
-import WifiLoader from "../loaders/WifiLoader.tsx";
+import { Dialog, Transition } from "@headlessui/react"
+import { Fragment } from "react"
+import Button from "../../../elements/Button.tsx"
+import { useTranslation } from "react-i18next"
+import { useAtomState } from "@zedux/react"
+import { setupComponent } from "../setupState.tsx"
+import WifiLoader from "../loaders/WifiLoader.tsx"
 
 export default function BetaWarning() {
     const { t } = useTranslation()

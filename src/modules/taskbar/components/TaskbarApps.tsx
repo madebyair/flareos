@@ -30,7 +30,7 @@ const TaskbarApp = ({name, className, active} : {name: string, className: string
 
 
     function activate() {
-        invoke("activate", { "name": name })
+        void invoke("activate", { "name": name })
     }
 
     useEffect(() => {

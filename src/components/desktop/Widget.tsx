@@ -72,7 +72,7 @@ const Widget = ({ w }: { w: WidgetType }) => {
                         })
                         const index = prevUser.widgets.findIndex((key: WidgetType) => key.component === w.component)
                         delete prevUser.widgets[index]
-                        if (prevUser == null) {
+                        if (!prevUser) {
                             return []
                         }
                         return prevUser
