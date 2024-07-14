@@ -2,14 +2,17 @@ import User from "../../types/user.ts"
 import { useTranslation } from "react-i18next"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { invoke } from "@tauri-apps/api/core"
+import useAvatar from "./hooks/useAvatar.tsx"
 
 const AuthCurrentUser = ({ user, onDesktop }: { user: User, onDesktop: () => void }) => {
     const { t } = useTranslation()
     const [error, setError] = useState("")
     const [value, setValue] = useState("")
     const [shake, setShake] = useState("")
+    const avatar = useAvatar(user.uuid)
+    const [avatarUrl, setAvatarUrl] = useState("")
 
     function next() {
         if (value == "") {
@@ -35,11 +38,17 @@ const AuthCurrentUser = ({ user, onDesktop }: { user: User, onDesktop: () => voi
         })
     }
 
+    useEffect(() => {
+        setAvatarUrl(avatar)
+    }, [avatar])
+
     return (
         <div className="w-96 h-32 flex relative">
             <img
-                src={`https://api.made-by-air.com/avatar/${user.uuid}`}
+                src={avatarUrl}
                 alt=""
+                key={avatarUrl}
+                id="avatar"
                 className="w-32 h-32 rounded-full"
             />
             <div className="h-32 ml-4 mt-4">

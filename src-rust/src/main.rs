@@ -56,6 +56,12 @@ mod vendor {
     pub mod get_platform;
 }
 
+mod avatar {
+    pub mod get_avatar;
+    pub mod compare_avatars;
+    pub mod update_avatar;
+}
+
 use utils::encryption::encrypt;
 use utils::encryption::decrypt;
 use apps::terminal::{async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty, TerminalState};
@@ -95,6 +101,9 @@ use bluetooth::bt_devices::{get_connected_devices, get_paired_devices, get_devic
 use bluetooth::bt_scan::scan_on;
 use vendor::get_platform::get_platform;
 use tauri::Manager;
+use avatar::compare_avatars::compare_avatars;
+use avatar::get_avatar::get_avatar;
+use avatar::update_avatar::update_avatar;
 
 fn main() {
     if !Uid::effective().is_root() {
@@ -116,6 +125,7 @@ fn main() {
     let writer = pty_pair.master.take_writer().unwrap();
 
     let boundary_id = Arc::new(Mutex::new(0));
+    let boundary_id_avatar = Arc::new(Mutex::new(0));
 
     tauri::Builder::default()
         .setup(|app| {
@@ -142,14 +152,21 @@ fn main() {
             run_app,
             get_current_volume, set_current_volume, list_sinks, set_current_sink, get_current_sink,
             is_bluetooth_adapter_available, get_bluetooth_adapter_status, get_connected_devices, get_paired_devices, get_devices, scan_on,
-            get_platform
+            get_platform,
+            compare_avatars, update_avatar
          ])
         .register_asynchronous_uri_scheme_protocol("icons", move |_app, request, responder| {
               match get_icon(request, &boundary_id) {
                 Ok(http_response) => responder.respond(http_response),
                 Err(e) => println!("Icons error {}", e)
               }
-            })
+        })
+        .register_asynchronous_uri_scheme_protocol("avatar", move |_app, request, responder| {
+            match get_avatar(request, &boundary_id_avatar) {
+                Ok(http_response) => responder.respond(http_response),
+                Err(e) => println!("Avatars error {}", e)
+            }
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

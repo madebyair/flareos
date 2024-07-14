@@ -63,6 +63,9 @@ const AccountLoader = ({ uuid, secret, password, isFromAuth }: { uuid: string, s
                     uuid: response.data.uuid,
                     password: encryptedPassword
                 })
+
+                void invoke("update_avatar", { uuid: response.data.uuid })
+
                 if (unix !== "") {
                     const user: User = {
                         firstName: response.data.first_name,
