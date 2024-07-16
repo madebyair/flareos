@@ -11,7 +11,7 @@ import AuthUsers from "./AuthUsers.tsx"
 import { listen } from "@tauri-apps/api/event"
 
 const Auth = () => {
-    const currentUser = 0
+    const [currentUser, setCurrentUser] = useState(0)
     const [users, setUsers] = useState<Array<User>>([])
     const [inDesktop, setInDesktop] = useState(false)
     const [hide, setHide] = useState(false)
@@ -52,7 +52,9 @@ const Auth = () => {
                             ) : <span>Loading</span>}
                         </div>
                         <AuthFooter />
-                        <AuthUsers />
+                        {users.length > 0 &&
+                            <AuthUsers users={users} setCurrent={setCurrentUser} />
+                        }
                     </div>
                 </div>
             }
