@@ -14,6 +14,7 @@ import "../../../i18n.ts"
 import { useTranslation } from "react-i18next"
 import { actionsComponent } from "./actionsState.tsx"
 import ActionsBluetooth from "./bluetooth/ActionsBluetooth.tsx"
+import ActionsPower from "./ActionsPower.tsx"
 
 type EventResponse = {
     user: User;
@@ -113,8 +114,8 @@ const ActionsMenu = () => {
                 {component &&
                     component
                 }
-                <div className="w-screen h-3/4 flex">
-                    <div className="w-11/12 h-5/6 m-auto">
+                <div className="w-screen h-4/6 flex">
+                    <div className="w-11/12 h-3/4 m-auto">
                         <div className="w-full h-1/3 flex">
                             <ActionsButton text="Wifi" subtext="Connected" icon={faWifi} enabled onClick={() => {}}/>
                             {bluetooth.available &&
@@ -138,6 +139,7 @@ const ActionsMenu = () => {
                     </div>
                 </div>
                 <ActionsMixer />
+                <ActionsPower />
             </div>
         </div>
     )

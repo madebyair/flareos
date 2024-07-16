@@ -8,6 +8,7 @@ import { userState } from "../../state/currentUserState.ts"
 import { invoke } from "@tauri-apps/api/core"
 import AuthFooter from "./AuthFooter.tsx"
 import AuthUsers from "./AuthUsers.tsx"
+import { listen } from "@tauri-apps/api/event"
 
 const Auth = () => {
     const currentUser = 0
@@ -21,6 +22,11 @@ const Auth = () => {
             if (Array.isArray(users)) {
                 setUsers(users)
             }
+        })
+
+        listen("auth", () => {
+            setInDesktop(false)
+            setHide(false)
         })
     }, [])
 

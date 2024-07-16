@@ -8,7 +8,7 @@ import { get, set } from "./manager/store_manager.ts"
 import Auth from "./modules/auth/Auth.tsx"
 import { emit, listen } from "@tauri-apps/api/event"
 import { userState } from "./state/currentUserState.ts"
-import User from "./types/user.ts"
+import User, { defaultUser } from "./types/user.ts"
 import { install, uninstall } from "./manager/install_manager.ts"
 import { storeApp } from "./types/storeApp.ts"
 import { supportedLanguagesType } from "./types/supportedLanguages.ts"
@@ -19,22 +19,23 @@ import Desktop from "./components/desktop/Desktop.tsx"
 import AddPersonSetup from "./modules/setup/account/AddPersonSetup.tsx"
 import { AccountFailed } from "./modules/setup/loaders/AccountLoader.tsx"
 import AccountLoaderFromAuth from "./modules/setup/account/AccountLoaderFromAuth.tsx"
+import { invoke } from "@tauri-apps/api/core"
 
 function App() {
     const [colorScheme] = useAtomState(colorSchemeState)
-    const [component, setCompoment] = useState(<Loading />)
+    const [component, setComponent] = useState(<Loading />)
     const [user , setUser] = useAtomState(userState)
 
     useEffect(() => {
         get("users").then(r => {
             if (r && Array.isArray(r)) {
                 if (r.length > 0) {
-                    setCompoment(<Auth/>)
+                    setComponent(<Auth/>)
                 } else {
-                    setCompoment(<Setup/>)
+                    setComponent(<Setup/>)
                 }
             } else {
-                setCompoment(<Setup/>)
+                setComponent(<Setup/>)
             }
         })
 
@@ -42,29 +43,35 @@ function App() {
             window.addEventListener("contextmenu", e => e.preventDefault())
         }
 
+        void listen("logout", () => {
+            void invoke("remove_permissions", { user: user.unixUser })
+            void emit("auth")
+            setUser(defaultUser)
+        })
+
         void listen("component", (event) => {
             if (event.payload == "authlogin") {
-                setCompoment(<AddPersonSetup />)
+                setComponent(<AddPersonSetup />)
             }
 
             if (event.payload == "fromauth") {
-                setCompoment(<AccountFromAuth />)
+                setComponent(<AccountFromAuth />)
             }
 
             if (event.payload == "auth") {
-                setCompoment(<Auth />)
+                setComponent(<Auth />)
             }
 
             if (event.payload == "desktop") {
-                setCompoment(<Desktop />)
+                setComponent(<Desktop />)
             }
 
             if (event.payload == "authlogin_failed") {
-                setCompoment(<AccountFailed />)
+                setComponent(<AccountFailed />)
             }
 
             if (event.payload == "authlogin_loader") {
-                setCompoment(<AccountLoaderFromAuth />)
+                setComponent(<AccountLoaderFromAuth />)
             }
         })
 
