@@ -53,7 +53,7 @@ const Auth = () => {
                         </div>
                         <AuthFooter />
                         {users.length > 0 &&
-                            <AuthUsers users={users} setCurrent={setCurrentUser} />
+                            <AuthUsers users={users} current={currentUser} setCurrent={setCurrentUser} />
                         }
                     </div>
                 </div>
