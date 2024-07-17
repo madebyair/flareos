@@ -9,6 +9,7 @@ import AccountLoader from "../loaders/AccountLoader.tsx"
 import { userState } from "../../../state/currentUserState.ts"
 import embededApps from "../../../apps/embededApps.ts"
 import defaultWidgets from "../../../components/widgets/widgetList.tsx"
+import { BarLoader } from "react-spinners"
 
 type ResponseType = {
     status: string // status: "success" hehe
@@ -28,6 +29,7 @@ function AccountSetup({ isFromAuth }: { isFromAuth: boolean }) {
     const [uuid, setUuid] = useState("")
     const [, setComponent] = useAtomState(setupComponent)
     const [, setUser] = useAtomState(userState)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         axios.post<ResponseType>("https://api.made-by-air.com/challenge").then((r) => {
@@ -64,6 +66,8 @@ function AccountSetup({ isFromAuth }: { isFromAuth: boolean }) {
             })
         }, 1000)
 
+        setTimeout(() => setLoading(false), 1000)
+
         return () => clearInterval(inv)
     }, [uuid])
 
@@ -72,8 +76,30 @@ function AccountSetup({ isFromAuth }: { isFromAuth: boolean }) {
             {isFromAuth &&
                 <div className="text-blue-500 hover:text-blue-400 text-[17px] h-min transition duration-300 mb-8 ml-8 absolute bottom-0" onClick={() => emit("component", "auth")}>{t("Go back")}</div>
             }
+            {loading &&
+                <div className="w-full h-full rounded-md absolute bg-black">
+                    <div className="flex w-full rounded-xl">
+                        <BarLoader
+                            height={8}
+                            cssOverride={{
+                                width: "99.95%",
+                                borderTopLeftRadius: "25px",
+                                borderTopRightRadius: "25px",
+                                margin: "auto"
+                            }}
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                            color="#2563eb"
+                        />
+                    </div>
+                    <div className="flex h-full absolute top-0 w-full">
+                        <span className="m-auto text-white text-2xl font-bold">{t("Just one second")}</span>
+                    </div>
+                </div>
+            }
             {uuid !== "" &&
-                <iframe id="auth" src={"https://made-by-air.com/flare/01/auth/en/" + uuid + "/" + `${isFromAuth ? "dark" : theme}`}
+                <iframe id="auth"
+                    src={"https://made-by-air.com/flare/01/auth/en/" + uuid + "/" + `${isFromAuth ? "dark" : theme}`}
                     width="100%" style={{colorScheme: "dark", borderRadius: "10px"}}></iframe>
             }
         </div>
