@@ -1,6 +1,8 @@
 import User from "../../types/user.ts"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import useAvatar from "./hooks/useAvatar.tsx"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons"
 
 const AuthUsers = ({users, current, setCurrent} : {users: User[], current: number, setCurrent: Dispatch<SetStateAction<number>>}) => {
     const [avatar, setAvatar] = useState("")
@@ -42,7 +44,9 @@ const AuthUsers = ({users, current, setCurrent} : {users: User[], current: numbe
                     </div>
                 }
                 {users.length > 2 &&
-                    <div className="absolute bottom-4 left-32 h-16 w-16 bg-white"></div>
+                    <div className="absolute bottom-0 left-72 h-16 w-16 backdrop-blur-2xl hover:bg-gray-800/70 transition duration-300 rounded-md flex">
+                        <FontAwesomeIcon icon={faChevronRight} color="white" size="xl" className="m-auto" />
+                    </div>
                 }
             </div>
         </div>
