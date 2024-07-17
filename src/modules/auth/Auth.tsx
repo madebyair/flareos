@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import AuthCurrentUser from "./AuthCurrentUser.tsx"
-import { get } from "../../manager/store_manager.ts"
+import { get, set } from "../../manager/store_manager.ts"
 import User from "../../types/user.ts"
 import Desktop from "../../components/desktop/Desktop.tsx"
 import { useAtomState } from "@zedux/react"
@@ -20,11 +20,11 @@ const Auth = () => {
     useEffect(() => {
         get("users").then((users) => {
             if (Array.isArray(users)) {
-                setUsers(users)
+                setUsers(users.sort((a, b) => b.lastUsed - a.lastUsed))
             }
         })
 
-        listen("auth", () => {
+        void listen("auth", () => {
             setInDesktop(false)
             setHide(false)
         })
@@ -48,6 +48,20 @@ const Auth = () => {
                                         setUser(users[currentUser])
                                         setTimeout(() => setHide(true), 800)
                                         void invoke("add_permissions", { user: users[currentUser].unixUser })
+
+                                        get("users").then((r) => {
+                                            const cur: unknown = r
+
+                                            if (Array.isArray(cur)) {
+                                                const indexToUpdate = cur.findIndex((key: User) => key.uuid === users[currentUser].uuid)
+                                                if (indexToUpdate !== -1) {
+                                                    const now = new Date
+                                                    cur[indexToUpdate].lastUsed = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),
+                                                        now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds()).toString()
+                                                    set("users", cur)
+                                                }
+                                            }
+                                        })
                                     }}/>
                             ) : <span>Loading</span>}
                         </div>

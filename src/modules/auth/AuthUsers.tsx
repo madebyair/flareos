@@ -8,7 +8,7 @@ const AuthUsers = ({users, current, setCurrent} : {users: User[], current: numbe
     const [avatar, setAvatar] = useState("")
     const [shownUser, setShownUser] = useState(1)
     const avatar0 = useAvatar(users[0].uuid)
-    const avatar1 = useAvatar(users[1].uuid)
+    const avatar1 = users[1]?.uuid ? useAvatar(users[1]?.uuid) : ""
 
     useEffect(() => {
         if (current == 0) {

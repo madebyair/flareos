@@ -16,6 +16,8 @@ type User = {
     "language": supportedLanguagesType,
     "unixUser": string,
     widgets: Widget[]
+    lastUsed: string,
+    createdAt: string,
 }
 
 export const defaultUser : User = {
@@ -30,7 +32,9 @@ export const defaultUser : User = {
     "theme": "light",
     "language": "en",
     "unixUser": "",
-    widgets: defaultWidgets
+    widgets: defaultWidgets,
+    lastUsed: "",
+    createdAt: "",
 }
 
 export default User

@@ -56,7 +56,9 @@ function AccountSetup({ isFromAuth }: { isFromAuth: boolean }) {
                             theme: "dark",
                             language: "en",
                             unixUser: "",
-                            widgets: defaultWidgets
+                            widgets: defaultWidgets,
+                            lastUsed: "",
+                            createdAt: ""
                         })
                         void emit("component", "authlogin_loader")
                     } else {

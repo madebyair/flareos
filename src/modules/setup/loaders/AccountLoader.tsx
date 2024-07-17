@@ -67,6 +67,10 @@ const AccountLoader = ({ uuid, secret, password, isFromAuth }: { uuid: string, s
                 void invoke("update_avatar", { uuid: response.data.uuid })
 
                 if (unix !== "") {
+                    const now = new Date
+                    const utc_timestamp = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),
+                        now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds()).toString()
+
                     const user: User = {
                         firstName: response.data.first_name,
                         lastName: response.data.last_name,
@@ -80,13 +84,15 @@ const AccountLoader = ({ uuid, secret, password, isFromAuth }: { uuid: string, s
                         language: "en",
                         unixUser: unix,
                         widgets: widgetList,
+                        lastUsed: utc_timestamp,
+                        createdAt: utc_timestamp
                     }
 
                     setUser(user)
 
                     const currentUsers = await get("users")
                     const updatedUsers = Array.isArray(currentUsers) ? currentUsers : []
-                    await set("users", [...updatedUsers, user])
+                    set("users", [...updatedUsers, user])
 
                     setTimeout(() => {
                         if (isFromAuth) {
