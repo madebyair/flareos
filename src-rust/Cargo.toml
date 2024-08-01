@@ -16,7 +16,7 @@ tauri-plugin = "2.0.0-beta.17"
 serde_json = "1.0"
 bcrypt = "0.15.1"
 portable-pty = "0.8.1"
-serde = "1.0.203"
+serde = "1.0.204"
 airos_wmctrl = { git = "https://github.com/madebyair/airos-wmctrl" }
 percent-encoding = "2.3.1"
 http-range = "0.1.5"
