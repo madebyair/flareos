@@ -23,7 +23,7 @@ http-range = "0.1.5"
 http = "1.1.0"
 nix = { version = "0.29.0", features = ["user"] }
 uuid = { version = "1.10.0", features = ["v4"] }
-tauri-plugin-global-shortcut = "2.0.0-beta"
+tauri-plugin-global-shortcut = "2.0.0-rc.0"
 sha256 = "1.5.0"
 
 [features]
