@@ -7,7 +7,7 @@ const ActionPower = () => {
     const [ t ] = useTranslation()
 
     return (
-        <div className="w-full flex mt-6 w-">
+        <div className="w-full flex mt-6">
             <div className="flex w-11/12 mx-auto">
                 <BlurButton submit={() => {
                     void emit("logout")

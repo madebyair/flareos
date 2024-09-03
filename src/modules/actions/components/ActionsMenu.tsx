@@ -139,7 +139,7 @@ const ActionsMenu = () => {
                     </div>
                 </div>
                 <ActionsMixer />
-                <ActionsPower />
+                {component == null && <ActionsPower />}
             </div>
         </div>
     )

@@ -1,8 +1,11 @@
 use std::process::{Command, Stdio};
 use serde_json::{json, Value};
+use std::thread;
+use tauri::async_runtime;
 
 #[tauri::command]
-pub fn get_connected_devices() -> String {
+pub async fn get_connected_devices() -> String {
+    async_runtime::spawn(async move {
         let output = match Command::new("sh")
             .arg("-c")
             .arg("bluetoothctl devices Connected")
@@ -26,10 +29,12 @@ pub fn get_connected_devices() -> String {
         } else {
             String::new()
         }
+    }).await.expect("reason lol")
 }
 
 #[tauri::command]
-pub fn get_paired_devices() -> String {
+pub async fn get_paired_devices() -> String {
+    async_runtime::spawn(async move {
         let output = match Command::new("sh")
             .arg("-c")
             .arg("bluetoothctl devices Paired")
@@ -53,10 +58,12 @@ pub fn get_paired_devices() -> String {
         } else {
             String::new()
         }
+    }).await.expect("reason lol")
 }
 
 #[tauri::command]
-pub fn get_devices() -> String {
+pub async fn get_devices() -> String {
+    async_runtime::spawn(async move {
         let output = match Command::new("sh")
             .arg("-c")
             .arg("bluetoothctl devices")
@@ -80,4 +87,5 @@ pub fn get_devices() -> String {
         } else {
             String::new()
         }
+    }).await.expect("reason lol")
 }
