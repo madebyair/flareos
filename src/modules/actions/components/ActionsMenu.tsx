@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react"
-import User, { defaultUser } from "../../../types/user.ts"
 import { listen } from "@tauri-apps/api/event"
 import { getCurrent } from "@tauri-apps/api/window"
-import "../../../assets/css/App.css"
-import { faMoon, faPalette, faPlane, faShare, faWifi } from "@fortawesome/free-solid-svg-icons"
-import ActionsButton from "./ActionsButton.tsx"
-import { disableNightLight, enableNightLight } from "../../../manager/nightlight/setNightLight.ts"
 import isNightLight from "../../../manager/nightlight/isNightLight.ts"
-import ActionsMixer from "./ActionsMixer.tsx"
-import { useAtomState } from "@zedux/react"
 import { invoke } from "@tauri-apps/api/core"
-import "../../../i18n.ts"
 import { useTranslation } from "react-i18next"
-import { actionsComponent } from "./actionsState.tsx"
-import ActionsBluetooth from "./bluetooth/ActionsBluetooth.tsx"
-import ActionsPower from "./ActionsPower.tsx"
+import { useAtomState } from "@zedux/react"
+import User, { defaultUser } from "../../../types/user.ts"
+import { actionsComponent } from "../actionsState.tsx"
+import "../../../i18n.ts"
+import "../../../assets/css/App.css"
+
+const transformDevices = (devices: { device: string }[]): DeviceInfo[] => {
+    return devices.map(item => {
+        const parts = item.device.split(" ")
+        const mac = parts[1]
+        const name = parts.slice(2).join(" ")
+        return { mac, name }
+    })
+}
 
 type EventResponse = {
     user: User;
@@ -32,22 +35,14 @@ interface DeviceInfo {
     name: string;
 }
 
-const transformDevices = (devices: { device: string }[]): DeviceInfo[] => {
-    return devices.map(item => {
-        const parts = item.device.split(" ")
-        const mac = parts[1]
-        const name = parts.slice(2).join(" ")
-        return { mac, name }
-    })
-}
-
 const ActionsMenu = () => {
     const [user, setUser] = useState<User>(defaultUser)
     const [nightLight, setIsNightLight] = useState(false)
     const [component, setComponent] = useAtomState(actionsComponent)
     const [bluetooth, setBluetooth] = useState<BluetoothState>({available: false, enabled: false, devices: []})
-    const [t, i18n] = useTranslation()
+    const [, i18n] = useTranslation()
 
+    
     useEffect(() => {
         void listen<EventResponse>("components-display-event", (event) => {
             setUser(event.payload.user)
@@ -110,54 +105,21 @@ const ActionsMenu = () => {
     }, [])
     return (
         <div className={user?.theme}>
-            <div className="start bg-slate-200/95 dark:bg-zinc-950/95 w-screen h-screen rounded-xl dark:text-white select-none fill-black dark:fill-white">
-                {component &&
-                    component
-                }
-                <div className="w-screen h-4/6 flex">
-                    <div className="w-11/12 h-3/4 m-auto">
-                        <div className="w-full h-1/3 flex">
-                            <ActionsButton text="Wifi" subtext="Connected" icon={faWifi} enabled onClick={() => {}}/>
-                            {bluetooth.available &&
-                                <ActionsButton text="Bluetooth" subtext={bluetooth.devices.length > 0 ? bluetooth.devices.length.toString() + " " + t("Connected") : t("Ready")} iconSvg={<BluetoothIcon/>} enabled={bluetooth.enabled} onClick={() => setComponent(<ActionsBluetooth />)}/>
-                            }
-                            <ActionsButton text="Plane mode" icon={faPlane} enabled={false} onClick={() => {}}/>
-                        </div>
-                        <div className="w-full h-1/3 flex">
-                            <ActionsButton text="Blue light" icon={faPalette} enabled={false} onClick={() => {}} />
-                            <ActionsButton text="Night light" icon={faMoon} enabled={nightLight} onClick={() => {
-                                if (nightLight) {
-                                    disableNightLight()
-                                    setIsNightLight(false)
-                                    return
-                                }
-                                enableNightLight()
-                                setIsNightLight(true)
-                            }} />
-                            <ActionsButton text="Hotspot" icon={faShare} enabled={false} onClick={() => {}} />
+            <div className="bg-slate-200/90 dark:bg-zinc-950/90 w-screen h-screen rounded-xl dark:text-white select-none fill-black dark:fill-white">
+                <div className="flex h-16 w-screen">
+                    <div className="w-10/12 m-auto h-12 flex">
+                        <div className="flex w-1/2">
+                            <div className="m-1">
+                                <img src={"avatar://" + user.uuid} className="rounded-full w-10 h-10"/>
+                            </div>
+                            <div className="mt-auto mb-auto ml-2 font-medium">{user.firstName} {user.lastName}</div>
                         </div>
                     </div>
                 </div>
-                <ActionsMixer />
-                {component == null && <ActionsPower />}
+                <div className="w-9/12 h-3/4 bg-sky-300/55 hover:bg-sky-500 dark:bg-zinc-900 dark:hover:bg-zinc-900/60 m-auto rounded-md transition duration-100 flex">
+
+                </div>
             </div>
         </div>
-    )
-}
-
-function BluetoothIcon() {
-    return (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            style={{msFilter: ""}}
-        >
-            <path
-                d="M4.41 16.192l1.18 1.615L10 14.584V21a1 1 0 001.541.841l7-4.5a.999.999 0 00.049-1.649L13.537 12l5.053-3.692a1.002 1.002 0 00-.049-1.65l-7-4.5a1.002 1.002 0 00-1.021-.037c-.32.176-.52.513-.52.879v6.416L5.59 6.192 4.41 7.808 10 11.893v.215l-5.59 4.084zM12 4.832l4.232 2.721L12 10.646V4.832zm0 8.522l4.232 3.093L12 19.168v-5.814z"></path>
-        </svg>
-    )
-}
-
+    )}
 export default ActionsMenu

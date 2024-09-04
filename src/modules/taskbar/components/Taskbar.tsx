@@ -35,7 +35,6 @@ const Taskbar = () => {
                     decorations: false,
                     alwaysOnTop: true,
                     transparent: true,
-                    visible: false,
                     resizable: false
                 })
             }

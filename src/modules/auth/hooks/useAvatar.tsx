@@ -35,6 +35,8 @@ export async function avatar(user: string) {
 
             return "https://api.made-by-air.com/avatar/" + user
         }
+    } else {
+        return "avatars://" + user
     }
 
     return ""
