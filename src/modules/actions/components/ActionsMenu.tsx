@@ -9,6 +9,9 @@ import User, { defaultUser } from "../../../types/user.ts"
 import { actionsComponent } from "../actionsState.tsx"
 import "../../../i18n.ts"
 import "../../../assets/css/App.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGear, faLock, faPowerOff, faSignOut } from "@fortawesome/free-solid-svg-icons";
+import ActionHeader from "./ActionsHeader.tsx";
 
 const transformDevices = (devices: { device: string }[]): DeviceInfo[] => {
     return devices.map(item => {
@@ -106,20 +109,13 @@ const ActionsMenu = () => {
     return (
         <div className={user?.theme}>
             <div className="bg-slate-200/90 dark:bg-zinc-950/90 w-screen h-screen rounded-xl dark:text-white select-none fill-black dark:fill-white">
-                <div className="flex h-16 w-screen">
-                    <div className="w-10/12 m-auto h-12 flex">
-                        <div className="flex w-1/2">
-                            <div className="m-1">
-                                <img src={"avatar://" + user.uuid} className="rounded-full w-10 h-10"/>
-                            </div>
-                            <div className="mt-auto mb-auto ml-2 font-medium">{user.firstName} {user.lastName}</div>
-                        </div>
-                    </div>
-                </div>
-                <div className="w-9/12 h-3/4 bg-sky-300/55 hover:bg-sky-500 dark:bg-zinc-900 dark:hover:bg-zinc-900/60 m-auto rounded-md transition duration-100 flex">
+                <ActionHeader user={user} />
+                <div
+                    className="w-9/12 h-3/4 bg-sky-300/55 hover:bg-sky-500 dark:bg-zinc-900 dark:hover:bg-zinc-900/60 m-auto rounded-md transition duration-100 flex">
 
                 </div>
             </div>
         </div>
-    )}
+    )
+}
 export default ActionsMenu
