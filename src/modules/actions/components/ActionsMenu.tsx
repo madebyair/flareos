@@ -9,9 +9,7 @@ import User, { defaultUser } from "../../../types/user.ts"
 import { actionsComponent } from "../actionsState.tsx"
 import "../../../i18n.ts"
 import "../../../assets/css/App.css"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear, faLock, faPowerOff, faSignOut } from "@fortawesome/free-solid-svg-icons";
-import ActionHeader from "./ActionsHeader.tsx";
+import ActionsHeader from "./ActionsHeader.tsx"
 
 const transformDevices = (devices: { device: string }[]): DeviceInfo[] => {
     return devices.map(item => {
@@ -109,7 +107,7 @@ const ActionsMenu = () => {
     return (
         <div className={user?.theme}>
             <div className="bg-slate-200/90 dark:bg-zinc-950/90 w-screen h-screen rounded-xl dark:text-white select-none fill-black dark:fill-white">
-                <ActionHeader user={user} />
+                <ActionsHeader user={user} />
                 <div
                     className="w-9/12 h-3/4 bg-sky-300/55 hover:bg-sky-500 dark:bg-zinc-900 dark:hover:bg-zinc-900/60 m-auto rounded-md transition duration-100 flex">
 

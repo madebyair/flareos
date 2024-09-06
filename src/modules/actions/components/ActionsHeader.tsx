@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear, faLock, faPowerOff, faSignOut } from "@fortawesome/free-solid-svg-icons";
 import User from "../../../types/user.ts";
 
-const ActionHeader = ({user} : {user: User}) => {
+const ActionsHeader = ({user} : {user: User}) => {
     return (
         <div className="flex h-16 w-screen">
             <div className="w-10/12 m-auto h-12 flex relative">
@@ -52,4 +52,4 @@ const ActionHeader = ({user} : {user: User}) => {
     )
 }
 
-export default ActionHeader
+export default ActionsHeader
