@@ -3,6 +3,8 @@ import { BluetoothIcon, Wifi4Icon } from "./ActionsIcons.tsx"
 import { useEffect, useState } from "react"
 import { invoke } from "@tauri-apps/api/core"
 import { useTranslation } from "react-i18next"
+import ActionsButtonSmall from "./ActionsButtonSmall.tsx"
+import { faDisplay, faMoon } from "@fortawesome/free-solid-svg-icons"
 
 interface DeviceInfo {
     mac: string;
@@ -68,12 +70,21 @@ const ActionsQuickActions = () => {
         <div className="w-screen flex">
             <div className="mt-5 mx-auto w-10/12 flex flex-wrap">
                 <div className="w-1/3 flex-grow-0">
-                    <ActionButton icon={<Wifi4Icon />} name={t("Network")} description="" active={true} />
+                    <ActionButton icon={<Wifi4Icon/>} name={t("Network")} description="" active={true}/>
                 </div>
                 <div className="w-1/3 flex-grow-0">
                     {bluetooth.available &&
-                        <ActionButton icon={<BluetoothIcon />} description={bluetooth.devices.length > 0 ? bluetooth.devices.length.toString() + " " + t("Connected") : t("Ready")} name="Bluetooth" active={true} />
+                        <ActionButton icon={<BluetoothIcon/>}
+                            description={bluetooth.devices.length > 0 ? bluetooth.devices.length.toString() + " " + t("Connected") : t("Ready")}
+                            name="Bluetooth" active={true}/>
                     }
+                </div>
+                <div className="w-1/6 flex-grow-0">
+                    <ActionsButtonSmall icon={faDisplay} active={false}/>
+                </div>
+
+                <div className="w-1/6 flex-grow-0">
+                    <ActionsButtonSmall icon={faMoon} active={false}/>
                 </div>
             </div>
         </div>
