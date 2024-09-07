@@ -91,5 +91,6 @@
   "Welcome to FlareOS": "Welcome to FlareOS",
   "Something went wrong": "Something went wrong",
   "Account creation failed because you already have one account.": "Account creation failed because you already have one account.",
-  "Logout": "Logout"
+  "Logout": "Logout",
+  "Network": "Network"
 }
