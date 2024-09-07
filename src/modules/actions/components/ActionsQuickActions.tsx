@@ -5,6 +5,8 @@ import { invoke } from "@tauri-apps/api/core"
 import { useTranslation } from "react-i18next"
 import ActionsButtonSmall from "./ActionsButtonSmall.tsx"
 import { faDisplay, faMoon } from "@fortawesome/free-solid-svg-icons"
+import isNightLight from "../../../manager/nightlight/isNightLight.ts";
+import { disableNightLight, enableNightLight } from "../../../manager/nightlight/setNightLight.ts";
 
 interface DeviceInfo {
     mac: string;
@@ -29,6 +31,7 @@ const transformDevices = (devices: { device: string }[]): DeviceInfo[] => {
 
 const ActionsQuickActions = () => {
     const [bluetooth, setBluetooth] = useState<BluetoothState>({available: false, enabled: false, devices: []})
+    const [nightLight, setIsNightLight] = useState(false)
 
     const [ t ] = useTranslation()
 
@@ -62,6 +65,10 @@ const ActionsQuickActions = () => {
                     }
                 })
             })
+
+            isNightLight().then((r) => {
+                setIsNightLight(r)
+            })
         }, 300)
 
         return () => clearInterval(interval)
@@ -83,8 +90,16 @@ const ActionsQuickActions = () => {
                     <ActionsButtonSmall icon={faDisplay} active={false}/>
                 </div>
 
-                <div className="w-1/6 flex-grow-0">
-                    <ActionsButtonSmall icon={faMoon} active={false}/>
+                <div className="w-1/6 flex-grow-0" onClick={() => {
+                    if (nightLight) {
+                        disableNightLight()
+                        setIsNightLight(false)
+                        return
+                    }
+                    enableNightLight()
+                    setIsNightLight(true)
+                }}>
+                    <ActionsButtonSmall icon={faMoon} active={nightLight}/>
                 </div>
             </div>
         </div>
