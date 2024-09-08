@@ -4,8 +4,13 @@ import { useEffect } from "react"
 import { currentMonitor } from "@tauri-apps/api/window"
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow"
 import TaskbarApps from "./TaskbarApps.tsx"
+import { emit } from "@tauri-apps/api/event";
+import { useAtomState } from "@zedux/react";
+import { userState } from "../../../state/currentUserState.ts";
 
 const Taskbar = () => {
+    const [user] = useAtomState(userState)
+
     useEffect(() => {
         currentMonitor().then((result) => {
             if (result?.size.height && result?.size.width) {
@@ -38,6 +43,13 @@ const Taskbar = () => {
                     resizable: false,
                     visible: false,
                 })
+
+                setTimeout(() => {
+                    void emit("start-display-event", {
+                        user: user,
+                        current: false
+                    })
+                }, 500)
             }
         })
     }, [])
