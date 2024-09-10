@@ -39,6 +39,119 @@ const CalculatorContainer = () => {
                             256
                         </div>
                     </div>
+                    <div className="h-[66%] w-screen flex">
+                        <div className="w-11/12 h-[96%] m-auto">
+                            <div className="w-full h-16 flex justify-between mt-7">
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">CLR</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">(</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">)</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">mod</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">π</h1>
+                                </div>
+                            </div>
+                            <div className="w-full h-16 flex justify-between">
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">7</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">8</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">9</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">÷</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">√</h1>
+                                </div>
+                            </div>
+                            <div className="w-full h-16 flex justify-between">
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">4</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">5</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">6</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">×</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">x²</h1>
+                                </div>
+                            </div>
+                            <div className="w-full h-16 flex justify-between">
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">1</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">2</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">3</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">-</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-[112px] bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-2xl m-auto">\=</h1>
+                                </div>
+                            </div>
+                            <div className="w-full h-16 flex justify-between">
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">0</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">.</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">%</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12 bg-slate-300 dark:bg-zinc-800 hover:bg-slate-300/60 hover:dark:bg-zinc-800/70 rounded-md flex">
+                                    <h1 className="font-medium text-lg m-auto">+</h1>
+                                </div>
+                                <div
+                                    className="w-1/6 h-12">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
