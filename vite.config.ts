@@ -31,7 +31,8 @@ export default defineConfig(async () => ({
                 actions: resolve(__dirname, "actions.html"),
                 store: resolve(__dirname, "store.html"),
                 widgets: resolve(__dirname, "widgets.html"),
-                discover: resolve(__dirname, "discover.html")
+                discover: resolve(__dirname, "discover.html"),
+                calculator: resolve(__dirname, "calculator.html")
             },
         },
     },

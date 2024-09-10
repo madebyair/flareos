@@ -97,7 +97,17 @@ const StartComponent = () => {
                 minHeight: 600,
                 visible: false
             })
-            break    
+            break
+        case "__FlareOS_embed_app_calculator__":
+            new WebviewWindow("calculator", {
+                url: "calculator.html",
+                title: "Calculator",
+                width: 400,
+                height: 550,
+                resizable: false,
+                visible: false
+            })
+            break
         default:
             void invoke("run_app", { command: command, user: user.unixUser })
 

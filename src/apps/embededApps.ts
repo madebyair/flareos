@@ -30,6 +30,12 @@ const embededApps : Array<App> = [
         "description": "Discover your computer.",
         "exec": "__FlareOS_emebed_app_discover__",
         "icon": "icons://discover.webp"
+    },
+    {
+        "name": "Calculator",
+        "description": "Calculator",
+        "exec": "__FlareOS_embed_app_calculator__",
+        "icon": "icons://calculator.webp"
     }
 ]
 

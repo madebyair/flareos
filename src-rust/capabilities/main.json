@@ -11,7 +11,8 @@
     "actions",
     "store",
     "widgets",
-    "discover"
+    "discover",
+    "calculator"
   ],
   "permissions": [
     "path:default",
