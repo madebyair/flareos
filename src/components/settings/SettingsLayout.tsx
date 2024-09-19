@@ -11,6 +11,7 @@ import "../../i18n.ts"
 import { useTranslation } from "react-i18next"
 import SettingsInformation from "./information/SettingsInformation.tsx"
 import SettingsThemes from "./themes/SettingsThemes.tsx"
+import { getCurrent } from "@tauri-apps/api/window"
 
 const SettingsLayout = () => {
     const [component] = useAtomState(settingsComponent)
@@ -25,6 +26,9 @@ const SettingsLayout = () => {
         void listen<User>("user-response", (r) => {
             setUser(r.payload)
             void i18n.changeLanguage(r.payload.language)
+            setTimeout(() => {
+                void getCurrent().show()
+            }, 30)
         })
 
         void listen<"light" | "dark">("theme-change", (event) => {
