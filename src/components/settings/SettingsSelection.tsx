@@ -4,30 +4,20 @@ type SettingsSelectionType = {
     onClick: () => void
 }
 
-const SettingsSelection = ({name, subtext, onClick} : SettingsSelectionType) => {
+const SettingsSelection = ({ name, subtext, onClick }: SettingsSelectionType) => {
     return (
-        <div className="w-full h-16 bg-slate-400/60 mt-2 mb-2 dark:bg-zinc-900 hover:bg-slate-400 dark:hover:bg-zinc-900/80 transition duration-300 rounded-md" onClick={() => onClick()}>
-            {subtext == undefined &&
-                <div className="h-16 w-full flex">
-                    <span className="ml-4 mt-auto mb-auto">
-                        {name}
-                    </span>
+        <div
+            className="w-full h-auto bg-slate-200/70 dark:bg-zinc-900 hover:bg-slate-300 dark:hover:bg-zinc-800 transition-colors duration-300 rounded-md shadow-sm cursor-pointer p-4 mt-2"
+            onClick={onClick}
+        >
+            <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                {name}
+            </div>
+            {subtext && (
+                <div className="text-sm mt-1 text-gray-600 dark:text-gray-400 leading-tight">
+                    {subtext}
                 </div>
-            }
-            {subtext !== undefined &&
-                <>
-                    <div className="h-10 w-full flex">
-                        <span className="ml-4 mt-auto mb-auto">
-                            {name}
-                        </span>
-                    </div>
-                    <div className="h-6 w-full flex">
-                        <span className="ml-4 mt-auto mb-auto text-blue-400/80 text-sm">
-                            {subtext}
-                        </span>
-                    </div>
-                </>
-            }
+            )}
         </div>
     )
 }

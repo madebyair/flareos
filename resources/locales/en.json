@@ -92,5 +92,10 @@
   "Something went wrong": "Something went wrong",
   "Account creation failed because you already have one account.": "Account creation failed because you already have one account.",
   "Logout": "Logout",
-  "Network": "Network"
+  "Network": "Network",
+  "Themes": "Themes",
+  "Light Mode": "Light Mode",
+  "Bright and clear interface.": "Bright and clear interface.",
+  "Dark Mode": "Dark Mode",
+  "Subtle and easy on the eyes.": "Subtle and easy on the eyes."
 }
