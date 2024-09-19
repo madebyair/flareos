@@ -63,8 +63,9 @@ const StartComponent = () => {
             new WebviewWindow("settings", {
                 url: "settings.html",
                 title: "Settings",
-                minWidth: 800,
-                minHeight: 600,
+                minWidth: 1000,
+                minHeight: 650,
+                resizable: false,
                 visible: false
             })
             break
