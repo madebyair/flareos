@@ -9,9 +9,13 @@ import { getCurrent } from "@tauri-apps/api/window"
 const WidgetsMenu = () => {
     const [user, setUser] = useState<User>(defaultUser)
     const [t, i18n] = useTranslation()
+    const [theme, setTheme] = useState("")
 
     useEffect(() => {
         void emit("user-request")
+
+        // @ts-ignore
+        setTheme(localStorage.getItem("theme"))
 
         void listen<User>("user-response", (r) => {
             setUser(r.payload)
@@ -31,8 +35,13 @@ const WidgetsMenu = () => {
 
     }, [])
 
+    useEffect(() => {
+        setTheme(user.theme)
+    }, [user])
+
+
     return (
-        <div className={user?.theme}>
+        <div className={theme}>
             <div className="w-screen h-screen p-8 bg-slate-200 dark:bg-black dark:text-white select-none">
                 <h1 className="text-3xl font-bold">{t("Widgets")}</h1>
                 <div className="w-full relative flex mt-6">

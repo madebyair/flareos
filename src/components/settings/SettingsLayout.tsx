@@ -19,8 +19,12 @@ const SettingsLayout = () => {
     const [t, i18n] = useTranslation()
     const [isTransitioning, setIsTransitioning] = useState(false)
     const [currentComponent, setCurrentComponent] = useState(component)
+    const [theme, setTheme] = useState("")
 
     useEffect(() => {
+        // @ts-ignore
+        setTheme(localStorage.getItem("theme"))
+
         void emit("user-request")
 
         void listen<User>("user-response", (r) => {
@@ -45,6 +49,10 @@ const SettingsLayout = () => {
     }, [])
 
     useEffect(() => {
+        setTheme(user.theme)
+    }, [user])
+
+    useEffect(() => {
         setIsTransitioning(true)
         const timeout = setTimeout(() => {
             setCurrentComponent(component)
@@ -55,7 +63,7 @@ const SettingsLayout = () => {
     }, [component])
 
     return (
-        <div className={user.theme}>
+        <div className={theme}>
             <div className="w-screen h-screen bg-slate-300 dark:bg-zinc-950 flex select-none dark:text-white">
                 <div className="w-1/3 bg-white dark:bg-zinc-900 p-6 rounded-r-lg shadow-lg">
                     <div className="mt-4 mb-6">

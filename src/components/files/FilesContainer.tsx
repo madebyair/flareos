@@ -14,9 +14,13 @@ const FilesContainer = () => {
     const [currentDir] = useAtomState(currentDirState)
     const [user, setUser] = useState<User>(defaultUser)
     const [ , i18n ] = useTranslation()
+    const [theme, setTheme] = useState("")
 
     useEffect(() => {
         void emit("user-request")
+
+        // @ts-ignore
+        setTheme(localStorage.getItem("theme"))
 
         void listen<User>("user-response", (r) => {
             setUser(r.payload)
@@ -36,8 +40,12 @@ const FilesContainer = () => {
 
     }, [])
 
+    useEffect(() => {
+        setTheme(user.theme)
+    }, [user])
+
     return (
-        <div className={user.theme}>
+        <div className={theme}>
             <div className="w-screen h-screen bg-slate-300 dark:bg-zinc-900 select-none dark:text-white flex">
                 <div className="w-1/4 h-screen" data-tauri-drag-region={true}>
                     <FilesSidebar />

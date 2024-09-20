@@ -76,6 +76,8 @@ function App() {
         })
 
         void listen<"light" | "dark">("theme-change", (event) => {
+            localStorage.setItem("theme", user.theme)
+
             setUser(prevUser => {
                 get("users").then((r) => {
                     const cur: unknown = r
@@ -185,6 +187,10 @@ function App() {
 
         void isLatest()
     }, [])
+
+    useEffect(() => {
+        localStorage.setItem("theme", user.theme)
+    }, [user])
 
 
     return (

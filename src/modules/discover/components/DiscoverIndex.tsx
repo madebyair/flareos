@@ -12,9 +12,13 @@ const DiscoverIndex = () => {
     const [user, setUser] = useState<User>(defaultUser)
     const [, i18n] = useTranslation()
     const [component] = useAtomState(discoverComponent)
+    const [theme, setTheme] = useState("")
 
     useEffect(() => {
         void emit("user-request")
+
+        // @ts-ignore
+        setTheme(localStorage.getItem("theme"))
 
         void listen<User>("user-response", (r) => {
             setUser(r.payload)
@@ -34,8 +38,12 @@ const DiscoverIndex = () => {
 
     }, [])
 
+    useEffect(() => {
+        setTheme(user.theme)
+    }, [user])
+
     return (
-        <div className={user.theme}>
+        <div className={theme}>
             <div className="w-screen h-screen p-8 bg-slate-200 dark:bg-black dark:text-white select-none flex">
                 <div className="w-1/3 h-full">
                     <DiscoverSidebar />

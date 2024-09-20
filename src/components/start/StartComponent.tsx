@@ -32,6 +32,8 @@ const StartComponent = () => {
         })
 
         void listen<"light" | "dark">("theme-change", (event) => {
+            localStorage.setItem("theme", user.theme)
+
             setUser(prevUser => ({
                 ...prevUser,
                 theme: event.payload
@@ -62,6 +64,8 @@ const StartComponent = () => {
         const appConfig = appDetails[command]
 
         if (appConfig) {
+            localStorage.setItem("theme", user.theme)
+
             const allWindows = WebviewWindow.getAll()
             let existingWindow: string | false = false
 

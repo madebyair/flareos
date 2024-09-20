@@ -12,9 +12,13 @@ const CalculatorContainer = () => {
     const [input, setInput] = useState("")
     const [display, setDisplay] = useState("")
     const [result, setResult] = useState("")
+    const [theme, setTheme] = useState("")
 
     useEffect(() => {
         void emit("user-request")
+
+        // @ts-ignore
+        setTheme(localStorage.getItem("theme"))
 
         void listen<User>("user-response", (r) => {
             setUser(r.payload)
@@ -107,7 +111,8 @@ const CalculatorContainer = () => {
             setResult(evalResult.toString())
             setDisplay(evalResult.toString())
             setInput(evalResult.toString())
-        } catch (error) {
+        } catch (e) {
+            console.log(e)
             setResult("∞")
         }
     }
@@ -124,8 +129,12 @@ const CalculatorContainer = () => {
         return mathMap[symbol] || symbol
     }
 
+    useEffect(() => {
+        setTheme(user.theme)
+    }, [user])
+
     return (
-        <div className={user.theme}>
+        <div className={theme}>
             <div className="w-screen h-screen bg-slate-200 dark:bg-black">
                 <div className="transition w-screen h-screen select-none dark:text-white">
                     <div className="h-2/6 bg-slate-300 dark:bg-zinc-800 flex justify-end items-center">

@@ -20,9 +20,13 @@ const StoreComponent = () => {
     const [component, setComponent] = useAtomState(storeComponent)
     const [t] = useTranslation()
     const [noNetwork, setNoNetwork] = useState(false)
+    const [theme, setTheme] = useState("")
 
     useEffect(() => {
         void emit("user-request")
+
+        // @ts-ignore
+        setTheme(localStorage.getItem("theme"))
 
         void listen<User>("user-response", (r) => {
             setUser(r.payload)
@@ -45,8 +49,12 @@ const StoreComponent = () => {
         })
     }, [])
 
+    useEffect(() => {
+        setTheme(user.theme)
+    }, [user])
+
     return (
-        <div className={user.theme}>
+        <div className={theme}>
             {noNetwork || user.email == "" &&
                 <NoInternet />
             }
