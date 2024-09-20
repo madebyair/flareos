@@ -1,7 +1,7 @@
 import "../../assets/css/App.css"
 import { useEffect, useState } from "react"
 import { emit, listen } from "@tauri-apps/api/event"
-import { getCurrent } from "@tauri-apps/api/window"
+import { getCurrent, Window } from "@tauri-apps/api/window"
 import User from "../../types/user"
 import { useAtomState } from "@zedux/react"
 import { userState } from "../../state/currentUserState"
@@ -48,71 +48,60 @@ const StartComponent = () => {
         setApps(updatedApps)
     }, [user])
 
-    function run(command: string) {
-        switch (command) {
-        case "__FlareOS_embed_app_terminal__":
-            new WebviewWindow("terminal", {
-                url: "terminal.html",
-                title: "Terminal",
-                minWidth: 300,
-                minHeight: 200,
-                visible: false
-            })
-            break
-        case "__FlareOS_embed_app_settings__":
-            new WebviewWindow("settings", {
-                url: "settings.html",
-                title: "Settings",
-                minWidth: 1000,
-                minHeight: 650,
-                resizable: false,
-                visible: false
-            })
-            break
-        case "__FlareOS_embed_app_files__":
-            new WebviewWindow("files", {
-                url: "files.html",
-                title: "Files",
-                minWidth: 900,
-                minHeight: 530,
-                width: 900,
-                height: 530,
-                visible: false
-            })
-            break
+    async function run(command: string) {
+        const appDetails = {
+            "__FlareOS_embed_app_terminal__": { id: "terminal", url: "terminal.html", title: "Terminal", minWidth: 300, minHeight: 200 },
+            "__FlareOS_embed_app_settings__": { id: "settings", url: "settings.html", title: "Settings", minWidth: 1000, minHeight: 650, resizable: false },
+            "__FlareOS_embed_app_files__": { id: "files", url: "files.html", title: "Files", minWidth: 900, minHeight: 530, width: 900, height: 530 },
+            "__FlareOS_embed_app_store__": { id: "store", url: "store.html", title: "Store", minWidth: 800, minHeight: 600 },
+            "__FlareOS_embed_app_discover__": { id: "discover", url: "discover.html", title: "Discover", minWidth: 800, minHeight: 600 },
+            "__FlareOS_embed_app_calculator__": { id: "calculator", url: "calculator.html", title: "Calculator", width: 400, height: 550, resizable: false }
+        }
 
-        case "__FlareOS_embed_app_store__":
-            new WebviewWindow("store", {
-                url: "store.html",
-                title: "Store",
-                minWidth: 800,
-                minHeight: 600,
-                visible: false
-            })
-            break
-        case "__FlareOS_embed_app_discover__":
-            new WebviewWindow("discover", {
-                url: "discover.html",
-                title: "Discover",
-                minWidth: 800,
-                minHeight: 600,
-                visible: false
-            })
-            break
-        case "__FlareOS_embed_app_calculator__":
-            new WebviewWindow("calculator", {
-                url: "calculator.html",
-                title: "Calculator",
-                width: 400,
-                height: 550,
-                resizable: false,
-                visible: false
-            })
-            break
-        default:
-            void invoke("run_app", { command: command, user: user.unixUser })
+        // @ts-ignore
+        const appConfig = appDetails[command]
 
-            break
+        if (appConfig) {
+            const allWindows = WebviewWindow.getAll()
+            let existingWindow: string | false = false
+
+            allWindows.forEach(win => {
+                if (win.label == appConfig.id) {
+                    existingWindow = win.label
+                }
+            })
+
+
+            if (existingWindow) {
+                try {
+                    await Window.getByLabel(existingWindow)?.setFocus()
+                } catch (error) {
+                    console.error(error)
+                }
+            } else {
+                try {
+                    const newWindow = new WebviewWindow(appConfig.id, {
+                        url: appConfig.url,
+                        title: appConfig.title,
+                        minWidth: appConfig.minWidth,
+                        minHeight: appConfig.minHeight,
+                        width: appConfig.width,
+                        height: appConfig.height,
+                        resizable: appConfig.resizable !== undefined ? appConfig.resizable : true,
+                        visible: false
+                    })
+
+                    await newWindow.show()
+                } catch (error) {
+                    console.error(error)
+                }
+            }
+        } else {
+            try {
+                await invoke("run_app", { command: command, user: user.unixUser })
+            } catch (error) {
+                console.error(error)
+            }
         }
 
         void emit("start-hide-request")
@@ -124,7 +113,7 @@ const StartComponent = () => {
                 <StartSearchComponent />
                 <div className="mx-4 pt-2 grid grid-cols-4 gap-4 justify-items-center">
                     {apps.map(app => (
-                        <div key={app.name} onClick={() => run(app.exec)} className="hover:bg-slate-300 dark:hover:bg-zinc-800 transition duration-300 rounded-md w-20 h-24 flex flex-col items-center justify-center"> {/* Modified */}
+                        <div key={app.name} onClick={() => run(app.exec)} className="hover:bg-slate-300 dark:hover:bg-zinc-800 transition duration-300 rounded-md w-20 h-24 flex flex-col items-center justify-center">
                             <div className="flex justify-center w-full">
                                 <img src={app.icon} alt="" width="60px" height="60px" className="rounded-md"/>
                             </div>
@@ -137,10 +126,6 @@ const StartComponent = () => {
             </div>
         </div>
     )
-
-
-
-
 }
 
 export default StartComponent
