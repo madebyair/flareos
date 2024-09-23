@@ -14,7 +14,7 @@ const Taskbar = () => {
     useEffect(() => {
         currentMonitor().then((result) => {
             if (result?.size.height && result?.size.width) {
-                const height = result.size.height - 655
+                const height = result.size.height - 680
 
                 new WebviewWindow("start", {
                     title: "__FlareOS_start_menu__",
@@ -55,7 +55,7 @@ const Taskbar = () => {
     }, [])
 
     return (
-        <div className="w-screen bg-zinc-300 dark:bg-zinc-950 h-10 z-10 flex">
+        <div className="w-screen bg-zinc-300 dark:bg-zinc-950 h-14 z-10 flex">
             <TaskbarAirButton />
             <TaskbarApps />
             <TaskbarClock />
