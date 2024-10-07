@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { emit, listen } from "@tauri-apps/api/event"
 import "../../../i18n.ts"
 import "../../../assets/css/App.css"
-import { getCurrent } from "@tauri-apps/api/window"
+import { getCurrentWindow } from "@tauri-apps/api/window"
 
 const WidgetsMenu = () => {
     const [user, setUser] = useState<User>(defaultUser)
@@ -55,7 +55,7 @@ const WidgetsMenu = () => {
                                 default: "clock"
                             })
 
-                            void getCurrent().close()
+                            void getCurrentWindow().close()
                         }}>
                         <div
                             className="bg-gradient-to-r from-purple-900/70 via-purple-700/70 to-purple-500/70 h-24 rounded-xl flex">

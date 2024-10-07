@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { listen } from "@tauri-apps/api/event"
-import { getCurrent } from "@tauri-apps/api/window"
+import { getCurrentWindow } from "@tauri-apps/api/window"
 import { useTranslation } from "react-i18next"
 import User, { defaultUser } from "../../../types/user.ts"
 import "../../../i18n.ts"
@@ -26,9 +26,9 @@ const ActionsMenu = () => {
             void i18n.changeLanguage(event.payload.user.language)
 
             if (!event.payload.current) {
-                void getCurrent().hide()
+                void getCurrentWindow().hide()
             } else {
-                void getCurrent().show()
+                void getCurrentWindow().show()
             }
         })
 

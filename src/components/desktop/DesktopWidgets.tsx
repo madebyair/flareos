@@ -3,7 +3,7 @@ import { userState } from "../../state/currentUserState.ts"
 import Widget from "./Widget.tsx"
 import { listen } from "@tauri-apps/api/event"
 import { useEffect, useReducer, useState } from "react"
-import { getCurrent } from "@tauri-apps/api/window"
+import { getCurrentWindow } from "@tauri-apps/api/window"
 import { get, set } from "../../manager/store_manager.ts"
 import User from "../../types/user.ts"
 import { Widget as WidgetType } from "../../types/widget.ts"
@@ -17,7 +17,7 @@ const DesktopWidgets = () => {
         setWidgets(user.widgets)
         void listen<WidgetType>("widget-add", (event) => {
             const payload = event.payload
-            void getCurrent().setFocus()
+            void getCurrentWindow().setFocus()
             setUser(prev => {
                 get("users").then((r) => {
                     const cur: unknown = r

@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
-import { getCurrent } from "@tauri-apps/api/window"
+import { getCurrentWindow } from "@tauri-apps/api/window"
 import WidgetsMenu from "../components/widgets/menu/WidgetsMenu.tsx"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
@@ -9,4 +9,4 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     </React.StrictMode>
 )
 
-void getCurrent().show()
+void getCurrentWindow().show()

@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import StoreComponent from "../components/store/StoreComponent.tsx"
-import { getCurrent } from "@tauri-apps/api/window"
+import { getCurrentWindow } from "@tauri-apps/api/window"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
@@ -9,4 +9,4 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     </React.StrictMode>
 )
 
-void getCurrent().show()
+void getCurrentWindow().show()

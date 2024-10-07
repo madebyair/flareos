@@ -1,6 +1,7 @@
 use std::process::Command;
 use std::thread;
 use tauri::Manager;
+use tauri::Emitter;
 
 #[tauri::command]
 pub fn install_snap(package: String, window: tauri::Window) {

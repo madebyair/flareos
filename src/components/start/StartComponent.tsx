@@ -1,7 +1,7 @@
 import "../../assets/css/App.css"
 import { useEffect, useState } from "react"
 import { emit, listen } from "@tauri-apps/api/event"
-import { getCurrent, Window } from "@tauri-apps/api/window"
+import { getCurrentWindow, Window } from "@tauri-apps/api/window"
 import User from "../../types/user"
 import { useAtomState } from "@zedux/react"
 import { userState } from "../../state/currentUserState"
@@ -25,9 +25,9 @@ const StartComponent = () => {
             setUser(event.payload.user)
 
             if (!event.payload.current) {
-                void getCurrent().hide()
+                void getCurrentWindow().hide()
             } else {
-                void getCurrent().show()
+                void getCurrentWindow().show()
             }
         })
 
@@ -66,7 +66,7 @@ const StartComponent = () => {
         if (appConfig) {
             localStorage.setItem("theme", user.theme)
 
-            const allWindows = WebviewWindow.getAll()
+            const allWindows = await WebviewWindow.getAll()
             let existingWindow: string | false = false
 
             allWindows.forEach(win => {
@@ -78,7 +78,9 @@ const StartComponent = () => {
 
             if (existingWindow) {
                 try {
-                    await Window.getByLabel(existingWindow)?.setFocus()
+                    await Window.getByLabel(existingWindow).then((w) => {
+                        w?.setFocus()
+                    })
                 } catch (error) {
                     console.error(error)
                 }

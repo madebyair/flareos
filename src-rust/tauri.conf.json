@@ -19,7 +19,7 @@
       }
     ],
     "security": {
-      "csp": "",
+      "csp": null,
       "assetProtocol": {
         "scope": ["/usr/flareos/icons/*"]
       }

@@ -107,7 +107,7 @@ use avatar::update_avatar::update_avatar;
 
 fn main() {
     if !Uid::effective().is_root() {
-        panic!("The Air Operating System Shell requires to be runned as root.");
+        panic!("The Flare Operating System Shell requires to be run as root.");
     }
 
     let pty_system = native_pty_system();
