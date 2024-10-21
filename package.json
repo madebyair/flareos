@@ -23,7 +23,7 @@
     "@tauri-apps/plugin-shell": ">=2.0.0",
     "@tauri-apps/plugin-store": ">=2.0.0",
     "@uiw/react-tabs-draggable": "^1.0.1",
-    "@zedux/react": "^1.2.0",
+    "@zedux/react": "^1.2.3",
     "algoliasearch": "^4.23.3",
     "axios": "^1.7.2",
     "i18next": "^23.11.5",
