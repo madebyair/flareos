@@ -46,7 +46,7 @@ const FilesContainer = () => {
 
     return (
         <div className={theme}>
-            <div className="w-screen h-screen bg-slate-300 dark:bg-zinc-900 select-none dark:text-white flex">
+            <div className="w-screen h-screen bg-slate-300 dark:bg-zinc-950 select-none dark:text-white flex">
                 <div className="w-1/4 h-screen" data-tauri-drag-region={true}>
                     <FilesSidebar />
                 </div>

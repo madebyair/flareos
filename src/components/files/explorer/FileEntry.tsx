@@ -17,9 +17,9 @@ const FileEntry = ({ path, is_dir }: Entry) => {
 
     useEffect(() => {
         if (active == path) {
-            setBg("bg-blue-500/20")
+            setBg("bg-slate-300 dark:bg-neutral-700/50")
         } else {
-            setBg("bg-slate-400/30 dark:bg-zinc-950/20")
+            setBg("bg-slate-200/70 dark:bg-zinc-900")
         }
     }, [active])
 
@@ -35,21 +35,25 @@ const FileEntry = ({ path, is_dir }: Entry) => {
     }
 
     return (
-        <div className="transition">
+        <div className="transition-colors duration-300">
             <div
-                className={`flex h-12  mt-2 mb-2 rounded-md ${bg}`}
+                className={`flex h-16  mt-2 mb-2 rounded-md ${bg}`}
                 onClick={handleSingleClick}
-                onMouseOver={() => setBg("bg-blue-400/10")}
+                onMouseOver={() => setBg("bg-slate-300/70 dark:bg-zinc-800")}
                 onMouseOut={() => {
-                    if (bg !== "bg-blue-500/20") {
-                        setBg("bg-slate-400/30 dark:bg-zinc-950/20")
+                    if (bg !== "bg-slate-300 dark:bg-neutral-700/50") {
+                        setBg("bg-slate-200/70 dark:bg-zinc-900")
                     }
                 }}
             >
-                <div className="mt-auto mb-auto ml-2">
-                    <FontAwesomeIcon icon={is_dir ? faFolder : faFile} />
+                <div className="h-16 w-16 flex ml-6">
+                    <div className="w-12 h-12 m-auto rounded-md flex bg-slate-400/70 dark:bg-zinc-800">
+                        <div className="m-auto">
+                            <FontAwesomeIcon icon={is_dir ? faFolder : faFile} />
+                        </div>
+                    </div>
                 </div>
-                <div className="mt-auto mb-auto ml-2">
+                <div className="mt-auto mb-auto ml-2 font-semibold">
                     {path.split("/").pop()}
                 </div>
             </div>
