@@ -7,14 +7,13 @@ import { useTranslation } from "react-i18next"
 import BetaWarning from "./BetaWarning.tsx"
 
 const WelcomeSetup = () => {
-    const [enabled, setEnabled] = useState(false)
-    const [, setThemeScheme] = useAtomState(colorSchemeState)
+    const [themeScheme, setThemeScheme] = useAtomState(colorSchemeState)
     const [betaWarning, setBetaWarning] = useState(false)
 
     const { t } = useTranslation()
 
     function trigger() {
-        if (!enabled) {
+        if (themeScheme !== "dark") {
             setThemeScheme("dark")
         } else {
             setThemeScheme("light")
@@ -35,8 +34,7 @@ const WelcomeSetup = () => {
                     <div className="flex">
                         <Toggle
                             onChange={trigger}
-                            enabled={enabled}
-                            setEnabled={setEnabled}
+                            enabled={themeScheme == "dark"}
                         />
                         <span className="text-zinc-700 dark:text-zinc-300 ml-3 mt-[4px]">
                             {t("Dark mode")}

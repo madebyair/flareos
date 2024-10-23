@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { useAtomState } from "@zedux/react"
 import { setupComponent, setupNoPadding } from "../setupState.tsx"
 import { useEffect } from "react"
-import AirTermsOfService from "../law/AirTermsOfService.tsx"
+import AirPrivacyPolicy from "../law/AirPrivacyPolicy.tsx"
 
 const WifiLoader = () => {
     const { t } = useTranslation()
@@ -19,7 +19,7 @@ const WifiLoader = () => {
 
                 setTimeout(() => {
                     setNoPadding(false)
-                    setComponent(<AirTermsOfService />)
+                    setComponent(<AirPrivacyPolicy />)
                 }, 700)
             } else {
                 console.log("no network detected")

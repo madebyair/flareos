@@ -8,7 +8,7 @@ import { useAtomState } from "@zedux/react"
 import { setupComponent, setupNoPadding } from "../setupState.tsx"
 import AccountSetup from "../account/AccountSetup.tsx"
 
-const AirTermsOfService = () => {
+const AirPrivacyPolicy = () => {
     const [ t ] = useTranslation()
     const [, setComponent] = useAtomState(setupComponent)
     const [, setNoPadding] = useAtomState(setupNoPadding)
@@ -35,4 +35,4 @@ const AirTermsOfService = () => {
     )
 }
 
-export default AirTermsOfService
+export default AirPrivacyPolicy
