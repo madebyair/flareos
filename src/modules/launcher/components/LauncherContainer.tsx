@@ -3,6 +3,7 @@ import User, { defaultUser } from "../../../types/user.ts"
 import { useTranslation } from "react-i18next"
 import { emit, listen } from "@tauri-apps/api/event"
 import "../../../assets/css/App.css"
+import { getCurrentWindow } from "@tauri-apps/api/window";
 
 
 const LauncherContainer = () => {
@@ -19,6 +20,16 @@ const LauncherContainer = () => {
         void listen<User>("user-response", (r) => {
             setUser(r.payload)
             void i18n.changeLanguage(r.payload.language)
+        })
+
+        void listen("launcher-event", () => {
+            getCurrentWindow().isVisible().then((v) => {
+                if (v) {
+                    void getCurrentWindow().hide()
+                } else {
+                    void getCurrentWindow().show()
+                }
+            })
         })
 
         void listen<"light" | "dark">("theme-change", (event) => {

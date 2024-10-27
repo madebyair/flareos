@@ -65,7 +65,7 @@ const TaskbarApp = ({ name, className, active, onRemove, isClosing }: { name: st
         void invoke("activate", { "name": name })
     }
 
-    if (name === "FlareOS" || name === "__FlareOS_start_menu__" || name === "__FlareOS_actions_menu__") {
+    if (name === "FlareOS" || name === "__FlareOS_start_menu__" || name === "__FlareOS_actions_menu__" || name === "__FlareOS_launcher__") {
         return null
     }
 
