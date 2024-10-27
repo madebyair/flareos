@@ -44,6 +44,20 @@ const Taskbar = () => {
                     visible: false,
                 })
 
+                new WebviewWindow("launcher", {
+                    title: "__FlareOS_launcher__",
+                    url: "launcher.html",
+                    x: (result?.size.width - 500) / 2,
+                    y: (result?.size.height - 300) / 2,
+                    width: 500,
+                    height: 300,
+                    decorations: false,
+                    alwaysOnTop: true,
+                    transparent: true,
+                    resizable: false,
+                    visible: false,
+                })
+
                 setTimeout(() => {
                     void emit("start-display-event", {
                         user: user,

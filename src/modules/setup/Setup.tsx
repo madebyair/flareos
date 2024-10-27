@@ -1,7 +1,7 @@
 import { setupComponent, setupNoPadding } from "./setupState.tsx"
 import { useAtomState } from "@zedux/react"
 import { colorSchemeState } from "../../state/themeState.ts"
-import SetupFooter from "./SetupFooter.tsx";
+import SetupFooter from "./SetupFooter.tsx"
 
 const Setup = () => {
     const [component] = useAtomState(setupComponent)

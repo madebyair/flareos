@@ -12,7 +12,8 @@
     "store",
     "widgets",
     "discover",
-    "calculator"
+    "calculator",
+    "launcher"
   ],
   "permissions": [
     "core:default",
