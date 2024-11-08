@@ -1,19 +1,19 @@
 import { createStore } from "@tauri-apps/plugin-store"
 
-export const store = await createStore("/usr/flareos/data.dat")
+let storePromise = createStore("/usr/flareos/data.dat")
 
-export function get(key: string) {
+export async function get(key: string) {
+    const store = await storePromise
     return store.get(key)
 }
 
-export function set(key: string, value : unknown) {
-    return void store.set(key, value).then(() => {
-        save()
-    })
+export async function set(key: string, value: unknown) {
+    const store = await storePromise
+    await store.set(key, value)
+    await save()
 }
 
-export function save() {
-    void store.save()
-
-    return
+export async function save() {
+    const store = await storePromise
+    await store.save()
 }
