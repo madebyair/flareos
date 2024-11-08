@@ -1,6 +1,6 @@
 import { createStore } from "@tauri-apps/plugin-store"
 
-let storePromise = createStore("/usr/flareos/data.dat")
+const storePromise = createStore("/usr/flareos/data.dat")
 
 export async function get(key: string) {
     const store = await storePromise
