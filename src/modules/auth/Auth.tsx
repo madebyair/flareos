@@ -48,6 +48,7 @@ const Auth = () => {
                                         setUser(users[currentUser])
                                         setTimeout(() => setHide(true), 800)
                                         void invoke("add_permissions", { user: users[currentUser].unixUser })
+                                        void invoke("run_pipewire", { name: users[currentUser].unixUser })
 
                                         get("users").then((r) => {
                                             const cur: unknown = r

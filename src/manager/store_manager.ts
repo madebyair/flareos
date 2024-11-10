@@ -1,19 +1,16 @@
-import { createStore } from "@tauri-apps/plugin-store"
+import { LazyStore } from "@tauri-apps/plugin-store"
 
-const storePromise = createStore("/usr/flareos/data.dat")
+const storePromise = new LazyStore("/usr/flareos/data,dat")
 
 export async function get(key: string) {
-    const store = await storePromise
-    return store.get(key)
+    return storePromise.get(key)
 }
 
 export async function set(key: string, value: unknown) {
-    const store = await storePromise
-    await store.set(key, value)
+    await storePromise.set(key, value)
     await save()
 }
 
 export async function save() {
-    const store = await storePromise
-    await store.save()
+    await storePromise.save()
 }

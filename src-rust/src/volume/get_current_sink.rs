@@ -3,13 +3,16 @@ use std::thread;
 use std::sync::mpsc;
 
 #[tauri::command]
-pub fn get_current_sink() -> String {
+pub fn get_current_sink(user: String) -> String {
     let (tx, rx) = mpsc::channel();
 
     thread::spawn(move || {
         let command_output = Command::new("sh")
             .arg("-c")
-            .arg("XDG_RUNTIME_DIR=/run/user/1000 wpctl status | awk '/Sinks:/ {sinks=1} sinks && /\\* / {print $3; exit}'")
+            .arg(format!(
+                "sudo -u {} wpctl status | awk '/Sinks:/ {{sinks=1}} sinks && /\\* / {{print $3; exit}}'",
+                user
+            ))
             .output()
             .expect("failed to execute wpctl");
 

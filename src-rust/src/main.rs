@@ -26,6 +26,7 @@ mod files {
 
 mod unix {
     pub mod create_user;
+    pub mod pipewire;
 }
 
 mod gamma {
@@ -104,6 +105,7 @@ use tauri::Manager;
 use avatar::compare_avatars::compare_avatars;
 use avatar::get_avatar::get_avatar;
 use avatar::update_avatar::update_avatar;
+use unix::pipewire::{run_pipewire, stop_pipewire};
 
 fn main() {
     if !Uid::effective().is_root() {
@@ -146,7 +148,7 @@ fn main() {
             async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty,
             get_windows, activate, get_active_window, add_permissions, remove_permissions,
             read_dir,
-            create_user,
+            create_user, run_pipewire, stop_pipewire,
             get_current_gamma, set_current_gamma,
             download_icon, install_snap, install_deb, uninstall_snap,
             run_app,

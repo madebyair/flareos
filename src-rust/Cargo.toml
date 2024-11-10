@@ -24,6 +24,7 @@ nix = { version = "0.29.0", features = ["user"] }
 uuid = { version = "1.4.0", features = ["v4"] }
 tauri-plugin-global-shortcut = "2.0.1"
 sha256 = "1.5.0"
+tokio = "1.40.0"
 
 [features]
 custom-protocol = ["tauri/custom-protocol"]

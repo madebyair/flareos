@@ -70,6 +70,36 @@ pub fn create_user(name: String, uuid: String, password: String) -> String {
         .output()
         .expect("Failed to set password");
 
+    Command::new("sh")
+        .arg("-c")
+        .arg(format!("mkdir -p /storage/{}/.config/systemd/user", uuid))
+        .output()
+        .expect(&format!("Failed to create systemd user directory for {}", name));
+
+    Command::new("sh")
+        .arg("-c")
+        .arg(format!("cp /etc/systemd/user/pipewire.service /storage/{}/.config/systemd/user/", uuid))
+        .output()
+        .expect("Failed to copy pipewire.service to user config");
+
+    Command::new("sh")
+        .arg("-c")
+        .arg(format!("cp /etc/systemd/user/wireplumber.service /storage/{}/.config/systemd/user/", uuid))
+        .output()
+        .expect("Failed to copy wireplumber.service to user config");
+
+    Command::new("sh")
+        .arg("-c")
+        .arg(format!("sudo -u {} systemctl --user start pipewire.service", name))
+        .output()
+        .expect("Failed to enable pipewire.service");
+
+    Command::new("sh")
+        .arg("-c")
+        .arg(format!("sudo -u {} systemctl --user start wireplumber.service", name))
+        .output()
+        .expect("Failed to enable wireplumber.service");
+
     name
 }
 

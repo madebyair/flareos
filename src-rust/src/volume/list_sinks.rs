@@ -3,13 +3,13 @@ use std::thread;
 use std::sync::mpsc;
 
 #[tauri::command]
-pub fn list_sinks() -> String {
+pub fn list_sinks(user: String) -> String {
     let (tx, rx) = mpsc::channel();
 
     thread::spawn(move || {
         let command = Command::new("sh")
             .arg("-c")
-            .arg("XDG_RUNTIME_DIR=/run/user/1000 pw-cli list-objects Node")
+            .arg(format!("sudo -u {} pw-cli list-objects Node", user))
             .output()
             .unwrap_or_else(|_| panic!("failed to execute pw-cli"));
 

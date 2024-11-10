@@ -20,6 +20,7 @@ import AddPersonSetup from "./modules/setup/account/AddPersonSetup.tsx"
 import { AccountFailed } from "./modules/setup/loaders/AccountLoader.tsx"
 import AccountLoaderFromAuth from "./modules/setup/account/AccountLoaderFromAuth.tsx"
 import { invoke } from "@tauri-apps/api/core"
+import { getCurrentWindow } from "@tauri-apps/api/window"
 
 function App() {
     const [colorScheme] = useAtomState(colorSchemeState)
@@ -36,6 +37,14 @@ function App() {
                 }
             } else {
                 setComponent(<Setup/>)
+            }
+
+            if (window.location.port !== "1420") {
+                getCurrentWindow().setFullscreen(true).then(() => {
+                    void getCurrentWindow().show()
+                })
+            } else {
+                void getCurrentWindow().show()
             }
         })
 
