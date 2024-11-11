@@ -42,7 +42,6 @@ function App() {
             if (window.location.port !== "1420") {
                 getCurrentWindow().setFullscreen(true).then(() => {
                     void getCurrentWindow().show()
-                    void getCurrentWindow().setAlwaysOnBottom(true)
                 })
             } else {
                 void getCurrentWindow().show()
