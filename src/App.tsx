@@ -167,7 +167,7 @@ function App() {
         void listen<storeApp>("app-uninstall", (e) => {
             const app = e.payload
             
-            uninstall(app).then(() => {
+            uninstall(app, user.unixUser).then(() => {
                 setUser(prevUser => {
                     // @ts-ignore
                     const filteredArray = prevUser.apps.filter(item => ![app.uuid].includes(item.uuid))

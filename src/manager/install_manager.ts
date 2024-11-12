@@ -57,13 +57,13 @@ export async function install(app: storeApp, user: string, unix: string) : Promi
     }
 }
 
-export async function uninstall(app: storeApp){
+export async function uninstall(app: storeApp, user: string) : Promise<UserApp | null> {
     uninstalling.push(app.uuid)
 
     console.log("Uninstalling " + app.name)
 
     if (app.source == "flatpak") {
-        await invoke("uninstall_snap", { package: app.source_id })
+        await invoke("uninstall_flatpak", { package: app.source_id, user: user })
         await listen("uninstall_complete__" + app.source_id, () => {
             console.log("uninstall complete")
             emit("uninstalled", app.uuid)
