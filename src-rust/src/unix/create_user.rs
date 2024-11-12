@@ -32,6 +32,7 @@ pub fn create_user(name: String, uuid: String, password: String) -> String {
         format!("setfacl -m u:{}:0 /mnt", name),
         format!("setfacl -m u:{}:0 /opt", name),
         format!("setfacl -m u:{}:rx /bin", name),
+        format!("setfacl -m u:{}:0 /usr/flareos", name),
         format!("setfacl -m u:{}:rx /usr/bin", name),
         format!("chmod -R 700 /storage/{}", uuid),
         format!("echo '{}:{}' | chpasswd", name, password),
