@@ -15,15 +15,15 @@ export function isUnInstalling(uuid: string): boolean {
     return uninstalling.includes(uuid)
 }
 
-export async function install(app: storeApp, user: string) : Promise<UserApp | null> {
+export async function install(app: storeApp, user: string, unix: string) : Promise<UserApp | null> {
     await axios.get("https://api.made-by-air.com/store/download?uuid=" + app.uuid)
 
     installing.push(app.uuid)
     console.log("Installing app", user)
     const icon = await invoke("download_icon", { icon: app.icon })
 
-    if (app.source == "snap") {
-        await invoke("install_snap", { package: app.source_id })
+    if (app.source == "flatpak") {
+        await invoke("install_flatpak", { package: app.source_id, user: unix })
         await listen("install_complete__" + app.source_id, () => {
             console.log("install complete")
             emit("installed", app.uuid)
@@ -62,7 +62,7 @@ export async function uninstall(app: storeApp){
 
     console.log("Uninstalling " + app.name)
 
-    if (app.source == "snap") {
+    if (app.source == "flatpak") {
         await invoke("uninstall_snap", { package: app.source_id })
         await listen("uninstall_complete__" + app.source_id, () => {
             console.log("uninstall complete")

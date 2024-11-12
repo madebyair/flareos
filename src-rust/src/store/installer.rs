@@ -4,11 +4,11 @@ use tauri::Manager;
 use tauri::Emitter;
 
 #[tauri::command]
-pub fn install_snap(package: String, window: tauri::Window) {
+pub fn install_flatpak(package: String, user: String window: tauri::Window) {
     thread::spawn(move || {
         let _ = Command::new("sh")
             .arg("-c")
-            .arg(format!("snap install {} --classic", package))
+            .arg(format!("sudo -u {} flatpak install --user {}", user, package))
             .output();
 
         window.emit(format!("install_complete__{}", package).as_str(), "");
@@ -35,11 +35,11 @@ pub fn install_deb(package: String, window: tauri::Window) {
 }
 
 #[tauri::command]
-pub fn uninstall_snap(package: String, window: tauri::Window) {
+pub fn uninstall_flatpak(package: String, user: String window: tauri::Window) {
     thread::spawn(move || {
         let _ = Command::new("sh")
             .arg("-c")
-            .arg(format!("snap remove {}", package))
+            .arg(format!("sudo -u {} flatpak --user uninstall {}", user, package))
             .output();
 
         window.emit(format!("uninstall_complete__{}", package).as_str(), "");

@@ -90,7 +90,7 @@ use wm::add_permissions::{add_permissions, remove_permissions};
 use gamma::get_current_gamma::get_current_gamma;
 use gamma::set_current_gamma::set_current_gamma;
 use store::download_icon::download_icon;
-use store::installer::{install_snap, install_deb, uninstall_snap};
+use store::installer::{install_flatpak, install_deb, uninstall_flatpak};
 use apps::run_app::run_app;
 use volume::get_current_volume::get_current_volume;
 use volume::set_current_volume::set_current_volume;
@@ -150,7 +150,7 @@ fn main() {
             read_dir,
             create_user, run_pipewire, stop_pipewire,
             get_current_gamma, set_current_gamma,
-            download_icon, install_snap, install_deb, uninstall_snap,
+            download_icon, install_flatpak, install_deb, uninstall_flatpak,
             run_app,
             get_current_volume, set_current_volume, list_sinks, set_current_sink, get_current_sink,
             is_bluetooth_adapter_available, get_bluetooth_adapter_status, get_connected_devices, get_paired_devices, get_devices, scan_on,

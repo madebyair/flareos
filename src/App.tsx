@@ -138,7 +138,7 @@ function App() {
         void listen<storeApp>("app-install", (e) => {
             const app = e.payload
             
-            install(app, user.uuid).then(r => {
+            install(app, user.uuid, user.unixUser).then(r => {
                 if (r) {
                     setUser(prevUser => {
                         const state = {
