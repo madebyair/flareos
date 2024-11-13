@@ -54,7 +54,7 @@ const StartComponent = () => {
         const appDetails = {
             "__FlareOS_embed_app_terminal__": { id: "terminal", url: "terminal.html", title: "Terminal", minWidth: 300, minHeight: 200 },
             "__FlareOS_embed_app_settings__": { id: "settings", url: "settings.html", title: "Settings", minWidth: 1000, minHeight: 650, resizable: false },
-            "__FlareOS_embed_app_files__": { id: "files", url: "files.html", title: "Files", minWidth: 900, minHeight: 530, width: 900, height: 530 },
+            "__FlareOS_embed_app_files__": { id: "files", url: "files.html", title: "Files", minWidth: 900, minHeight: 530, width: 900, height: 530, visible: false },
             "__FlareOS_embed_app_store__": { id: "store", url: "store.html", title: "Store", minWidth: 800, minHeight: 600 },
             "__FlareOS_embed_app_discover__": { id: "discover", url: "discover.html", title: "Discover", minWidth: 800, minHeight: 600 },
             "__FlareOS_embed_app_calculator__": { id: "calculator", url: "calculator.html", title: "Calculator", width: 400, height: 550, resizable: false }
