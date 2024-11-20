@@ -8,9 +8,8 @@ import { useEffect, useState } from "react"
 import WifiLoader from "../setup/loaders/WifiLoader.tsx"
 import EndOfSetup from "./end/EndOfSetup.tsx"
 import AirPrivacyPolicy from "./law/AirPrivacyPolicy.tsx"
-import AirTermsOfService from "./law/AirTermsOfService.tsx"
 import WelcomeSetup from "./welcome/WelcomeSetup.tsx"
-import AccountLoader from "./loaders/AccountLoader.tsx"
+import AccountSetup from "./account/AccountSetup.tsx"
 
 const SetupFooter = () => {
     const [t] = useTranslation()
@@ -23,7 +22,7 @@ const SetupFooter = () => {
             component.type === WelcomeSetup ||
             component.type === WifiLoader ||
             component.type === EndOfSetup ||
-            component.type === AccountLoader
+            component.type === AccountSetup
         ) {
             setBackButtonAvailable(false)
         } else {
@@ -34,8 +33,6 @@ const SetupFooter = () => {
     function goBack() {
         if (component.type === AirPrivacyPolicy) {
             setComponent(<WelcomeSetup />)
-        } else if (component.type === AirTermsOfService) {
-            setComponent(<AirPrivacyPolicy />)
         }
     }
 

@@ -6,10 +6,14 @@ import { colorSchemeState } from "../../../state/themeState.ts"
 import { useTranslation } from "react-i18next"
 import BetaWarning from "./BetaWarning.tsx"
 import languages from "../../../assets/languages.ts"
+import { isBeta } from "../../../helpers.ts"
+import { setupComponent } from "../setupState.tsx"
+import WifiLoader from "../loaders/WifiLoader.tsx"
 
 const WelcomeSetup = () => {
     const [themeScheme, setThemeScheme] = useAtomState(colorSchemeState)
     const [betaWarning, setBetaWarning] = useState(false)
+    const [, setComponent] = useAtomState(setupComponent)
 
     const { t, i18n } = useTranslation()
 
@@ -59,7 +63,13 @@ const WelcomeSetup = () => {
                         </span>
                     </div>
                     <div className="absolute -top-1 left-52">
-                        <Button label={t("Continue")} submit={() => setBetaWarning(true)} />
+                        <Button label={t("Continue")} submit={() => {
+                            if (isBeta()) {
+                                setBetaWarning(true)
+                            } else {
+                                setComponent(<WifiLoader />)
+                            }
+                        }} />
                     </div>
                 </div>
             </div>
