@@ -1,6 +1,6 @@
 import { LazyStore } from "@tauri-apps/plugin-store"
 
-const storePromise = new LazyStore("/usr/flareos/data,dat")
+const storePromise = new LazyStore("/usr/flareos/data.dat")
 
 export async function get(key: string) {
     return storePromise.get(key)
