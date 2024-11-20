@@ -34,7 +34,7 @@ const WelcomeSetup = () => {
                         <h1 className="text-5xl dark:text-white">{t("Welcome!")}</h1>
                         <h2 className="text-zinc-700 dark:text-zinc-300 mt-4 w-72">
                             {t(
-                                "Welcome to FlareOS! Before we begin, let's connect to the network and log in to your air account.",
+                                "Welcome to FlareOS! Start by selecting your preferred language, then connect to the network and set up your account.",
                             )}
                         </h2>
                     </div>
