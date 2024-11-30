@@ -49,6 +49,7 @@ const Auth = () => {
                                         setTimeout(() => setHide(true), 800)
                                         void invoke("add_permissions", { user: users[currentUser].unixUser })
                                         void invoke("run_pipewire", { name: users[currentUser].unixUser })
+                                        void invoke("run_command", { command: users[currentUser].theme == "light" ? "gsettings set org.gnome.desktop.interface color-scheme \"prefer-light\"" : "gsettings set org.gnome.desktop.interface color-scheme \"prefer-dark\""})
 
                                         get("users").then((r) => {
                                             const cur: unknown = r

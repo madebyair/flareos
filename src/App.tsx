@@ -11,7 +11,6 @@ import { userState } from "./state/currentUserState.ts"
 import User, { defaultUser } from "./types/user.ts"
 import { install, uninstall } from "./manager/install_manager.ts"
 import { storeApp } from "./types/storeApp.ts"
-import { supportedLanguagesType } from "./types/supportedLanguages.ts"
 import isLatest from "./modules/updater/isLatest.ts"
 import Loading from "./components/Loading.tsx"
 import AccountFromAuth from "./modules/setup/account/AccountFromAuth.tsx"
@@ -87,6 +86,8 @@ function App() {
 
         void listen<"light" | "dark">("theme-change", (event) => {
             localStorage.setItem("theme", user.theme)
+            void invoke("run_command", { command: user.theme == "light" ? "gsettings set org.gnome.desktop.interface color-scheme \"prefer-light\"" : "gsettings set org.gnome.desktop.interface color-scheme \"prefer-dark\""})
+
 
             setUser(prevUser => {
                 get("users").then((r) => {
@@ -107,7 +108,7 @@ function App() {
             })
         })
 
-        void listen<supportedLanguagesType>("language-change", (event) => {
+        void listen<string>("language-change", (event) => {
             setUser(prevUser => {
                 get("users").then((r) => {
                     const cur: unknown = r
