@@ -1,5 +1,4 @@
 import { App, UserApp } from "./app.ts"
-import { supportedLanguagesType } from "./supportedLanguages.ts"
 import { Widget } from "./widget.ts"
 import defaultWidgets from "../components/widgets/widgetList.tsx"
 
@@ -13,7 +12,7 @@ type User = {
     "password": string,
     "apps": Array<App | UserApp>,
     "theme": "light"|"dark",
-    "language": supportedLanguagesType,
+    "language": string,
     "unixUser": string,
     widgets: Widget[]
     lastUsed: string,

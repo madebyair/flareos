@@ -27,6 +27,7 @@ mod files {
 mod unix {
     pub mod create_user;
     pub mod pipewire;
+    pub mod run_command;
 }
 
 mod gamma {
@@ -106,6 +107,7 @@ use avatar::compare_avatars::compare_avatars;
 use avatar::get_avatar::get_avatar;
 use avatar::update_avatar::update_avatar;
 use unix::pipewire::{run_pipewire, stop_pipewire};
+use unix::run_command::run_command;
 
 fn main() {
     if !Uid::effective().is_root() {
@@ -155,7 +157,8 @@ fn main() {
             get_current_volume, set_current_volume, list_sinks, set_current_sink, get_current_sink,
             is_bluetooth_adapter_available, get_bluetooth_adapter_status, get_connected_devices, get_paired_devices, get_devices, scan_on,
             get_platform,
-            compare_avatars, update_avatar
+            compare_avatars, update_avatar,
+            run_command
          ])
         .register_asynchronous_uri_scheme_protocol("icons", move |_app, request, responder| {
               match get_icon(request, &boundary_id) {

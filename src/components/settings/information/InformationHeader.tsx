@@ -6,19 +6,11 @@ const InformationHeader = () => {
 
     return (
         <div className="w-full h-36 rounded-lg bg-slate-200/70 dark:bg-zinc-800/90 flex items-center shadow-lg p-4">
-            <div className="h-28 w-28 flex items-center justify-center bg-slate-300/50 dark:bg-zinc-700/50 rounded-full p-2">
-                <img
-                    src="icons://FlareOS-white.webp"
-                    alt="FlareOS Logo"
-                    className="hidden dark:block w-20 h-20"
-                    draggable={false}
-                />
-                <img
-                    src="icons://FlareOS-black.webp"
-                    alt="FlareOS Logo"
-                    className="dark:hidden w-20 h-20"
-                    draggable={false}
-                />
+            <div
+                className="h-28 w-28 flex items-center justify-center bg-slate-300/50 dark:bg-zinc-700/50 rounded-full p-2">
+                <div
+                    className="border-8 w-10 h-10 rounded-md m-auto transition border-gray-100"
+                ></div>
             </div>
 
             <div className="ml-6">

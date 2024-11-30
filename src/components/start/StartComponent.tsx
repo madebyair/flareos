@@ -10,6 +10,8 @@ import { App } from "../../types/app"
 import embededApps from "../../apps/embededApps"
 import { invoke } from "@tauri-apps/api/core"
 import StartSearchComponent from "./StartSearchComponent.tsx"
+import "../../i18n.ts"
+import { useTranslation } from "react-i18next";
 
 type EventResponse = {
     user: User;
@@ -19,10 +21,12 @@ type EventResponse = {
 const StartComponent = () => {
     const [user, setUser] = useAtomState(userState)
     const [apps, setApps] = useState<Array<App>>([])
+    const [, i18n] = useTranslation()
 
     useEffect(() => {
         void listen<EventResponse>("start-display-event", (event) => {
             setUser(event.payload.user)
+            i18n.changeLanguage(event.payload.user.language)
 
             if (!event.payload.current) {
                 void getCurrentWindow().hide()
@@ -86,7 +90,7 @@ const StartComponent = () => {
                 }
             } else {
                 try {
-                    const newWindow = new WebviewWindow(appConfig.id, {
+                    new WebviewWindow(appConfig.id, {
                         url: appConfig.url,
                         title: appConfig.title,
                         minWidth: appConfig.minWidth,
@@ -96,8 +100,6 @@ const StartComponent = () => {
                         resizable: appConfig.resizable !== undefined ? appConfig.resizable : true,
                         visible: false
                     })
-
-                    await newWindow.show()
                 } catch (error) {
                     console.error(error)
                 }

@@ -24,7 +24,7 @@ type SessionResponse = {
 };
 
 const AccountLoader = ({ uuid, secret, password, isFromAuth }: { uuid: string, secret: string, password: string, isFromAuth: boolean }) => {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
     const [, setNoPadding] = useAtomState(setupNoPadding)
     const [theme] = useAtomState(colorSchemeState)
     const [, setComponent] = useAtomState(setupComponent)
@@ -81,7 +81,7 @@ const AccountLoader = ({ uuid, secret, password, isFromAuth }: { uuid: string, s
                         password: encryptedPassword,
                         apps: [],
                         theme: theme,
-                        language: "en",
+                        language: i18n.language,
                         unixUser: unix,
                         widgets: widgetList,
                         lastUsed: utc_timestamp,
