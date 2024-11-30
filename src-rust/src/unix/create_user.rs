@@ -20,7 +20,7 @@ pub fn create_user(name: String, uuid: String, password: String) -> String {
         format!("mkdir -m 700 /storage/{}", uuid),
         format!("useradd -M {} -d /storage/{}", name, uuid),
         format!("chown {}:{} /storage/{}", name, name, uuid),
-        format!("setfacl -m u:{}:0 /etc", name),
+        format!("setfacl -m u:{}:r /etc", name),
         format!("setfacl -m u:{}:rx /usr/lib64", name),
         format!("setfacl -m u:{}:rx /usr/lib", name),
         format!("setfacl -m u:{}:0 /srv", name),
