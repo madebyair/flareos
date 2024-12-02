@@ -17,7 +17,7 @@ const AuthCurrentUser = ({ user, onDesktop }: { user: User, onDesktop: () => voi
     function next() {
         if (value == "") {
             setShake("shake")
-            setError(t("Enter the password to your air account."))
+            setError(t("Please enter your password."))
             setTimeout(() => {
                 setShake("")
             }, 300)
@@ -28,7 +28,7 @@ const AuthCurrentUser = ({ user, onDesktop }: { user: User, onDesktop: () => voi
         invoke("decrypt", { content: value, challenge: user.password }).then(result => {
             if (!result) {
                 setShake("shake")
-                setError(t("We think that's not your password."))
+                setError(t("That doesn't seem right."))
                 setTimeout(() => {
                     setShake("")
                 }, 300)
