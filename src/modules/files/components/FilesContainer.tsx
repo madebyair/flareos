@@ -5,10 +5,11 @@ import { useTranslation } from "react-i18next"
 import "../../../assets/css/App.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCog } from "@fortawesome/free-solid-svg-icons"
+import "../../../i18n.ts"
 
 const FilesContainer = () => {
     const [theme, setTheme] = useState("")
-    const [ , i18n ] = useTranslation()
+    const [t , i18n ] = useTranslation()
     const [user, setUser] = useState<User>(defaultUser)
 
     useEffect(() => {
@@ -45,7 +46,7 @@ const FilesContainer = () => {
                 <div className="w-1/4 bg-white dark:bg-zinc-900 p-6 rounded-br-lg shadow-lg relative">
                     <div className="w-full h-8 flex">
                         <div className="m-auto text-lg font-semibold">
-                            Files
+                            {t("Files")}
                         </div>
                     </div>
                     <div className="h-10 w-10 absolute bottom-4 right-4 hover:bg-stone-400/70 dark:hover:bg-zinc-800 flex transition-all duration-300 rounded-xl">
