@@ -17,6 +17,8 @@ type User = {
     widgets: Widget[]
     lastUsed: string,
     createdAt: string,
+    pinCode: string,
+    preferPinCode: boolean,
 }
 
 export const defaultUser : User = {
@@ -34,6 +36,8 @@ export const defaultUser : User = {
     widgets: defaultWidgets,
     lastUsed: "",
     createdAt: "",
+    pinCode: "",
+    preferPinCode: true,
 }
 
 export default User

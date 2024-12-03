@@ -58,7 +58,9 @@ function AccountSetup({ isFromAuth }: { isFromAuth: boolean }) {
                             unixUser: "",
                             widgets: defaultWidgets,
                             lastUsed: "",
-                            createdAt: ""
+                            createdAt: "",
+                            pinCode: "",
+                            preferPinCode: true
                         })
                         void emit("component", "authlogin_loader")
                     } else {

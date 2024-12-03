@@ -1,6 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react"
 import { Dispatch, Fragment, SetStateAction, useState } from "react"
-import { supportedLanguagesType } from "../../../types/supportedLanguages.ts"
 import { UsaFlag } from "../../../assets/CountryFlags.tsx"
 import Button from "../../../elements/Button.tsx"
 import { useAtomState } from "@zedux/react"
@@ -10,7 +9,7 @@ import { emit } from "@tauri-apps/api/event"
 
 type LanguageType = {
     name: string,
-    short: supportedLanguagesType,
+    short: string,
     flag: JSX.Element,
     setChanged: Dispatch<SetStateAction<boolean>>
 }

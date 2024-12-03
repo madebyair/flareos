@@ -85,7 +85,9 @@ const AccountLoader = ({ uuid, secret, password, isFromAuth }: { uuid: string, s
                         unixUser: unix,
                         widgets: widgetList,
                         lastUsed: utc_timestamp,
-                        createdAt: utc_timestamp
+                        createdAt: utc_timestamp,
+                        pinCode: "",
+                        preferPinCode: true
                     }
 
                     setUser(user)
