@@ -90,7 +90,7 @@ const StartComponent = () => {
                 }
             } else {
                 try {
-                    new WebviewWindow(appConfig.id, {
+                    const webview = new WebviewWindow(appConfig.id, {
                         url: appConfig.url,
                         title: appConfig.title,
                         minWidth: appConfig.minWidth,
@@ -99,6 +99,10 @@ const StartComponent = () => {
                         height: appConfig.height,
                         resizable: appConfig.resizable !== undefined ? appConfig.resizable : true,
                         visible: false
+                    })
+
+                    listen("user-response", () => {
+                        setTimeout(() => webview.show(), 100)
                     })
                 } catch (error) {
                     console.error(error)
